@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RYUZY STORE — Suntik Sosmed</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:radial-gradient(circle at top,#39206f,#10082c 55%,#070419);
+  color:#fff;
+}
+.container{max-width:1050px;margin:auto;padding:24px}
+.hero{
+  text-align:center;padding:35px 20px 25px;
+}
+.hero h1{
+  margin:0;font-size:clamp(38px,8vw,72px);
+  background:linear-gradient(90deg,#d99cff,#fff,#65bfff);
+  -webkit-background-clip:text;color:transparent;
+  font-weight:900;
+}
+.hero p{color:#ddd;margin:8px 0 0}
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:18px;margin-top:20px;
+}
+.card{
+  background:rgba(24,12,67,.82);
+  border:1px solid #9d6cff;border-radius:20px;
+  padding:20px;box-shadow:0 0 22px rgba(130,70,255,.18);
+}
+.card h2{margin:0 0 15px;color:#dca7ff;font-size:22px}
+.service{
+  display:flex;justify-content:space-between;gap:12px;
+  padding:11px 0;border-bottom:1px solid rgba(255,255,255,.12);
+}
+.service:last-child{border-bottom:0}
+.price{font-weight:700;color:#8fd8ff;white-space:nowrap}
+.order{
+  margin:28px auto 10px;max-width:650px;
+  background:rgba(20,10,54,.9);border:1px solid #9d6cff;
+  border-radius:22px;padding:24px;
+}
+label{display:block;margin:12px 0 7px;color:#ddd}
+select,input{
+  width:100%;padding:13px;border-radius:12px;
+  border:1px solid #7551b9;background:#10092d;color:#fff;
+}
+button{
+  width:100%;margin-top:18px;padding:14px;border:0;
+  border-radius:13px;background:linear-gradient(90deg,#8b3dff,#25a9ff);
+  color:white;font-size:16px;font-weight:800;cursor:pointer;
+}
+.note{text-align:center;color:#aaa;font-size:13px;margin-top:18px}
+footer{text-align:center;padding:30px;color:#aaa}
+</style>
+</head>
+<body>
+<div class="container">
+  <section class="hero">
+    <h1>RYUZY STORE</h1>
+    <p>💜 Suntik Sosmed • Cepat • Aman • Terpercaya</p>
+  </section>
+
+  <div class="grid">
+    <div class="card">
+      <h2>🎵 TikTok — Like</h2>
+      <div class="service"><span>100 Like</span><span class="price">Rp130</span></div>
+      <div class="service"><span>200 Like</span><span class="price">Rp270</span></div>
+      <div class="service"><span>300 Like</span><span class="price">Rp410</span></div>
+      <div class="service"><span>400 Like</span><span class="price">Rp550</span></div>
+      <div class="service"><span>500 Like</span><span class="price">Rp690</span></div>
+    </div>
+
+    <div class="card">
+      <h2>🎵 TikTok — Followers</h2>
+      <div class="service"><span>100 Followers</span><span class="price">Rp7.000</span></div>
+      <div class="service"><span>200 Followers</span><span class="price">Rp15.000</span></div>
+      <div class="service"><span>300 Followers</span><span class="price">Rp23.000</span></div>
+      <div class="service"><span>400 Followers</span><span class="price">Rp31.000</span></div>
+      <div class="service"><span>500 Followers</span><span class="price">Rp39.000</span></div>
+      <div class="service"><span>1.000 Followers</span><span class="price">Rp58.000</span></div>
+    </div>
+
+    <div class="card">
+      <h2>🎵 TikTok — Views</h2>
+      <div class="service"><span>1.000 Views</span><span class="price">Rp500</span></div>
+      <div class="service"><span>2.000 Views</span><span class="price">Rp1.000</span></div>
+      <div class="service"><span>3.000 Views</span><span class="price">Rp1.500</span></div>
+      <div class="service"><span>4.000 Views</span><span class="price">Rp2.000</span></div>
+      <div class="service"><span>5.000 Views</span><span class="price">Rp2.500</span></div>
+    </div>
+
+    <div class="card">
+      <h2>📸 Instagram — Like</h2>
+      <div class="service"><span>100 Like</span><span class="price">Rp700</span></div>
+      <div class="service"><span>200 Like</span><span class="price">Rp1.400</span></div>
+      <div class="service"><span>300 Like</span><span class="price">Rp2.100</span></div>
+      <div class="service"><span>400 Like</span><span class="price">Rp2.800</span></div>
+      <div class="service"><span>500 Like</span><span class="price">Rp3.500</span></div>
+    </div>
+
+    <div class="card">
+      <h2>📸 Instagram — Followers</h2>
+      <div class="service"><span>100 Followers</span><span class="price">Rp6.000</span></div>
+      <div class="service"><span>200 Followers</span><span class="price">Rp13.000</span></div>
+      <div class="service"><span>300 Followers</span><span class="price">Rp20.000</span></div>
+      <div class="service"><span>400 Followers</span><span class="price">Rp26.000</span></div>
+      <div class="service"><span>500 Followers</span><span class="price">Rp33.000</span></div>
+      <div class="service"><span>1.000 Followers</span><span class="price">Rp47.000</span></div>
+    </div>
+
+    <div class="card">
+      <h2>📸 Instagram — Views</h2>
+      <div class="service"><span>1.000 Views</span><span class="price">Rp70</span></div>
+      <div class="service"><span>2.000 Views</span><span class="price">Rp140</span></div>
+      <div class="service"><span>3.000 Views</span><span class="price">Rp210</span></div>
+      <div class="service"><span>4.000 Views</span><span class="price">Rp290</span></div>
+      <div class="service"><span>5.000 Views</span><span class="price">Rp360</span></div>
+    </div>
+
+    <div class="card">
+      <h2>💬 Pengikut Saluran WhatsApp</h2>
+      <div class="service"><span>100 Pengikut</span><span class="price">Rp8.000</span></div>
+      <div class="service"><span>200 Pengikut</span><span class="price">Rp16.000</span></div>
+      <div class="service"><span>300 Pengikut</span><span class="price">Rp24.000</span></div>
+      <div class="service"><span>400 Pengikut</span><span class="price">Rp26.000</span></div>
+      <div class="service"><span>500 Pengikut</span><span class="price">Rp40.000</span></div>
+      <div class="service"><span>1.000 Pengikut</span><span class="price">Rp60.000</span></div>
+    </div>
+  </div>
+
+  <section class="order">
+    <h2>🛒 Order Sekarang</h2>
+
+    <label for="category">Kategori</label>
+    <select id="category" onchange="updateServices()">
+      <option value="tiktok">🎵 TikTok</option>
+      <option value="instagram">📸 Instagram</option>
+      <option value="whatsapp">💬 WhatsApp Channel</option>
+    </select>
+
+    <label for="service">Layanan</label>
+    <select id="service" onchange="updatePrice()"></select>
+
+    <label for="qty">Jumlah</label>
+    <input id="qty" type="number" min="1" value="1" oninput="updatePrice()">
+
+    <label for="link">Link postingan / akun / channel</label>
+    <input id="link" type="url" placeholder="https://...">
+
+    <div style="margin-top:16px;padding:15px;border-radius:14px;background:rgba(139,61,255,.14);border:1px solid rgba(157,108,255,.45)">
+      <div style="color:#bbb;font-size:13px">Estimasi total</div>
+      <div id="total" style="font-size:26px;font-weight:900;color:#8fd8ff;margin-top:4px">Rp0</div>
+    </div>
+
+    <button onclick="order()">💜 ORDER VIA WHATSAPP</button>
+    <div class="note">Harga dihitung otomatis berdasarkan paket yang dipilih.</div>
+  </section>
+
+  <footer>© 2026 RYUZY STORE • Suntik Sosmed</footer>
+</div>
+
+<script>
+const admin = "6285776210087";
+
+const data = {
+  tiktok: [
+    {name:"Like", unit:"Like", base:100, price:130},
+    {name:"Followers", unit:"Followers", base:100, price:7000},
+    {name:"Views", unit:"Views", base:1000, price:500}
+  ],
+  instagram: [
+    {name:"Like", unit:"Like", base:100, price:700},
+    {name:"Followers", unit:"Followers", base:100, price:6000},
+    {name:"Views", unit:"Views", base:1000, price:70}
+  ],
+  whatsapp: [
+    {name:"Pengikut Saluran", unit:"Pengikut", base:100, price:8000}
+  ]
+};
+
+function formatRp(n){
+  return "Rp" + Math.round(n).toLocaleString("id-ID");
+}
+
+function updateServices(){
+  const category = document.getElementById("category").value;
+  const service = document.getElementById("service");
+  service.innerHTML = "";
+
+  data[category].forEach((item, i) => {
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = `${item.name} — mulai ${item.base.toLocaleString("id-ID")} ${item.unit} — ${formatRp(item.price)}`;
+    service.appendChild(opt);
+  });
+
+  document.getElementById("qty").value = data[category][0].base;
+  updatePrice();
+}
+
+function updatePrice(){
+  const category = document.getElementById("category").value;
+  const index = Number(document.getElementById("service").value || 0);
+  const item = data[category][index];
+  if(!item) return;
+
+  let qty = Number(document.getElementById("qty").value) || item.base;
+  qty = Math.max(1, qty);
+  document.getElementById("qty").value = qty;
+
+  const total = (qty / item.base) * item.price;
+  document.getElementById("total").textContent = formatRp(total);
+}
+
+function order(){
+  const category = document.getElementById("category").value;
+  const index = Number(document.getElementById("service").value || 0);
+  const item = data[category][index];
+  const qty = Number(document.getElementById("qty").value);
+  const link = document.getElementById("link").value.trim();
+
+  if(!link){
+    alert("Masukkan link terlebih dahulu.");
+    return;
+  }
+  if(!qty || qty < 1){
+    alert("Masukkan jumlah yang valid.");
+    return;
+  }
+
+  const total = (qty / item.base) * item.price;
+  const message =
+`Halo RYUZY STORE, saya ingin order.%0A%0A` +
+`Layanan: ${encodeURIComponent(item.name)}%0A` +
+`Jumlah: ${encodeURIComponent(qty.toLocaleString("id-ID") + " " + item.unit)}%0A` +
+`Total: ${encodeURIComponent(formatRp(total))}%0A` +
+`Link: ${encodeURIComponent(link)}`;
+
+  window.open(`https://wa.me/${admin}?text=${message}`, "_blank");
+}
+
+updateServices();
+</script>
+</body>
+</html>
