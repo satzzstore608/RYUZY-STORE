@@ -3,47 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RYUZY STORE - Digital Store</title>
+    <title>RYUZY STORE - Digital Store Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* --- CSS VARIABLES & RESET --- */
         :root {
             --primary-purple: #7c3aed;
             --primary-blue: #3b82f6;
-            --dark-bg: #0f0f1a;
-            --card-bg: rgba(30, 30, 50, 0.8);
+            --dark-bg: #0a0a12;
+            --card-bg: rgba(20, 20, 35, 0.8);
             --text-primary: #ffffff;
-            --text-secondary: #a0a0b0;
-            --neon-glow: 0 0 20px rgba(124, 58, 237, 0.5);
+            --text-secondary: #9ca3af;
+            --neon-glow: 0 0 15px rgba(124, 58, 237, 0.4);
+            --border-color: rgba(124, 58, 237, 0.3);
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a2e 100%);
+            background-color: var(--dark-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 40%);
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Navbar */
+        /* --- NAVBAR --- */
         .navbar {
-            background: rgba(15, 15, 26, 0.95);
+            background: rgba(10, 10, 18, 0.95);
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(124, 58, 237, 0.3);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .nav-container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -51,693 +51,216 @@
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
             font-size: 1.5rem;
-            font-weight: bold;
+            font-weight: 800;
             background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
         }
 
-        .logo i {
-            font-size: 2rem;
-            color: var(--primary-purple);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; }
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            transition: all 0.3s;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
+        .nav-links a:hover, .nav-links a.active { color: var(--text-primary); text-shadow: var(--neon-glow); }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--text-primary);
-            background: rgba(124, 58, 237, 0.2);
-        }
+        .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
+        /* --- MAIN CONTENT --- */
+        .main-content { margin-top: 80px; padding: 2rem; max-width: 1200px; margin-left: auto; margin-right: auto; min-height: 80vh; }
+        .section { display: none; animation: fadeIn 0.4s ease; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Main Content */
-        .main-content {
-            margin-top: 80px;
-            padding: 2rem;
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Hero Section */
+        /* --- HERO SECTION --- */
         .hero {
             text-align: center;
             padding: 4rem 2rem;
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(59, 130, 246, 0.1));
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(59, 130, 246, 0.05));
             border-radius: 20px;
+            border: 1px solid var(--border-color);
             margin-bottom: 3rem;
-            border: 1px solid rgba(124, 58, 237, 0.3);
             position: relative;
             overflow: hidden;
         }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        .status-badges {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .badge-online {
-            background: rgba(34, 197, 94, 0.2);
-            color: #22c55e;
-            border: 1px solid #22c55e;
-        }
-
-        .badge-cs {
-            background: rgba(59, 130, 246, 0.2);
-            color: #3b82f6;
-            border: 1px solid #3b82f6;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+        .hero h1 { font-size: 3rem; margin-bottom: 0.5rem; background: linear-gradient(90deg, #fff, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.1rem; }
+        
+        .status-badges { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .badge { padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); }
+        .badge-online i { color: #22c55e; }
+        .badge-cs i { color: var(--primary-blue); }
 
         .btn {
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            padding: 0.8rem 1.5rem; border: none; border-radius: 10px; cursor: pointer; font-size: 0.95rem;
+            transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-weight: 600;
         }
+        .btn-primary { background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue)); color: white; box-shadow: var(--neon-glow); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(124, 58, 237, 0.6); }
+        .btn-secondary { background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border-color); }
+        .btn-secondary:hover { background: rgba(124, 58, 237, 0.2); }
 
-        .btn-primary {
-            background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
-            color: white;
-            box-shadow: var(--neon-glow);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(124, 58, 237, 0.7);
-        }
-
-        .btn-secondary {
-            background: rgba(124, 58, 237, 0.2);
-            color: white;
-            border: 1px solid var(--primary-purple);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(124, 58, 237, 0.3);
-        }
-
-        /* Cards */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
+        /* --- CARDS GRID --- */
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
         .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            transition: all 0.3s;
+            background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem;
+            border: 1px solid var(--border-color); transition: all 0.3s; cursor: pointer;
         }
+        .card:hover { transform: translateY(-5px); border-color: var(--primary-purple); box-shadow: var(--neon-glow); }
+        .card-icon { font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary-purple); }
+        .card h3 { margin-bottom: 0.5rem; }
+        .card p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem; }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--neon-glow);
+        /* --- FORMS --- */
+        .form-container {
+            background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem;
+            border: 1px solid var(--border-color); max-width: 800px; margin: 0 auto;
         }
-
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .card h3 {
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .card p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        /* Forms */
-        .form-section {
-            display: none;
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            margin-bottom: 2rem;
-        }
-
-        .form-section.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-        }
-
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.9rem; }
         .form-control {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            border-radius: 8px;
-            background: rgba(15, 15, 26, 0.8);
-            color: white;
-            font-size: 1rem;
+            width: 100%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 8px;
+            background: rgba(0,0,0,0.3); color: white; font-size: 1rem; transition: 0.3s;
         }
+        .form-control:focus { outline: none; border-color: var(--primary-purple); box-shadow: 0 0 10px rgba(124, 58, 237, 0.2); }
+        select.form-control { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em; }
 
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-purple);
-            box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
-        }
-
-        select.form-control {
-            cursor: pointer;
-        }
-
-        /* Payment Methods */
-        .payment-methods {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .payment-method {
-            background: rgba(15, 15, 26, 0.8);
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            border-radius: 10px;
-            padding: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .payment-method:hover, .payment-method.selected {
-            border-color: var(--primary-purple);
-            background: rgba(124, 58, 237, 0.1);
-        }
-
-        .payment-method i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .payment-dana { color: #008ceb; }
-        .payment-gopay { color: #00aa13; }
-        .payment-qris { color: #7c3aed; }
-
-        /* Order Summary */
+        /* --- ORDER SUMMARY --- */
         .order-summary {
-            background: rgba(15, 15, 26, 0.8);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
+            background: rgba(0,0,0,0.3); border-radius: 10px; padding: 1.5rem; margin: 2rem 0;
+            border: 1px dashed var(--border-color);
+        }
+        .summary-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.95rem; }
+        .summary-row:last-child { border-bottom: none; font-weight: bold; font-size: 1.2rem; color: var(--primary-purple); margin-top: 0.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color); }
+
+        /* --- PAYMENT MODAL --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85);
+            z-index: 2000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(5px);
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: #151525; border-radius: 20px; padding: 2rem; max-width: 500px; width: 90%;
+            border: 1px solid var(--primary-purple); box-shadow: 0 0 40px rgba(124, 58, 237, 0.3);
+            max-height: 90vh; overflow-y: auto;
+        }
+        .payment-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; }
+        .payment-method {
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 10px;
+            padding: 1rem; text-align: center; cursor: pointer; transition: 0.3s;
+        }
+        .payment-method:hover, .payment-method.selected { border-color: var(--primary-purple); background: rgba(124, 58, 237, 0.1); }
+        .payment-method i { font-size: 1.5rem; margin-bottom: 0.5rem; display: block; }
+        
+        /* QRIS IMAGE POPUP */
+        .qris-popup-img {
+            width: 100%; border-radius: 10px; border: 2px solid var(--primary-purple);
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.4); margin-bottom: 1rem;
         }
 
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(124, 58, 237, 0.2);
-        }
-
-        .summary-item:last-child {
-            border-bottom: none;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: var(--primary-purple);
-        }
-
-        /* Chat Widget */
-        .chat-widget {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 999;
-        }
-
+        /* --- CHAT WIDGET --- */
+        .chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 999; }
         .chat-button {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: var(--neon-glow);
-            transition: all 0.3s;
+            width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
+            border: none; color: white; font-size: 1.5rem; cursor: pointer; box-shadow: var(--neon-glow);
+            display: flex; align-items: center; justify-content: center; transition: 0.3s;
         }
-
-        .chat-button:hover {
-            transform: scale(1.1);
-        }
-
+        .chat-button:hover { transform: scale(1.1); }
         .chat-window {
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            width: 350px;
-            height: 500px;
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            display: none;
-            flex-direction: column;
+            position: absolute; bottom: 80px; right: 0; width: 350px; height: 500px;
+            background: #151525; border-radius: 15px; border: 1px solid var(--border-color);
+            display: none; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
+        .chat-window.active { display: flex; }
+        .chat-header { background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue)); padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .chat-messages { flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .message { padding: 0.8rem 1rem; border-radius: 12px; max-width: 85%; font-size: 0.9rem; line-height: 1.4; }
+        .msg-admin { background: rgba(124, 58, 237, 0.2); align-self: flex-start; border-bottom-left-radius: 2px; }
+        .msg-user { background: rgba(59, 130, 246, 0.2); align-self: flex-end; border-bottom-right-radius: 2px; }
+        .chat-input-area { padding: 1rem; border-top: 1px solid var(--border-color); display: flex; gap: 0.5rem; }
+        .chat-input-area input { flex: 1; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.3); color: white; }
+        .chat-input-area button { padding: 0.6rem 1rem; background: var(--primary-purple); border: none; border-radius: 8px; color: white; cursor: pointer; }
 
-        .chat-window.active {
-            display: flex;
-        }
+        /* --- ADMIN DASHBOARD --- */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { background: var(--card-bg); padding: 1.5rem; border-radius: 10px; border: 1px solid var(--border-color); text-align: center; }
+        .stat-num { font-size: 2rem; font-weight: bold; color: var(--primary-purple); }
+        .stat-label { font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        th { color: var(--text-secondary); font-weight: 600; }
+        .status-badge { padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.75rem; font-weight: 600; }
+        .st-pending { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+        .st-process { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .st-done { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .st-cancel { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
 
-        .chat-header {
-            background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
-            padding: 1rem;
-            border-radius: 15px 15px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chat-header-info {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .online-indicator {
-            width: 10px;
-            height: 10px;
-            background: #22c55e;
-            border-radius: 50%;
-            animation: blink 2s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 1rem;
-            overflow-y: auto;
-        }
-
-        .message {
-            margin-bottom: 1rem;
-            padding: 0.8rem;
-            border-radius: 10px;
-            max-width: 80%;
-        }
-
-        .message-admin {
-            background: rgba(124, 58, 237, 0.2);
-            margin-right: auto;
-        }
-
-        .message-user {
-            background: rgba(59, 130, 246, 0.2);
-            margin-left: auto;
-        }
-
-        .chat-input {
-            padding: 1rem;
-            border-top: 1px solid rgba(124, 58, 237, 0.3);
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .chat-input input {
-            flex: 1;
-            padding: 0.5rem;
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            border-radius: 8px;
-            background: rgba(15, 15, 26, 0.8);
-            color: white;
-        }
-
-        .chat-input button {
-            padding: 0.5rem 1rem;
-            background: var(--primary-purple);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            cursor: pointer;
-        }
-
-        /* Admin Dashboard */
-        .admin-dashboard {
-            display: none;
-        }
-
-        .admin-dashboard.active {
-            display: block;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            margin-top: 0.5rem;
-        }
-
-        /* Table */
-        .table-container {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid rgba(124, 58, 237, 0.2);
-        }
-
-        th {
-            background: rgba(124, 58, 237, 0.2);
-            color: var(--text-primary);
-        }
-
-        td {
-            color: var(--text-secondary);
-        }
-
-        .status-badge {
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-        }
-
-        .status-pending { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
-        .status-processing { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
-        .status-completed { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
-        .status-cancelled { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
-
-        /* Toast Notification */
+        /* --- UTILS --- */
         .toast {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            border-radius: 10px;
-            padding: 1rem;
-            display: none;
-            z-index: 1001;
-            animation: slideIn 0.3s ease-out;
+            position: fixed; top: 100px; right: 20px; background: #151525; border: 1px solid var(--primary-purple);
+            border-radius: 10px; padding: 1rem 1.5rem; z-index: 3000; transform: translateX(120%); transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 10px;
         }
+        .toast.show { transform: translateX(0); }
+        .copy-btn { background: rgba(124, 58, 237, 0.2); border: 1px solid var(--primary-purple); color: white; padding: 0.2rem 0.6rem; border-radius: 5px; cursor: pointer; font-size: 0.75rem; margin-left: 5px; }
+        
+        footer { text-align: center; padding: 2rem; color: var(--text-secondary); font-size: 0.85rem; border-top: 1px solid var(--border-color); margin-top: 4rem; }
 
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        .toast.show {
-            display: block;
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 15, 26, 0.9);
-            z-index: 1002;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .loading.active {
-            display: flex;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(124, 58, 237, 0.3);
-            border-top-color: var(--primary-purple);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(15, 15, 26, 0.95);
-                flex-direction: column;
-                padding: 1rem;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .chat-window {
-                width: calc(100vw - 40px);
-                right: -10px;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-secondary);
-            border-top: 1px solid rgba(124, 58, 237, 0.3);
-            margin-top: 3rem;
-        }
-
-        /* Hidden sections */
-        .section {
-            display: none;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        /* Copy button */
-        .copy-btn {
-            background: rgba(124, 58, 237, 0.2);
-            border: 1px solid var(--primary-purple);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            margin-left: 0.5rem;
-        }
-
-        .copy-btn:hover {
-            background: rgba(124, 58, 237, 0.3);
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #0a0a12; flex-direction: column; padding: 1rem; border-bottom: 1px solid var(--border-color); }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .hero h1 { font-size: 2rem; }
+            .chat-window { width: calc(100vw - 40px); right: -10px; }
+            .payment-methods { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Loading -->
-    <div class="loading" id="loading">
-        <div class="spinner"></div>
-    </div>
 
-    <!-- Toast -->
-    <div class="toast" id="toast">
-        <span id="toast-message"></span>
-    </div>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"><i class="fas fa-check-circle" style="color: var(--primary-purple)"></i> <span id="toast-msg"></span></div>
 
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-gamepad"></i>
-                <span>RYUZY STORE</span>
-            </div>
+            <div class="logo"><i class="fas fa-gamepad"></i> RYUZY STORE</div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#" class="active" onclick="showSection('home')"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="#" onclick="showSection('sosmed')"><i class="fas fa-mobile-alt"></i> Suntik Sosmed</a></li>
                 <li><a href="#" onclick="showSection('game')"><i class="fas fa-gamepad"></i> Top Up Game</a></li>
-                <li><a href="#" onclick="showSection('layanan')"><i class="fas fa-list"></i> Layanan Lainnya</a></li>
+                <li><a href="#" onclick="showSection('layanan')"><i class="fas fa-tools"></i> Layanan Lain</a></li>
                 <li><a href="#" onclick="showSection('cek-order')"><i class="fas fa-search"></i> Cek Order</a></li>
                 <li><a href="#" onclick="showSection('admin-login')"><i class="fas fa-user-shield"></i> Admin</a></li>
             </ul>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button class="mobile-menu-btn" onclick="document.getElementById('navLinks').classList.toggle('active')"><i class="fas fa-bars"></i></button>
         </div>
     </nav>
 
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Home Section -->
+        
+        <!-- HOME SECTION -->
         <section id="home" class="section active">
             <div class="hero">
-                <div class="hero-content">
-                    <h1>RYUZY STORE</h1>
-                    <p>Suntik Sosmed • Top Up Game • Jasa Digital</p>
-                    <div class="status-badges">
-                        <div class="badge badge-online">
-                            <i class="fas fa-circle"></i> STORE ONLINE
-                        </div>
-                        <div class="badge badge-cs">
-                            <i class="fas fa-headset"></i> CUSTOMER SERVICE 24/7
-                        </div>
-                    </div>
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary" onclick="showSection('sosmed')">
-                            <i class="fas fa-shopping-cart"></i> ORDER SEKARANG
-                        </button>
-                        <button class="btn btn-secondary" onclick="openChat()">
-                            <i class="fas fa-comments"></i> CUSTOMER SERVICE 24/7
-                        </button>
-                        <button class="btn btn-secondary" onclick="showSection('cek-order')">
-                            <i class="fas fa-search"></i> CEK ORDER
-                        </button>
-                        <a href="https://wa.me/085776210087" target="_blank" class="btn btn-secondary">
-                            <i class="fab fa-whatsapp"></i> CHAT WHATSAPP
-                        </a>
-                    </div>
+                <h1>RYUZY STORE</h1>
+                <p>Suntik Sosmed • Top Up Game • Jasa Digital Premium</p>
+                <div class="status-badges">
+                    <div class="badge badge-online"><i class="fas fa-circle"></i> STORE ONLINE</div>
+                    <div class="badge badge-cs"><i class="fas fa-headset"></i> CS 24/7</div>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="showSection('sosmed')"><i class="fas fa-shopping-cart"></i> ORDER SEKARANG</button>
+                    <button class="btn btn-secondary" onclick="toggleChat()"><i class="fas fa-comments"></i> CUSTOMER SERVICE</button>
+                    <a href="https://wa.me/085776210087" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> CHAT WHATSAPP</a>
                 </div>
             </div>
 
@@ -745,327 +268,206 @@
                 <div class="card" onclick="showSection('sosmed')">
                     <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
                     <h3>Suntik Sosmed</h3>
-                    <p>Tingkatkan followers, likes, views untuk TikTok, Instagram, YouTube, dan platform lainnya.</p>
-                    <button class="btn btn-primary">Order Sekarang</button>
+                    <p>Tingkatkan followers, likes, views TikTok, IG, YouTube dengan harga termurah.</p>
+                    <button class="btn btn-primary" style="width:100%">Order Sekarang</button>
                 </div>
                 <div class="card" onclick="showSection('game')">
                     <div class="card-icon"><i class="fas fa-gamepad"></i></div>
                     <h3>Top Up Game</h3>
-                    <p>Top up diamond, UC, dan currency game favoritmu dengan harga terbaik.</p>
-                    <button class="btn btn-primary">Top Up Sekarang</button>
+                    <p>Diamond ML, FF, Robux, Valorant Points proses cepat dan aman.</p>
+                    <button class="btn btn-primary" style="width:100%">Top Up Sekarang</button>
                 </div>
                 <div class="card" onclick="showSection('layanan')">
                     <div class="card-icon"><i class="fas fa-tools"></i></div>
                     <h3>Layanan Digital</h3>
-                    <p>Jasa post, convert saldo, template QRIS, rekber, dan layanan digital lainnya.</p>
-                    <button class="btn btn-primary">Lihat Layanan</button>
+                    <p>Jasa post, convert saldo, template QRIS, rekber terpercaya.</p>
+                    <button class="btn btn-primary" style="width:100%">Lihat Layanan</button>
                 </div>
             </div>
         </section>
 
-        <!-- Suntik Sosmed Section -->
+        <!-- SUNTIK SOSMED SECTION -->
         <section id="sosmed" class="section">
-            <h2 style="margin-bottom: 2rem; text-align: center;">
-                <i class="fas fa-mobile-alt"></i> SUNTIK SOSMED
-            </h2>
-            
-            <div class="form-section active">
-                <form id="sosmedForm">
+            <h2 style="text-align:center; margin-bottom:2rem;"><i class="fas fa-mobile-alt"></i> SUNTIK SOSMED</h2>
+            <div class="form-container">
+                <form id="formSosmed">
                     <div class="form-group">
                         <label>Platform</label>
-                        <select class="form-control" id="platform" onchange="updateServices()">
+                        <select class="form-control" id="smPlatform" onchange="updateSmServices()" required>
                             <option value="">Pilih Platform</option>
                             <option value="tiktok">TikTok</option>
                             <option value="instagram">Instagram</option>
                             <option value="facebook">Facebook</option>
                             <option value="twitter">X / Twitter</option>
-                            <option value="telegram">Telegram</option>
                             <option value="youtube">YouTube</option>
-                            <option value="other">Platform Lainnya</option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label>Jenis Layanan</label>
-                        <select class="form-control" id="serviceType" onchange="calculatePrice()">
+                        <select class="form-control" id="smService" onchange="calcSmPrice()" required>
                             <option value="">Pilih Jenis Layanan</option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label>Link Akun/Postingan</label>
-                        <input type="url" class="form-control" id="socialLink" placeholder="https://..." required>
+                        <input type="url" class="form-control" id="smLink" placeholder="https://..." required>
                     </div>
-
                     <div class="form-group">
                         <label>Jumlah</label>
-                        <input type="number" class="form-control" id="quantity" placeholder="Masukkan jumlah" min="1" oninput="calculatePrice()" required>
+                        <input type="number" class="form-control" id="smQty" placeholder="Min. 100" min="10" oninput="calcSmPrice()" required>
                     </div>
-
                     <div class="form-group">
                         <label>Paket</label>
-                        <select class="form-control" id="package" onchange="calculatePrice()">
-                            <option value="regular">Regular</option>
-                            <option value="premium">Premium (+20%)</option>
-                            <option value="vip">VIP (+50%)</option>
+                        <select class="form-control" id="smPackage" onchange="calcSmPrice()">
+                            <option value="1">Regular (Standar)</option>
+                            <option value="1.2">Premium (+20% Cepat)</option>
+                            <option value="1.5">VIP (+50% Instan)</option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label>Catatan</label>
-                        <textarea class="form-control" id="notes" rows="3" placeholder="Catatan tambahan..."></textarea>
+                        <textarea class="form-control" id="smNote" rows="2" placeholder="Opsional..."></textarea>
                     </div>
-
+                    
                     <div class="order-summary">
-                        <h3 style="margin-bottom: 1rem;">RINGKASAN ORDER</h3>
-                        <div class="summary-item">
-                            <span>Harga per unit:</span>
-                            <span id="pricePerUnit">Rp 0</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Jumlah:</span>
-                            <span id="summaryQuantity">0</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Subtotal:</span>
-                            <span id="subtotal">Rp 0</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Total:</span>
-                            <span id="totalPrice">Rp 0</span>
-                        </div>
+                        <div class="summary-row"><span>Harga Satuan</span><span id="smPriceUnit">Rp 0</span></div>
+                        <div class="summary-row"><span>Jumlah</span><span id="smSummaryQty">0</span></div>
+                        <div class="summary-row"><span>Total Pembayaran</span><span id="smTotal">Rp 0</span></div>
                     </div>
-
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        <i class="fas fa-shopping-cart"></i> ORDER SEKARANG
-                    </button>
+                    
+                    <button type="submit" class="btn btn-primary" style="width:100%"><i class="fas fa-paper-plane"></i> LANJUT KE PEMBAYARAN</button>
                 </form>
             </div>
         </section>
 
-        <!-- Top Up Game Section -->
+        <!-- TOP UP GAME SECTION -->
         <section id="game" class="section">
-            <h2 style="margin-bottom: 2rem; text-align: center;">
-                <i class="fas fa-gamepad"></i> TOP UP GAME
-            </h2>
-
-            <div class="form-section active">
-                <form id="gameForm">
+            <h2 style="text-align:center; margin-bottom:2rem;"><i class="fas fa-gamepad"></i> TOP UP GAME</h2>
+            <div class="form-container">
+                <form id="formGame">
                     <div class="form-group">
                         <label>Pilih Game</label>
-                        <select class="form-control" id="gameSelect" onchange="updateGameForm()">
+                        <select class="form-control" id="gmSelect" onchange="updateGmForm()" required>
                             <option value="">Pilih Game</option>
                             <option value="ml">Mobile Legends</option>
                             <option value="ff">Free Fire</option>
                             <option value="roblox">Roblox</option>
                             <option value="valorant">Valorant</option>
                             <option value="genshin">Genshin Impact</option>
-                            <option value="hsr">Honkai: Star Rail</option>
-                            <option value="hok">Honor of Kings</option>
-                            <option value="codm">Call of Duty Mobile</option>
                             <option value="pubg">PUBG Mobile</option>
-                            <option value="other">Game Lainnya</option>
                         </select>
                     </div>
-
-                    <div id="gameFields">
+                    <div id="gmIdFields">
                         <div class="form-group">
                             <label>User ID</label>
-                            <input type="text" class="form-control" id="userId" placeholder="Masukkan User ID" required>
+                            <input type="text" class="form-control" id="gmUserId" placeholder="Masukkan User ID" required>
                         </div>
-
-                        <div class="form-group" id="serverIdField" style="display: none;">
+                        <div class="form-group" id="gmServerField" style="display:none">
                             <label>Server ID</label>
-                            <input type="text" class="form-control" id="serverId" placeholder="Masukkan Server ID">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Nickname</label>
-                            <input type="text" class="form-control" id="nickname" placeholder="Nickname in-game">
+                            <input type="text" class="form-control" id="gmServerId" placeholder="Contoh: 1234">
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label>Nominal Top Up</label>
-                        <select class="form-control" id="nominal" onchange="calculateGamePrice()">
+                        <select class="form-control" id="gmNominal" onchange="calcGmPrice()" required>
                             <option value="">Pilih Nominal</option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label>Catatan</label>
-                        <textarea class="form-control" id="gameNotes" rows="3" placeholder="Catatan tambahan..."></textarea>
+                        <textarea class="form-control" id="gmNote" rows="2" placeholder="Opsional..."></textarea>
                     </div>
 
                     <div class="order-summary">
-                        <h3 style="margin-bottom: 1rem;">RINGKASAN ORDER</h3>
-                        <div class="summary-item">
-                            <span>Game:</span>
-                            <span id="gameName">-</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Nominal:</span>
-                            <span id="gameNominal">-</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Total:</span>
-                            <span id="gameTotal">Rp 0</span>
-                        </div>
+                        <div class="summary-row"><span>Item</span><span id="gmSummaryItem">-</span></div>
+                        <div class="summary-row"><span>Total Pembayaran</span><span id="gmTotal">Rp 0</span></div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        <i class="fas fa-shopping-cart"></i> ORDER SEKARANG
-                    </button>
+                    <button type="submit" class="btn btn-primary" style="width:100%"><i class="fas fa-paper-plane"></i> LANJUT KE PEMBAYARAN</button>
                 </form>
             </div>
         </section>
 
-        <!-- Layanan Lainnya Section -->
+        <!-- LAYANAN LAINNYA SECTION -->
         <section id="layanan" class="section">
-            <h2 style="margin-bottom: 2rem; text-align: center;">
-                <i class="fas fa-tools"></i> LAYANAN LAINNYA
-            </h2>
-
-            <div class="form-section active">
-                <form id="layananForm">
+            <h2 style="text-align:center; margin-bottom:2rem;"><i class="fas fa-tools"></i> LAYANAN DIGITAL</h2>
+            <div class="form-container">
+                <form id="formLayanan">
                     <div class="form-group">
-                        <label>Nama Layanan</label>
-                        <select class="form-control" id="layananType">
+                        <label>Jenis Layanan</label>
+                        <select class="form-control" id="layType" required>
                             <option value="">Pilih Layanan</option>
-                            <option value="post">Jasa Post</option>
-                            <option value="convert">Convert Saldo</option>
-                            <option value="qris">Jasa Template QRIS</option>
-                            <option value="rekber">Rekber</option>
-                            <option value="other">Jasa Digital Lainnya</option>
+                            <option value="Jasa Post">Jasa Post / Admin Sosmed</option>
+                            <option value="Convert Saldo">Convert Saldo E-Wallet</option>
+                            <option value="Template QRIS">Jasa Template QRIS Custom</option>
+                            <option value="Rekber">Rekber (Rekening Bersama)</option>
+                            <option value="Lainnya">Lainnya (Chat Admin)</option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label>Deskripsi Kebutuhan</label>
-                        <textarea class="form-control" id="layananDesc" rows="4" placeholder="Jelaskan kebutuhan Anda..." required></textarea>
+                        <textarea class="form-control" id="layDesc" rows="4" placeholder="Jelaskan detail kebutuhan Anda..." required></textarea>
                     </div>
-
-                    <div class="form-group">
-                        <label>Catatan</label>
-                        <textarea class="form-control" id="layananNotes" rows="3" placeholder="Catatan tambahan..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        <i class="fas fa-shopping-cart"></i> ORDER SEKARANG
-                    </button>
+                    <button type="submit" class="btn btn-primary" style="width:100%"><i class="fas fa-paper-plane"></i> TANYA HARGA & ORDER</button>
                 </form>
             </div>
         </section>
 
-        <!-- Cek Order Section -->
+        <!-- CEK ORDER SECTION -->
         <section id="cek-order" class="section">
-            <h2 style="margin-bottom: 2rem; text-align: center;">
-                <i class="fas fa-search"></i> CEK ORDER
-            </h2>
-
-            <div class="form-section active">
-                <form id="cekOrderForm">
+            <h2 style="text-align:center; margin-bottom:2rem;"><i class="fas fa-search"></i> CEK STATUS ORDER</h2>
+            <div class="form-container" style="max-width:500px">
+                <form id="formCekOrder">
                     <div class="form-group">
                         <label>ID Order</label>
-                        <input type="text" class="form-control" id="checkOrderId" placeholder="Contoh: RYZ-20260818-0001" required>
+                        <input type="text" class="form-control" id="cekId" placeholder="RYZ-20260818-0001" required>
                     </div>
-
                     <div class="form-group">
                         <label>Nomor WhatsApp</label>
-                        <input type="tel" class="form-control" id="checkWa" placeholder="08xxxxxxxxxx" required>
+                        <input type="tel" class="form-control" id="cekWa" placeholder="08xxxxxxxxxx" required>
                     </div>
-
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        <i class="fas fa-search"></i> CEK STATUS ORDER
-                    </button>
+                    <button type="submit" class="btn btn-primary" style="width:100%"><i class="fas fa-search"></i> CEK STATUS</button>
                 </form>
-
-                <div id="orderStatus" style="margin-top: 2rem; display: none;">
-                    <div class="order-summary">
-                        <h3 style="margin-bottom: 1rem;">STATUS ORDER</h3>
-                        <div class="summary-item">
-                            <span>ID Order:</span>
-                            <span id="statusOrderId">-</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Status:</span>
-                            <span id="statusOrderStatus">-</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Layanan:</span>
-                            <span id="statusOrderService">-</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Total:</span>
-                            <span id="statusOrderTotal">-</span>
-                        </div>
-                    </div>
-                </div>
+                <div id="resultCekOrder" style="margin-top:2rem; display:none;"></div>
             </div>
         </section>
 
-        <!-- Admin Login Section -->
+        <!-- ADMIN LOGIN SECTION -->
         <section id="admin-login" class="section">
-            <h2 style="margin-bottom: 2rem; text-align: center;">
-                <i class="fas fa-user-shield"></i> ADMIN LOGIN
-            </h2>
-
-            <div class="form-section active" style="max-width: 500px; margin: 0 auto;">
-                <form id="adminLoginForm">
+            <h2 style="text-align:center; margin-bottom:2rem;"><i class="fas fa-lock"></i> ADMIN LOGIN</h2>
+            <div class="form-container" style="max-width:400px">
+                <form id="formAdminLogin">
                     <div class="form-group">
-                        <label>Email/Username</label>
-                        <input type="text" class="form-control" id="adminEmail" required>
+                        <label>Username</label>
+                        <input type="text" class="form-control" id="admUser" required>
                     </div>
-
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" id="adminPassword" required>
+                        <input type="password" class="form-control" id="admPass" required>
                     </div>
-
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        <i class="fas fa-sign-in-alt"></i> LOGIN
-                    </button>
+                    <button type="submit" class="btn btn-primary" style="width:100%">LOGIN DASHBOARD</button>
                 </form>
             </div>
         </section>
 
-        <!-- Admin Dashboard Section -->
-        <section id="admin-dashboard" class="section admin-dashboard">
-            <h2 style="margin-bottom: 2rem; text-align: center;">
-                <i class="fas fa-tachometer-alt"></i> ADMIN DASHBOARD
-            </h2>
-
+        <!-- ADMIN DASHBOARD SECTION -->
+        <section id="admin-dashboard" class="section">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+                <h2><i class="fas fa-tachometer-alt"></i> ADMIN DASHBOARD</h2>
+                <button class="btn btn-secondary" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+            
             <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number" id="totalOrders">0</div>
-                    <div class="stat-label">Total Order</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="pendingOrders">0</div>
-                    <div class="stat-label">Order Pending</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="processingOrders">0</div>
-                    <div class="stat-label">Order Diproses</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="completedOrders">0</div>
-                    <div class="stat-label">Order Selesai</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="totalRevenue">Rp 0</div>
-                    <div class="stat-label">Total Transaksi</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="totalCustomers">0</div>
-                    <div class="stat-label">Total Customer</div>
-                </div>
+                <div class="stat-card"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Total Order</div></div>
+                <div class="stat-card"><div class="stat-num" id="statPending">0</div><div class="stat-label">Menunggu Bayar</div></div>
+                <div class="stat-card"><div class="stat-num" id="statProcess">0</div><div class="stat-label">Diproses</div></div>
+                <div class="stat-card"><div class="stat-num" id="statDone">0</div><div class="stat-label">Selesai</div></div>
             </div>
 
-            <div class="card">
-                <h3 style="margin-bottom: 1rem;">Kelola Order</h3>
-                <div class="table-container">
-                    <table>
+            <div class="form-container" style="max-width:100%">
+                <h3 style="margin-bottom:1rem">Daftar Order Terbaru</h3>
+                <div style="overflow-x:auto">
+                    <table id="tblOrders">
                         <thead>
                             <tr>
                                 <th>ID Order</th>
@@ -1076,619 +478,456 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody id="ordersTable">
-                            <!-- Orders will be populated here -->
-                        </tbody>
+                        <tbody><!-- JS Populated --></tbody>
                     </table>
                 </div>
             </div>
-
-            <div class="card" style="margin-top: 2rem;">
-                <h3 style="margin-bottom: 1rem;">Customer Service</h3>
-                <div id="adminChatList">
-                    <!-- Chat list will be populated here -->
-                </div>
-            </div>
-
-            <button class="btn btn-secondary" onclick="logoutAdmin()" style="margin-top: 2rem;">
-                <i class="fas fa-sign-out-alt"></i> Logout Admin
-            </button>
         </section>
+
     </div>
 
-    <!-- Chat Widget -->
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 RYUZY STORE — All Rights Reserved</p>
+        <p style="margin-top:0.5rem; opacity:0.7"> DANA: 085776210087 | 💚 GoPay: 089647146786 | 💜 QRIS Available</p>
+    </footer>
+
+    <!-- CHAT WIDGET -->
     <div class="chat-widget">
         <div class="chat-window" id="chatWindow">
             <div class="chat-header">
-                <div class="chat-header-info">
-                    <div class="online-indicator"></div>
-                    <div>
-                        <div style="font-weight: bold;">💜 RYUZY STORE ADMIN</div>
-                        <div style="font-size: 0.8rem;">🟢 Online | Customer Service 24/7</div>
-                    </div>
+                <div>
+                    <div style="font-weight:bold; font-size:0.95rem">💜 RYUZY STORE ADMIN</div>
+                    <div style="font-size:0.75rem; opacity:0.9">🟢 Online | CS 24/7</div>
                 </div>
-                <button onclick="closeChat()" style="background: none; border: none; color: white; cursor: pointer;">
-                    <i class="fas fa-times"></i>
-                </button>
+                <button onclick="toggleChat()" style="background:none; border:none; color:white; cursor:pointer"><i class="fas fa-times"></i></button>
             </div>
             <div class="chat-messages" id="chatMessages">
-                <div class="message message-admin">
-                    «Halo kak! 👋 Selamat datang di RYUZY STORE. Ada yang bisa kami bantu? Silakan tanyakan mengenai order, harga, pembayaran, suntik sosmed, top up game, atau layanan lainnya.»
-                </div>
+                <div class="message msg-admin">«Halo kak! 👋 Selamat datang di RYUZY STORE. Ada yang bisa kami bantu? Silakan tanyakan mengenai order, harga, atau pembayaran.»</div>
             </div>
-            <div class="chat-input">
-                <input type="text" id="chatInput" placeholder="Ketik pesan..." onkeypress="handleChatKeypress(event)">
-                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Ketik pesan..." onkeypress="if(event.key==='Enter') sendChat()">
+                <button onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
             </div>
-            <div style="padding: 0.5rem; text-align: center;">
-                <a href="https://wa.me/085776210087?text=Halo%20Admin%20RYUZY%20STORE,%20saya%20ingin%20bertanya%20mengenai%20layanan/order." 
-                   target="_blank" 
-                   style="color: var(--primary-purple); text-decoration: none; font-size: 0.9rem;">
-                    📲 CHAT VIA WHATSAPP
-                </a>
+            <div style="padding:0.5rem; text-align:center; border-top:1px solid var(--border-color)">
+                <a href="https://wa.me/085776210087?text=Halo%20Admin%20RYUZY%20STORE" target="_blank" style="color:var(--primary-purple); font-size:0.8rem; text-decoration:none">📲 CHAT VIA WHATSAPP</a>
             </div>
         </div>
-        <button class="chat-button" onclick="toggleChat()">
-            <i class="fas fa-comments"></i>
-        </button>
+        <button class="chat-button" onclick="toggleChat()"><i class="fas fa-comments"></i></button>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 RYUZY STORE — All Rights Reserved</p>
-        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
-            💙 DANA: 085776210087 | 💚 GoPay: 089647146786 | 💜 QRIS Available
-        </p>
-    </footer>
+    <!-- PAYMENT MODAL -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-content">
+            <h3 style="text-align:center; margin-bottom:0.5rem">💳 PILIH METODE PEMBAYARAN</h3>
+            <p style="text-align:center; color:var(--text-secondary); font-size:0.9rem; margin-bottom:1.5rem">ID Order: <span id="payOrderId" style="color:var(--primary-purple); font-weight:bold"></span></p>
+            
+            <div class="payment-methods">
+                <div class="payment-method" onclick="selectPayment('DANA')">
+                    <i class="fas fa-wallet" style="color:#008ceb"></i>
+                    <div>DANA</div>
+                    <small style="font-size:0.7rem; color:var(--text-secondary)">085776210087</small>
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyText('085776210087')">Copy</button>
+                </div>
+                <div class="payment-method" onclick="selectPayment('GoPay')">
+                    <i class="fas fa-wallet" style="color:#00aa13"></i>
+                    <div>GoPay</div>
+                    <small style="font-size:0.7rem; color:var(--text-secondary)">089647146786</small>
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyText('089647146786')">Copy</button>
+                </div>
+                <div class="payment-method" onclick="showQrisImage()">
+                    <i class="fas fa-qrcode" style="color:var(--primary-purple)"></i>
+                    <div>QRIS</div>
+                    <small style="font-size:0.7rem; color:var(--text-secondary)">Scan Gambar</small>
+                </div>
+            </div>
+
+            <div class="order-summary" style="margin:1rem 0">
+                <div class="summary-row"><span>Total Tagihan</span><span id="payTotalDisplay">Rp 0</span></div>
+            </div>
+
+            <button class="btn btn-primary" style="width:100%" onclick="confirmOrderToWA()">
+                <i class="fab fa-whatsapp"></i> KONFIRMASI ORDER VIA WHATSAPP
+            </button>
+            <button class="btn btn-secondary" style="width:100%; margin-top:0.5rem" onclick="closePaymentModal()">Batal</button>
+        </div>
+    </div>
+
+    <!-- QRIS IMAGE MODAL -->
+    <div class="modal-overlay" id="qrisImageModal" onclick="this.classList.remove('active')">
+        <div class="modal-content" style="max-width:600px; text-align:center" onclick="event.stopPropagation()">
+            <h3 style="margin-bottom:1rem">SCAN QRIS RYUZY STORE</h3>
+            <!-- GANTI SRC DI BAWAH INI DENGAN PATH GAMBAR ANDA -->
+            <img src="qris-ryuzy.jpg" alt="QRIS RYUZY STORE" class="qris-popup-img" onerror="this.src='https://placehold.co/600x600/151525/7c3aed?text=QRIS+IMAGE+NOT+FOUND\n(Please+upload+qris-ryuzy.jpg)'">
+            <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:1.5rem">Support: DANA, OVO, GoPay, ShopeePay, Mobile Banking</p>
+            <button class="btn btn-primary" onclick="document.getElementById('qrisImageModal').classList.remove('active')">Tutup</button>
+        </div>
+    </div>
 
     <script>
-        // Data Storage
+        // --- DATA & CONFIG ---
+        const WA_ADMIN = "085776210087";
+        let currentOrder = null;
+        let selectedPayment = "";
+        
+        // Load data from localStorage
         let orders = JSON.parse(localStorage.getItem('ryuzy_orders')) || [];
-        let customers = JSON.parse(localStorage.getItem('ryuzy_customers')) || [];
-        let chats = JSON.parse(localStorage.getItem('ryuzy_chats')) || [];
-        let isAdminLoggedIn = false;
-
-        // Price configurations
-        const socialMediaPrices = {
-            tiktok: { followers: 50, like: 30, views: 10, favorite: 40, share: 35, comment: 100 },
-            instagram: { followers: 60, like: 35, views: 15, favorite: 45, share: 40, comment: 120 },
-            facebook: { followers: 70, like: 40, views: 20, favorite: 50, share: 45, comment: 130 },
-            twitter: { followers: 80, like: 45, views: 25, favorite: 55, share: 50, comment: 140 },
-            telegram: { followers: 90, like: 50, views: 30, favorite: 60, share: 55, comment: 150 },
-            youtube: { followers: 100, like: 60, views: 35, favorite: 70, share: 65, comment: 160 }
+        
+        const smPrices = {
+            tiktok: { followers: 50, like: 30, views: 10, share: 35, comment: 100 },
+            instagram: { followers: 60, like: 35, views: 15, share: 40, comment: 120 },
+            facebook: { followers: 70, like: 40, views: 20, share: 45, comment: 130 },
+            twitter: { followers: 80, like: 45, views: 25, share: 50, comment: 140 },
+            youtube: { subscribers: 100, like: 60, views: 35, comment: 160 }
         };
 
-        const gamePrices = {
-            ml: { '86 Diamonds': 15000, '172 Diamonds': 28000, '257 Diamonds': 40000, '344 Diamonds': 52000, '514 Diamonds': 75000, '706 Diamonds': 100000 },
+        const gmPrices = {
+            ml: { '86 Diamonds': 15000, '172 Diamonds': 28000, '257 Diamonds': 40000, '344 Diamonds': 52000, '706 Diamonds': 100000 },
             ff: { '70 Diamonds': 10000, '140 Diamonds': 19000, '355 Diamonds': 45000, '720 Diamonds': 90000 },
-            roblox: { '80 Robux': 15000, '400 Robux': 70000, '800 Robux': 135000, '1700 Robux': 270000 },
-            valorant: { '475 VP': 55000, '1000 VP': 110000, '2050 VP': 220000, '3650 VP': 380000 },
-            genshin: { '60 Genesis': 15000, '300+30 Genesis': 75000, '980+110 Genesis': 240000, '1980+260 Genesis': 480000 },
-            hsr: { '60 Oneiric': 15000, '300+30 Oneiric': 75000, '980+110 Oneiric': 240000, '1980+260 Oneiric': 480000 },
-            hok: { '50 Tokens': 10000, '100 Tokens': 19000, '250 Tokens': 45000, '500 Tokens': 85000 },
-            codm: { '80 CP': 15000, '420 CP': 75000, '880 CP': 150000, '2000 CP': 330000 },
-            pubg: { '60 UC': 15000, '325 UC': 75000, '660 UC': 150000, '1800 UC': 380000 }
+            roblox: { '80 Robux': 15000, '400 Robux': 70000, '800 Robux': 135000 },
+            valorant: { '475 VP': 55000, '1000 VP': 110000, '2050 VP': 220000 },
+            genshin: { '60 Genesis': 15000, '300+30 Genesis': 75000, '980+110 Genesis': 240000 },
+            pubg: { '60 UC': 15000, '325 UC': 75000, '660 UC': 150000 }
         };
 
-        // Navigation
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active');
-            
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            window.scrollTo(0, 0);
+        // --- NAVIGATION ---
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            window.scrollTo({top:0, behavior:'smooth'});
+            // Close mobile menu if open
+            document.getElementById('navLinks').classList.remove('active');
         }
 
-        function toggleMobileMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
-
-        // Social Media Functions
-        function updateServices() {
-            const platform = document.getElementById('platform').value;
-            const serviceSelect = document.getElementById('serviceType');
-            
-            serviceSelect.innerHTML = '<option value="">Pilih Jenis Layanan</option>';
-            
-            if (platform && socialMediaPrices[platform]) {
-                const services = Object.keys(socialMediaPrices[platform]);
-                services.forEach(service => {
-                    const option = document.createElement('option');
-                    option.value = service;
-                    option.textContent = service.charAt(0).toUpperCase() + service.slice(1);
-                    serviceSelect.appendChild(option);
+        // --- SOCIAL MEDIA LOGIC ---
+        function updateSmServices() {
+            const plat = document.getElementById('smPlatform').value;
+            const sel = document.getElementById('smService');
+            sel.innerHTML = '<option value="">Pilih Jenis Layanan</option>';
+            if(plat && smPrices[plat]) {
+                Object.keys(smPrices[plat]).forEach(k => {
+                    sel.innerHTML += `<option value="${k}" data-price="${smPrices[plat][k]}">${k.charAt(0).toUpperCase()+k.slice(1)}</option>`;
                 });
             }
-            
-            calculatePrice();
+            calcSmPrice();
         }
 
-        function calculatePrice() {
-            const platform = document.getElementById('platform').value;
-            const service = document.getElementById('serviceType').value;
-            const quantity = parseInt(document.getElementById('quantity').value) || 0;
-            const packageType = document.getElementById('package').value;
+        function calcSmPrice() {
+            const sel = document.getElementById('smService');
+            const opt = sel.options[sel.selectedIndex];
+            const price = opt.dataset.price ? parseInt(opt.dataset.price) : 0;
+            const qty = parseInt(document.getElementById('smQty').value) || 0;
+            const mult = parseFloat(document.getElementById('smPackage').value);
             
-            let pricePerUnit = 0;
-            if (platform && service && socialMediaPrices[platform] && socialMediaPrices[platform][service]) {
-                pricePerUnit = socialMediaPrices[platform][service];
-            }
+            const total = Math.round(price * qty * mult);
             
-            let multiplier = 1;
-            if (packageType === 'premium') multiplier = 1.2;
-            if (packageType === 'vip') multiplier = 1.5;
-            
-            const subtotal = pricePerUnit * quantity;
-            const total = Math.round(subtotal * multiplier);
-            
-            document.getElementById('pricePerUnit').textContent = `Rp ${pricePerUnit.toLocaleString()}`;
-            document.getElementById('summaryQuantity').textContent = quantity;
-            document.getElementById('subtotal').textContent = `Rp ${subtotal.toLocaleString()}`;
-            document.getElementById('totalPrice').textContent = `Rp ${total.toLocaleString()}`;
+            document.getElementById('smPriceUnit').textContent = `Rp ${price.toLocaleString()}`;
+            document.getElementById('smSummaryQty').textContent = qty;
+            document.getElementById('smTotal').textContent = `Rp ${total.toLocaleString()}`;
+            return total;
         }
 
-        // Game Functions
-        function updateGameForm() {
-            const game = document.getElementById('gameSelect').value;
-            const nominalSelect = document.getElementById('nominal');
-            const serverField = document.getElementById('serverIdField');
+        // --- GAME LOGIC ---
+        function updateGmForm() {
+            const game = document.getElementById('gmSelect').value;
+            const sel = document.getElementById('gmNominal');
+            const srvField = document.getElementById('gmServerField');
             
-            nominalSelect.innerHTML = '<option value="">Pilih Nominal</option>';
+            sel.innerHTML = '<option value="">Pilih Nominal</option>';
+            srvField.style.display = (game === 'ml') ? 'block' : 'none';
             
-            if (game && gamePrices[game]) {
-                const nominals = Object.keys(gamePrices[game]);
-                nominals.forEach(nominal => {
-                    const option = document.createElement('option');
-                    option.value = nominal;
-                    option.textContent = `${nominal} - Rp ${gamePrices[game][nominal].toLocaleString()}`;
-                    nominalSelect.appendChild(option);
+            if(game && gmPrices[game]) {
+                Object.keys(gmPrices[game]).forEach(k => {
+                    sel.innerHTML += `<option value="${k}" data-price="${gmPrices[game][k]}">${k} - Rp ${gmPrices[game][k].toLocaleString()}</option>`;
                 });
             }
-            
-            // Show server ID field for Mobile Legends
-            if (game === 'ml') {
-                serverField.style.display = 'block';
-            } else {
-                serverField.style.display = 'none';
-            }
-            
-            calculateGamePrice();
+            calcGmPrice();
         }
 
-        function calculateGamePrice() {
-            const game = document.getElementById('gameSelect').value;
-            const nominal = document.getElementById('nominal').value;
+        function calcGmPrice() {
+            const sel = document.getElementById('gmNominal');
+            const opt = sel.options[sel.selectedIndex];
+            const price = opt.dataset.price ? parseInt(opt.dataset.price) : 0;
             
-            let price = 0;
-            if (game && nominal && gamePrices[game] && gamePrices[game][nominal]) {
-                price = gamePrices[game][nominal];
-            }
+            document.getElementById('gmSummaryItem').textContent = opt.value || '-';
+            document.getElementById('gmTotal').textContent = `Rp ${price.toLocaleString()}`;
+            return price;
+        }
+
+        // --- ORDER PROCESSING ---
+        function generateId() {
+            const d = new Date();
+            const ds = d.getFullYear().toString() + (d.getMonth()+1).toString().padStart(2,'0') + d.getDate().toString().padStart(2,'0');
+            const num = (orders.length + 1).toString().padStart(4, '0');
+            return `RYZ-${ds}-${num}`;
+        }
+
+        function processOrder(type, data) {
+            const name = prompt("Masukkan Nama Anda:") || "Customer";
+            const wa = prompt("Masukkan Nomor WhatsApp Anda:") || "";
+            const id = generateId();
             
-            const gameNames = {
-                ml: 'Mobile Legends', ff: 'Free Fire', roblox: 'Roblox',
-                valorant: 'Valorant', genshin: 'Genshin Impact', hsr: 'Honkai: Star Rail',
-                hok: 'Honor of Kings', codm: 'Call of Duty Mobile', pubg: 'PUBG Mobile'
+            currentOrder = {
+                id, customer: name, whatsapp: wa, type, ...data,
+                status: 'Menunggu Pembayaran', timestamp: new Date().toISOString(), paymentMethod: ''
             };
             
-            document.getElementById('gameName').textContent = gameNames[game] || '-';
-            document.getElementById('gameNominal').textContent = nominal || '-';
-            document.getElementById('gameTotal').textContent = `Rp ${price.toLocaleString()}`;
-        }
-
-        // Order Generation
-        function generateOrderId() {
-            const date = new Date();
-            const dateStr = date.getFullYear().toString() + 
-                           (date.getMonth() + 1).toString().padStart(2, '0') + 
-                           date.getDate().toString().padStart(2, '0');
-            const orderCount = orders.length + 1;
-            return `RYZ-${dateStr}-${orderCount.toString().padStart(4, '0')}`;
+            orders.push(currentOrder);
+            localStorage.setItem('ryuzy_orders', JSON.stringify(orders));
+            
+            document.getElementById('payOrderId').textContent = id;
+            document.getElementById('payTotalDisplay').textContent = data.totalStr;
+            document.getElementById('paymentModal').classList.add('active');
         }
 
         // Form Submissions
-        document.getElementById('sosmedForm').addEventListener('submit', function(e) {
+        document.getElementById('formSosmed').addEventListener('submit', e => {
             e.preventDefault();
-            createOrder('sosmed');
+            const total = calcSmPrice();
+            if(total <= 0) return showToast('Mohon lengkapi data order');
+            processOrder('Suntik Sosmed', {
+                platform: document.getElementById('smPlatform').value,
+                service: document.getElementById('smService').value,
+                link: document.getElementById('smLink').value,
+                qty: document.getElementById('smQty').value,
+                package: document.getElementById('smPackage').options[document.getElementById('smPackage').selectedIndex].text,
+                note: document.getElementById('smNote').value,
+                total: total,
+                totalStr: `Rp ${total.toLocaleString()}`
+            });
         });
 
-        document.getElementById('gameForm').addEventListener('submit', function(e) {
+        document.getElementById('formGame').addEventListener('submit', e => {
             e.preventDefault();
-            createOrder('game');
+            const total = calcGmPrice();
+            if(total <= 0) return showToast('Mohon pilih nominal top up');
+            processOrder('Top Up Game', {
+                game: document.getElementById('gmSelect').options[document.getElementById('gmSelect').selectedIndex].text,
+                userId: document.getElementById('gmUserId').value,
+                serverId: document.getElementById('gmServerId').value,
+                nominal: document.getElementById('gmNominal').value,
+                note: document.getElementById('gmNote').value,
+                total: total,
+                totalStr: `Rp ${total.toLocaleString()}`
+            });
         });
 
-        document.getElementById('layananForm').addEventListener('submit', function(e) {
+        document.getElementById('formLayanan').addEventListener('submit', e => {
             e.preventDefault();
-            createOrder('layanan');
+            processOrder('Layanan Digital', {
+                layanan: document.getElementById('layType').value,
+                desc: document.getElementById('layDesc').value,
+                total: 0,
+                totalStr: 'Menunggu Konfirmasi Admin'
+            });
         });
 
-        function createOrder(type) {
-            const orderId = generateOrderId();
-            const customerName = prompt('Masukkan nama Anda:') || 'Customer';
-            const customerWa = prompt('Masukkan nomor WhatsApp Anda:') || '';
+        // --- PAYMENT & WHATSAPP ---
+        function selectPayment(method) {
+            selectedPayment = method;
+            document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            showToast(`Metode ${method} dipilih`);
+        }
+
+        function showQrisImage() {
+            selectedPayment = 'QRIS';
+            document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            document.getElementById('qrisImageModal').classList.add('active');
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+            currentOrder = null;
+            selectedPayment = "";
+        }
+
+        function confirmOrderToWA() {
+            if(!currentOrder) return;
+            if(!selectedPayment) return showToast('Pilih metode pembayaran dulu!');
             
-            let orderData = {
-                id: orderId,
-                customer: customerName,
-                whatsapp: customerWa,
-                type: type,
-                status: 'Menunggu Pembayaran',
-                timestamp: new Date().toISOString(),
-                paymentMethod: ''
-            };
-            
-            if (type === 'sosmed') {
-                orderData.platform = document.getElementById('platform').value;
-                orderData.service = document.getElementById('serviceType').value;
-                orderData.link = document.getElementById('socialLink').value;
-                orderData.quantity = document.getElementById('quantity').value;
-                orderData.package = document.getElementById('package').value;
-                orderData.notes = document.getElementById('notes').value;
-                orderData.total = document.getElementById('totalPrice').textContent;
-            } else if (type === 'game') {
-                orderData.game = document.getElementById('gameSelect').value;
-                orderData.userId = document.getElementById('userId').value;
-                orderData.serverId = document.getElementById('serverId').value;
-                orderData.nickname = document.getElementById('nickname').value;
-                orderData.nominal = document.getElementById('nominal').value;
-                orderData.notes = document.getElementById('gameNotes').value;
-                orderData.total = document.getElementById('gameTotal').textContent;
-            } else if (type === 'layanan') {
-                orderData.layanan = document.getElementById('layananType').value;
-                orderData.description = document.getElementById('layananDesc').value;
-                orderData.notes = document.getElementById('layananNotes').value;
-                orderData.total = 'Hubungi Admin';
-            }
-            
-            // Save order
-            orders.push(orderData);
+            currentOrder.paymentMethod = selectedPayment;
             localStorage.setItem('ryuzy_orders', JSON.stringify(orders));
             
-            // Save customer
-            if (!customers.find(c => c.whatsapp === customerWa)) {
-                customers.push({
-                    name: customerName,
-                    whatsapp: customerWa,
-                    id: 'CUST-' + Date.now()
-                });
-                localStorage.setItem('ryuzy_customers', JSON.stringify(customers));
+            let msg = `*RYUZY STORE — ORDER BARU*\n\n`;
+            msg += `Nama: ${currentOrder.customer}\n`;
+            msg += `ID Order: ${currentOrder.id}\n`;
+            msg += `Layanan: ${currentOrder.type}\n`;
+            
+            if(currentOrder.type === 'Suntik Sosmed') {
+                msg += `Platform: ${currentOrder.platform}\nJenis: ${currentOrder.service}\nLink: ${currentOrder.link}\nJumlah: ${currentOrder.qty}\nPaket: ${currentOrder.package}\n`;
+            } else if(currentOrder.type === 'Top Up Game') {
+                msg += `Game: ${currentOrder.game}\nUser ID: ${currentOrder.userId}${currentOrder.serverId ? ' ('+currentOrder.serverId+')' : ''}\nNominal: ${currentOrder.nominal}\n`;
+            } else {
+                msg += `Jenis: ${currentOrder.layanan}\nDeskripsi: ${currentOrder.desc}\n`;
             }
             
-            // Show payment methods
-            showPaymentMethods(orderData);
-        }
-
-        function showPaymentMethods(orderData) {
-            const paymentHtml = `
-                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1003; display: flex; justify-content: center; align-items: center;">
-                    <div style="background: var(--card-bg); padding: 2rem; border-radius: 15px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto;">
-                        <h3 style="margin-bottom: 1rem; text-align: center;">💳 PILIH METODE PEMBAYARAN</h3>
-                        
-                        <div class="payment-methods">
-                            <div class="payment-method" onclick="selectPayment('${orderData.id}', 'DANA')">
-                                <i class="fas fa-wallet payment-dana"></i>
-                                <div>DANA</div>
-                                <small>085776210087</small>
-                                <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('085776210087')">Copy</button>
-                            </div>
-                            <div class="payment-method" onclick="selectPayment('${orderData.id}', 'GoPay')">
-                                <i class="fas fa-wallet payment-gopay"></i>
-                                <div>GoPay</div>
-                                <small>089647146786</small>
-                                <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('089647146786')">Copy</button>
-                            </div>
-                            <div class="payment-method" onclick="selectPayment('${orderData.id}', 'QRIS')">
-                                <i class="fas fa-qrcode payment-qris"></i>
-                                <div>QRIS</div>
-                                <small>Scan QR Code</small>
-                            </div>
-                        </div>
-                        
-                        <div class="order-summary">
-                            <h4>Ringkasan Order</h4>
-                            <div class="summary-item">
-                                <span>ID Order:</span>
-                                <span>${orderData.id}</span>
-                            </div>
-                            <div class="summary-item">
-                                <span>Total:</span>
-                                <span>${orderData.total}</span>
-                            </div>
-                        </div>
-                        
-                        <button class="btn btn-primary" style="width: 100%;" onclick="sendToWhatsApp('${orderData.id}')">
-                            <i class="fab fa-whatsapp"></i> ORDER SEKARANG VIA WHATSAPP
-                        </button>
-                        
-                        <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;" onclick="this.closest('div[style]').remove()">
-                            Tutup
-                        </button>
-                    </div>
-                </div>
-            `;
+            msg += `\nMetode Pembayaran: ${selectedPayment}\n`;
+            msg += `Total: ${currentOrder.totalStr}\n`;
+            if(currentOrder.note) msg += `Catatan: ${currentOrder.note}\n`;
+            msg += `\nMohon diproses kak 🙏`;
             
-            document.body.insertAdjacentHTML('beforeend', paymentHtml);
-        }
-
-        function selectPayment(orderId, method) {
-            const order = orders.find(o => o.id === orderId);
-            if (order) {
-                order.paymentMethod = method;
-                localStorage.setItem('ryuzy_orders', JSON.stringify(orders));
-                showToast(`Metode pembayaran ${method} dipilih`);
-            }
-        }
-
-        function sendToWhatsApp(orderId) {
-            const order = orders.find(o => o.id === orderId);
-            if (!order) return;
-            
-            let message = `*RYUZY STORE — ORDER BARU*\n\n`;
-            message += `Nama: ${order.customer}\n`;
-            message += `ID Order: ${order.id}\n`;
-            message += `Layanan: ${order.type === 'sosmed' ? 'Suntik Sosmed' : order.type === 'game' ? 'Top Up Game' : 'Layanan Digital'}\n`;
-            
-            if (order.type === 'sosmed') {
-                message += `Platform: ${order.platform}\n`;
-                message += `Jenis: ${order.service}\n`;
-                message += `Link: ${order.link}\n`;
-                message += `Jumlah: ${order.quantity}\n`;
-            } else if (order.type === 'game') {
-                message += `Game: ${order.game}\n`;
-                message += `User ID: ${order.userId}\n`;
-                message += `Nominal: ${order.nominal}\n`;
-            }
-            
-            message += `Metode Pembayaran: ${order.paymentMethod || 'Belum dipilih'}\n`;
-            message += `Total: ${order.total}\n`;
-            if (order.notes) message += `Catatan: ${order.notes}\n`;
-            message += `\nMohon diproses kak 🙏`;
-            
-            const waUrl = `https://wa.me/085776210087?text=${encodeURIComponent(message)}`;
-            window.open(waUrl, '_blank');
-            
-            // Close payment modal
-            document.querySelector('div[style*="z-index: 1003"]').remove();
+            window.open(`https://wa.me/${WA_ADMIN}?text=${encodeURIComponent(msg)}`, '_blank');
+            closePaymentModal();
             showToast('Order berhasil dikirim ke WhatsApp!');
         }
 
-        // Check Order
-        document.getElementById('cekOrderForm').addEventListener('submit', function(e) {
+        // --- CHECK ORDER ---
+        document.getElementById('formCekOrder').addEventListener('submit', e => {
             e.preventDefault();
-            const orderId = document.getElementById('checkOrderId').value;
-            const wa = document.getElementById('checkWa').value;
+            const id = document.getElementById('cekId').value.trim();
+            const wa = document.getElementById('cekWa').value.trim();
+            const order = orders.find(o => o.id === id && o.whatsapp === wa);
+            const resDiv = document.getElementById('resultCekOrder');
             
-            const order = orders.find(o => o.id === orderId && o.whatsapp === wa);
-            
-            if (order) {
-                document.getElementById('orderStatus').style.display = 'block';
-                document.getElementById('statusOrderId').textContent = order.id;
+            if(order) {
+                let badgeClass = 'st-pending';
+                if(order.status.includes('Konfirmasi') || order.status.includes('Proses')) badgeClass = 'st-process';
+                if(order.status === 'Selesai') badgeClass = 'st-done';
+                if(order.status === 'Dibatalkan') badgeClass = 'st-cancel';
                 
-                const statusColors = {
-                    'Menunggu Pembayaran': 'status-pending',
-                    'Pembayaran Dikonfirmasi': 'status-processing',
-                    'Diproses': 'status-processing',
-                    'Selesai': 'status-completed',
-                    'Dibatalkan': 'status-cancelled'
-                };
-                
-                const statusClass = statusColors[order.status] || 'status-pending';
-                document.getElementById('statusOrderStatus').innerHTML = 
-                    `<span class="status-badge ${statusClass}">${order.status}</span>`;
-                
-                document.getElementById('statusOrderService').textContent = 
-                    order.type === 'sosmed' ? 'Suntik Sosmed' : 
-                    order.type === 'game' ? 'Top Up Game' : 'Layanan Digital';
-                document.getElementById('statusOrderTotal').textContent = order.total;
+                resDiv.style.display = 'block';
+                resDiv.innerHTML = `
+                    <div class="order-summary">
+                        <div class="summary-row"><span>ID Order</span><span>${order.id}</span></div>
+                        <div class="summary-row"><span>Status</span><span class="status-badge ${badgeClass}">${order.status}</span></div>
+                        <div class="summary-row"><span>Layanan</span><span>${order.type}</span></div>
+                        <div class="summary-row"><span>Total</span><span>${order.totalStr}</span></div>
+                        <div class="summary-row"><span>Tanggal</span><span>${new Date(order.timestamp).toLocaleDateString('id-ID')}</span></div>
+                    </div>
+                `;
             } else {
-                showToast('Order tidak ditemukan!');
+                resDiv.style.display = 'block';
+                resDiv.innerHTML = '<div style="text-align:center; color:#ef4444; padding:1rem"><i class="fas fa-exclamation-circle"></i> Order tidak ditemukan!</div>';
             }
         });
 
-        // Admin Login
-        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+        // --- ADMIN SYSTEM ---
+        document.getElementById('formAdminLogin').addEventListener('submit', e => {
             e.preventDefault();
-            const email = document.getElementById('adminEmail').value;
-            const password = document.getElementById('adminPassword').value;
-            
-            // Simple authentication (in production, use proper backend auth)
-            if (email === 'admin@ryuzy.store' && password === 'admin123') {
-                isAdminLoggedIn = true;
-                showSection('admin-dashboard');
+            const u = document.getElementById('admUser').value;
+            const p = document.getElementById('admPass').value;
+            // Simple auth for demo - CHANGE THIS IN PRODUCTION
+            if(u === 'admin' && p === 'ryuzy2026') {
+                sessionStorage.setItem('ryuzy_admin', 'true');
                 loadAdminDashboard();
-                showToast('Login berhasil!');
+                showSection('admin-dashboard');
+                showToast('Login Admin Berhasil');
             } else {
-                showToast('Email atau password salah!');
+                showToast('Username atau Password salah!');
             }
         });
 
         function loadAdminDashboard() {
-            // Update stats
-            document.getElementById('totalOrders').textContent = orders.length;
-            document.getElementById('pendingOrders').textContent = 
-                orders.filter(o => o.status === 'Menunggu Pembayaran').length;
-            document.getElementById('processingOrders').textContent = 
-                orders.filter(o => o.status === 'Diproses').length;
-            document.getElementById('completedOrders').textContent = 
-                orders.filter(o => o.status === 'Selesai').length;
-            document.getElementById('totalCustomers').textContent = customers.length;
+            if(!sessionStorage.getItem('ryuzy_admin')) { showSection('admin-login'); return; }
             
-            // Calculate total revenue
-            let totalRevenue = 0;
-            orders.forEach(order => {
-                const amount = parseInt(order.total.replace(/[^0-9]/g, '')) || 0;
-                totalRevenue += amount;
-            });
-            document.getElementById('totalRevenue').textContent = `Rp ${totalRevenue.toLocaleString()}`;
+            const pending = orders.filter(o => o.status === 'Menunggu Pembayaran').length;
+            const process = orders.filter(o => o.status.includes('Proses') || o.status.includes('Konfirmasi')).length;
+            const done = orders.filter(o => o.status === 'Selesai').length;
             
-            // Load orders table
-            const tbody = document.getElementById('ordersTable');
+            document.getElementById('statTotal').textContent = orders.length;
+            document.getElementById('statPending').textContent = pending;
+            document.getElementById('statProcess').textContent = process;
+            document.getElementById('statDone').textContent = done;
+            
+            const tbody = document.querySelector('#tblOrders tbody');
             tbody.innerHTML = '';
             
-            orders.slice().reverse().forEach(order => {
-                const row = document.createElement('tr');
-                const statusColors = {
-                    'Menunggu Pembayaran': 'status-pending',
-                    'Pembayaran Dikonfirmasi': 'status-processing',
-                    'Diproses': 'status-processing',
-                    'Selesai': 'status-completed',
-                    'Dibatalkan': 'status-cancelled'
-                };
+            [...orders].reverse().forEach(o => {
+                let badge = 'st-pending';
+                if(o.status.includes('Konfirmasi') || o.status.includes('Proses')) badge = 'st-process';
+                if(o.status === 'Selesai') badge = 'st-done';
+                if(o.status === 'Dibatalkan') badge = 'st-cancel';
                 
-                row.innerHTML = `
-                    <td>${order.id}</td>
-                    <td>${order.customer}<br><small>${order.whatsapp}</small></td>
-                    <td>${order.type === 'sosmed' ? 'Suntik Sosmed' : order.type === 'game' ? 'Top Up Game' : 'Layanan Digital'}</td>
-                    <td>${order.total}</td>
-                    <td><span class="status-badge ${statusColors[order.status] || 'status-pending'}">${order.status}</span></td>
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><small>${o.id}</small></td>
+                    <td>${o.customer}<br><small style="color:var(--text-secondary)">${o.whatsapp}</small></td>
+                    <td>${o.type}</td>
+                    <td>${o.totalStr}</td>
+                    <td><span class="status-badge ${badge}">${o.status}</span></td>
                     <td>
-                        <select onchange="updateOrderStatus('${order.id}', this.value)" style="padding: 0.3rem; border-radius: 5px;">
+                        <select onchange="updateStatus('${o.id}', this.value)" style="background:#0a0a12; color:white; border:1px solid var(--border-color); padding:0.3rem; border-radius:5px; font-size:0.8rem">
                             <option value="">Ubah Status</option>
-                            <option value="Menunggu Pembayaran">Menunggu Pembayaran</option>
-                            <option value="Pembayaran Dikonfirmasi">Pembayaran Dikonfirmasi</option>
+                            <option value="Menunggu Pembayaran">Menunggu Bayar</option>
+                            <option value="Pembayaran Dikonfirmasi">Bayar Dikonfirmasi</option>
                             <option value="Diproses">Diproses</option>
                             <option value="Selesai">Selesai</option>
                             <option value="Dibatalkan">Dibatalkan</option>
                         </select>
                     </td>
                 `;
-                tbody.appendChild(row);
+                tbody.appendChild(tr);
             });
         }
 
-        function updateOrderStatus(orderId, newStatus) {
-            if (!newStatus) return;
-            
-            const order = orders.find(o => o.id === orderId);
-            if (order) {
-                order.status = newStatus;
+        function updateStatus(id, newStatus) {
+            if(!newStatus) return;
+            const idx = orders.findIndex(o => o.id === id);
+            if(idx !== -1) {
+                orders[idx].status = newStatus;
                 localStorage.setItem('ryuzy_orders', JSON.stringify(orders));
                 loadAdminDashboard();
-                showToast(`Status order ${orderId} diubah menjadi ${newStatus}`);
+                showToast('Status order diperbarui');
             }
         }
 
         function logoutAdmin() {
-            isAdminLoggedIn = false;
+            sessionStorage.removeItem('ryuzy_admin');
             showSection('home');
-            showToast('Logout berhasil!');
+            showToast('Logout berhasil');
         }
 
-        // Chat Functions
-        function toggleChat() {
-            const chatWindow = document.getElementById('chatWindow');
-            chatWindow.classList.toggle('active');
-        }
+        // Check admin session on load
+        if(sessionStorage.getItem('ryuzy_admin')) loadAdminDashboard();
 
-        function openChat() {
-            document.getElementById('chatWindow').classList.add('active');
-        }
-
-        function closeChat() {
-            document.getElementById('chatWindow').classList.remove('active');
-        }
-
-        function handleChatKeypress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
+        // --- CHAT WIDGET ---
+        function toggleChat() { document.getElementById('chatWindow').classList.toggle('active'); }
+        
+        function sendChat() {
+            const inp = document.getElementById('chatInput');
+            const txt = inp.value.trim();
+            if(!txt) return;
             
-            if (!message) return;
-            
-            // Add user message
-            addMessage(message, 'user');
-            input.value = '';
-            
-            // Auto-reply
-            setTimeout(() => {
-                const reply = getAutoReply(message);
-                addMessage(reply, 'admin');
-            }, 1000);
-        }
-
-        function addMessage(text, sender) {
-            const messagesDiv = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message message-${sender}`;
-            messageDiv.textContent = text;
-            messagesDiv.appendChild(messageDiv);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            
-            // Save chat
-            chats.push({
-                message: text,
-                sender: sender,
-                timestamp: new Date().toISOString()
-            });
-            localStorage.setItem('ryuzy_chats', JSON.stringify(chats));
-        }
-
-        function getAutoReply(message) {
-            const lowerMsg = message.toLowerCase();
-            
-            if (lowerMsg.includes('cara order') || lowerMsg.includes('bagaimana order')) {
-                return 'Cara order:\n1. Pilih layanan (Suntik Sosmed/Top Up Game/Layanan Digital)\n2. Isi form order\n3. Pilih metode pembayaran\n4. Klik ORDER SEKARANG\n5. Kirim order via WhatsApp\n\nAda yang bisa dibantu lagi?';
-            }
-            
-            if (lowerMsg.includes('pembayaran') || lowerMsg.includes('bayar')) {
-                return 'Metode pembayaran yang tersedia:\n💙 DANA: 085776210087\n💚 GoPay: 089647146786\n💜 QRIS: Scan QR Code\n\nSilakan pilih metode yang sesuai saat checkout.';
-            }
-            
-            if (lowerMsg.includes('berapa lama') || lowerMsg.includes('proses')) {
-                return 'Estimasi waktu proses:\n• Suntik Sosmed: 1-24 jam\n• Top Up Game: 5-30 menit\n• Layanan Digital: Sesuai kesepakatan\n\nWaktu dapat bervariasi tergantung antrian.';
-            }
-            
-            if (lowerMsg.includes('cek order') || lowerMsg.includes('status')) {
-                return 'Untuk cek status order, silakan klik menu "Cek Order" di navigasi atas, lalu masukkan ID Order dan nomor WhatsApp Anda.';
-            }
-            
-            if (lowerMsg.includes('top up') || lowerMsg.includes('game')) {
-                return 'Untuk top up game:\n1. Pilih game yang diinginkan\n2. Masukkan User ID dan Server ID (jika diperlukan)\n3. Pilih nominal top up\n4. Lanjutkan ke pembayaran\n\nGame yang tersedia: ML, FF, Roblox, Valorant, Genshin, dll.';
-            }
-            
-            return 'Pertanyaan kamu akan diteruskan kepada Admin RYUZY STORE. Silakan tunggu balasan admin. 💜\n\nAtau kamu bisa chat langsung via WhatsApp untuk respon lebih cepat.';
-        }
-
-        // Utility Functions
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('Berhasil disalin!');
-            }).catch(() => {
-                // Fallback for older browsers
-                const textarea = document.createElement('textarea');
-                textarea.value = text;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                showToast('Berhasil disalin!');
-            });
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toast-message').textContent = message;
-            toast.classList.add('show');
+            addMsg(txt, 'user');
+            inp.value = '';
             
             setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+                const reply = getAutoReply(txt);
+                addMsg(reply, 'admin');
+            }, 800);
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load any saved data
-            console.log('RYUZY STORE initialized');
-        });
+        function addMsg(txt, type) {
+            const div = document.createElement('div');
+            div.className = `message msg-${type}`;
+            div.textContent = txt;
+            document.getElementById('chatMessages').appendChild(div);
+            document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+        }
+
+        function getAutoReply(msg) {
+            const m = msg.toLowerCase();
+            if(m.includes('order') || m.includes('cara')) return 'Cara order:\n1. Pilih layanan di menu atas\n2. Isi form & lanjut pembayaran\n3. Pilih DANA/GoPay/QRIS\n4. Klik konfirmasi WhatsApp\n\nAda yang dibantu lagi?';
+            if(m.includes('bayar') || m.includes('dana') || m.includes('gopay')) return 'Pembayaran via:\n💙 DANA: 085776210087\n💚 GoPay: 089647146786\n💜 QRIS: Scan gambar QRIS kami\n\nSemua metode support nominal dinamis!';
+            if(m.includes('lama') || m.includes('proses')) return 'Estimasi proses:\n• Suntik Sosmed: 1-24 jam\n• Top Up Game: 5-30 menit\n• Layanan Digital: Sesuai kesepakatan\n\nTerima kasih sudah menunggu 💜';
+            if(m.includes('cek') || m.includes('status')) return 'Cek status order di menu "Cek Order" ya kak. Masukkan ID Order & nomor WhatsApp kamu.';
+            return 'Pertanyaan kamu akan diteruskan ke Admin RYUZY STORE. Silakan tunggu balasan admin 💜\nAtau chat langsung via WhatsApp untuk respon lebih cepat.';
+        }
+
+        // --- UTILS ---
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        function copyText(txt) {
+            navigator.clipboard.writeText(txt).then(() => showToast('Berhasil disalin!'));
+        }
     </script>
 </body>
 </html>
