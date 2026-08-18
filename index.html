@@ -1,250 +1,1694 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RYUZY STORE — Suntik Sosmed</title>
-<style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:radial-gradient(circle at top,#39206f,#10082c 55%,#070419);
-  color:#fff;
-}
-.container{max-width:1050px;margin:auto;padding:24px}
-.hero{
-  text-align:center;padding:35px 20px 25px;
-}
-.hero h1{
-  margin:0;font-size:clamp(38px,8vw,72px);
-  background:linear-gradient(90deg,#d99cff,#fff,#65bfff);
-  -webkit-background-clip:text;color:transparent;
-  font-weight:900;
-}
-.hero p{color:#ddd;margin:8px 0 0}
-.grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:18px;margin-top:20px;
-}
-.card{
-  background:rgba(24,12,67,.82);
-  border:1px solid #9d6cff;border-radius:20px;
-  padding:20px;box-shadow:0 0 22px rgba(130,70,255,.18);
-}
-.card h2{margin:0 0 15px;color:#dca7ff;font-size:22px}
-.service{
-  display:flex;justify-content:space-between;gap:12px;
-  padding:11px 0;border-bottom:1px solid rgba(255,255,255,.12);
-}
-.service:last-child{border-bottom:0}
-.price{font-weight:700;color:#8fd8ff;white-space:nowrap}
-.order{
-  margin:28px auto 10px;max-width:650px;
-  background:rgba(20,10,54,.9);border:1px solid #9d6cff;
-  border-radius:22px;padding:24px;
-}
-label{display:block;margin:12px 0 7px;color:#ddd}
-select,input{
-  width:100%;padding:13px;border-radius:12px;
-  border:1px solid #7551b9;background:#10092d;color:#fff;
-}
-button{
-  width:100%;margin-top:18px;padding:14px;border:0;
-  border-radius:13px;background:linear-gradient(90deg,#8b3dff,#25a9ff);
-  color:white;font-size:16px;font-weight:800;cursor:pointer;
-}
-.note{text-align:center;color:#aaa;font-size:13px;margin-top:18px}
-footer{text-align:center;padding:30px;color:#aaa}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RYUZY STORE - Digital Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #7c3aed;
+            --primary-blue: #3b82f6;
+            --dark-bg: #0f0f1a;
+            --card-bg: rgba(30, 30, 50, 0.8);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --neon-glow: 0 0 20px rgba(124, 58, 237, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a2e 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(15, 15, 26, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(124, 58, 237, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary-purple);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-primary);
+            background: rgba(124, 58, 237, 0.2);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(59, 130, 246, 0.1));
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .status-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge-online {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid #22c55e;
+        }
+
+        .badge-cs {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            border: 1px solid #3b82f6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
+            color: white;
+            box-shadow: var(--neon-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.7);
+        }
+
+        .btn-secondary {
+            background: rgba(124, 58, 237, 0.2);
+            color: white;
+            border: 1px solid var(--primary-purple);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(124, 58, 237, 0.3);
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--neon-glow);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Forms */
+        .form-section {
+            display: none;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 8px;
+            background: rgba(15, 15, 26, 0.8);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
+        }
+
+        select.form-control {
+            cursor: pointer;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .payment-method {
+            background: rgba(15, 15, 26, 0.8);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .payment-method:hover, .payment-method.selected {
+            border-color: var(--primary-purple);
+            background: rgba(124, 58, 237, 0.1);
+        }
+
+        .payment-method i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-dana { color: #008ceb; }
+        .payment-gopay { color: #00aa13; }
+        .payment-qris { color: #7c3aed; }
+
+        /* Order Summary */
+        .order-summary {
+            background: rgba(15, 15, 26, 0.8);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary-purple);
+        }
+
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--neon-glow);
+            transition: all 0.3s;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            display: none;
+            flex-direction: column;
+        }
+
+        .chat-window.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
+            padding: 1rem;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .online-indicator {
+            width: 10px;
+            height: 10px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .message-admin {
+            background: rgba(124, 58, 237, 0.2);
+            margin-right: auto;
+        }
+
+        .message-user {
+            background: rgba(59, 130, 246, 0.2);
+            margin-left: auto;
+        }
+
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid rgba(124, 58, 237, 0.3);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 8px;
+            background: rgba(15, 15, 26, 0.8);
+            color: white;
+        }
+
+        .chat-input button {
+            padding: 0.5rem 1rem;
+            background: var(--primary-purple);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Admin Dashboard */
+        .admin-dashboard {
+            display: none;
+        }
+
+        .admin-dashboard.active {
+            display: block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+        }
+
+        th {
+            background: rgba(124, 58, 237, 0.2);
+            color: var(--text-primary);
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .status-pending { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+        .status-processing { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .status-completed { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .status-cancelled { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            display: none;
+            z-index: 1001;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 26, 0.9);
+            z-index: 1002;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading.active {
+            display: flex;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(124, 58, 237, 0.3);
+            border-top-color: var(--primary-purple);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 15, 26, 0.95);
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .chat-window {
+                width: calc(100vw - 40px);
+                right: -10px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            border-top: 1px solid rgba(124, 58, 237, 0.3);
+            margin-top: 3rem;
+        }
+
+        /* Hidden sections */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Copy button */
+        .copy-btn {
+            background: rgba(124, 58, 237, 0.2);
+            border: 1px solid var(--primary-purple);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background: rgba(124, 58, 237, 0.3);
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-  <section class="hero">
-    <h1>RYUZY STORE</h1>
-    <p>💜 Suntik Sosmed • Cepat • Aman • Terpercaya</p>
-  </section>
-
-  <div class="grid">
-    <div class="card">
-      <h2>🎵 TikTok — Like</h2>
-      <div class="service"><span>100 Like</span><span class="price">Rp130</span></div>
-      <div class="service"><span>200 Like</span><span class="price">Rp270</span></div>
-      <div class="service"><span>300 Like</span><span class="price">Rp410</span></div>
-      <div class="service"><span>400 Like</span><span class="price">Rp550</span></div>
-      <div class="service"><span>500 Like</span><span class="price">Rp690</span></div>
+    <!-- Loading -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
     </div>
 
-    <div class="card">
-      <h2>🎵 TikTok — Followers</h2>
-      <div class="service"><span>100 Followers</span><span class="price">Rp7.000</span></div>
-      <div class="service"><span>200 Followers</span><span class="price">Rp15.000</span></div>
-      <div class="service"><span>300 Followers</span><span class="price">Rp23.000</span></div>
-      <div class="service"><span>400 Followers</span><span class="price">Rp31.000</span></div>
-      <div class="service"><span>500 Followers</span><span class="price">Rp39.000</span></div>
-      <div class="service"><span>1.000 Followers</span><span class="price">Rp58.000</span></div>
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span id="toast-message"></span>
     </div>
 
-    <div class="card">
-      <h2>🎵 TikTok — Views</h2>
-      <div class="service"><span>1.000 Views</span><span class="price">Rp500</span></div>
-      <div class="service"><span>2.000 Views</span><span class="price">Rp1.000</span></div>
-      <div class="service"><span>3.000 Views</span><span class="price">Rp1.500</span></div>
-      <div class="service"><span>4.000 Views</span><span class="price">Rp2.000</span></div>
-      <div class="service"><span>5.000 Views</span><span class="price">Rp2.500</span></div>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+                <span>RYUZY STORE</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="active" onclick="showSection('home')"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#" onclick="showSection('sosmed')"><i class="fas fa-mobile-alt"></i> Suntik Sosmed</a></li>
+                <li><a href="#" onclick="showSection('game')"><i class="fas fa-gamepad"></i> Top Up Game</a></li>
+                <li><a href="#" onclick="showSection('layanan')"><i class="fas fa-list"></i> Layanan Lainnya</a></li>
+                <li><a href="#" onclick="showSection('cek-order')"><i class="fas fa-search"></i> Cek Order</a></li>
+                <li><a href="#" onclick="showSection('admin-login')"><i class="fas fa-user-shield"></i> Admin</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>RYUZY STORE</h1>
+                    <p>Suntik Sosmed • Top Up Game • Jasa Digital</p>
+                    <div class="status-badges">
+                        <div class="badge badge-online">
+                            <i class="fas fa-circle"></i> STORE ONLINE
+                        </div>
+                        <div class="badge badge-cs">
+                            <i class="fas fa-headset"></i> CUSTOMER SERVICE 24/7
+                        </div>
+                    </div>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="showSection('sosmed')">
+                            <i class="fas fa-shopping-cart"></i> ORDER SEKARANG
+                        </button>
+                        <button class="btn btn-secondary" onclick="openChat()">
+                            <i class="fas fa-comments"></i> CUSTOMER SERVICE 24/7
+                        </button>
+                        <button class="btn btn-secondary" onclick="showSection('cek-order')">
+                            <i class="fas fa-search"></i> CEK ORDER
+                        </button>
+                        <a href="https://wa.me/085776210087" target="_blank" class="btn btn-secondary">
+                            <i class="fab fa-whatsapp"></i> CHAT WHATSAPP
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card" onclick="showSection('sosmed')">
+                    <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Suntik Sosmed</h3>
+                    <p>Tingkatkan followers, likes, views untuk TikTok, Instagram, YouTube, dan platform lainnya.</p>
+                    <button class="btn btn-primary">Order Sekarang</button>
+                </div>
+                <div class="card" onclick="showSection('game')">
+                    <div class="card-icon"><i class="fas fa-gamepad"></i></div>
+                    <h3>Top Up Game</h3>
+                    <p>Top up diamond, UC, dan currency game favoritmu dengan harga terbaik.</p>
+                    <button class="btn btn-primary">Top Up Sekarang</button>
+                </div>
+                <div class="card" onclick="showSection('layanan')">
+                    <div class="card-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Layanan Digital</h3>
+                    <p>Jasa post, convert saldo, template QRIS, rekber, dan layanan digital lainnya.</p>
+                    <button class="btn btn-primary">Lihat Layanan</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Suntik Sosmed Section -->
+        <section id="sosmed" class="section">
+            <h2 style="margin-bottom: 2rem; text-align: center;">
+                <i class="fas fa-mobile-alt"></i> SUNTIK SOSMED
+            </h2>
+            
+            <div class="form-section active">
+                <form id="sosmedForm">
+                    <div class="form-group">
+                        <label>Platform</label>
+                        <select class="form-control" id="platform" onchange="updateServices()">
+                            <option value="">Pilih Platform</option>
+                            <option value="tiktok">TikTok</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="facebook">Facebook</option>
+                            <option value="twitter">X / Twitter</option>
+                            <option value="telegram">Telegram</option>
+                            <option value="youtube">YouTube</option>
+                            <option value="other">Platform Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Jenis Layanan</label>
+                        <select class="form-control" id="serviceType" onchange="calculatePrice()">
+                            <option value="">Pilih Jenis Layanan</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Link Akun/Postingan</label>
+                        <input type="url" class="form-control" id="socialLink" placeholder="https://..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Jumlah</label>
+                        <input type="number" class="form-control" id="quantity" placeholder="Masukkan jumlah" min="1" oninput="calculatePrice()" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Paket</label>
+                        <select class="form-control" id="package" onchange="calculatePrice()">
+                            <option value="regular">Regular</option>
+                            <option value="premium">Premium (+20%)</option>
+                            <option value="vip">VIP (+50%)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Catatan</label>
+                        <textarea class="form-control" id="notes" rows="3" placeholder="Catatan tambahan..."></textarea>
+                    </div>
+
+                    <div class="order-summary">
+                        <h3 style="margin-bottom: 1rem;">RINGKASAN ORDER</h3>
+                        <div class="summary-item">
+                            <span>Harga per unit:</span>
+                            <span id="pricePerUnit">Rp 0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Jumlah:</span>
+                            <span id="summaryQuantity">0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">Rp 0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Total:</span>
+                            <span id="totalPrice">Rp 0</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-shopping-cart"></i> ORDER SEKARANG
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Top Up Game Section -->
+        <section id="game" class="section">
+            <h2 style="margin-bottom: 2rem; text-align: center;">
+                <i class="fas fa-gamepad"></i> TOP UP GAME
+            </h2>
+
+            <div class="form-section active">
+                <form id="gameForm">
+                    <div class="form-group">
+                        <label>Pilih Game</label>
+                        <select class="form-control" id="gameSelect" onchange="updateGameForm()">
+                            <option value="">Pilih Game</option>
+                            <option value="ml">Mobile Legends</option>
+                            <option value="ff">Free Fire</option>
+                            <option value="roblox">Roblox</option>
+                            <option value="valorant">Valorant</option>
+                            <option value="genshin">Genshin Impact</option>
+                            <option value="hsr">Honkai: Star Rail</option>
+                            <option value="hok">Honor of Kings</option>
+                            <option value="codm">Call of Duty Mobile</option>
+                            <option value="pubg">PUBG Mobile</option>
+                            <option value="other">Game Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div id="gameFields">
+                        <div class="form-group">
+                            <label>User ID</label>
+                            <input type="text" class="form-control" id="userId" placeholder="Masukkan User ID" required>
+                        </div>
+
+                        <div class="form-group" id="serverIdField" style="display: none;">
+                            <label>Server ID</label>
+                            <input type="text" class="form-control" id="serverId" placeholder="Masukkan Server ID">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Nickname</label>
+                            <input type="text" class="form-control" id="nickname" placeholder="Nickname in-game">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nominal Top Up</label>
+                        <select class="form-control" id="nominal" onchange="calculateGamePrice()">
+                            <option value="">Pilih Nominal</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Catatan</label>
+                        <textarea class="form-control" id="gameNotes" rows="3" placeholder="Catatan tambahan..."></textarea>
+                    </div>
+
+                    <div class="order-summary">
+                        <h3 style="margin-bottom: 1rem;">RINGKASAN ORDER</h3>
+                        <div class="summary-item">
+                            <span>Game:</span>
+                            <span id="gameName">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Nominal:</span>
+                            <span id="gameNominal">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Total:</span>
+                            <span id="gameTotal">Rp 0</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-shopping-cart"></i> ORDER SEKARANG
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Layanan Lainnya Section -->
+        <section id="layanan" class="section">
+            <h2 style="margin-bottom: 2rem; text-align: center;">
+                <i class="fas fa-tools"></i> LAYANAN LAINNYA
+            </h2>
+
+            <div class="form-section active">
+                <form id="layananForm">
+                    <div class="form-group">
+                        <label>Nama Layanan</label>
+                        <select class="form-control" id="layananType">
+                            <option value="">Pilih Layanan</option>
+                            <option value="post">Jasa Post</option>
+                            <option value="convert">Convert Saldo</option>
+                            <option value="qris">Jasa Template QRIS</option>
+                            <option value="rekber">Rekber</option>
+                            <option value="other">Jasa Digital Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Deskripsi Kebutuhan</label>
+                        <textarea class="form-control" id="layananDesc" rows="4" placeholder="Jelaskan kebutuhan Anda..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Catatan</label>
+                        <textarea class="form-control" id="layananNotes" rows="3" placeholder="Catatan tambahan..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-shopping-cart"></i> ORDER SEKARANG
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Cek Order Section -->
+        <section id="cek-order" class="section">
+            <h2 style="margin-bottom: 2rem; text-align: center;">
+                <i class="fas fa-search"></i> CEK ORDER
+            </h2>
+
+            <div class="form-section active">
+                <form id="cekOrderForm">
+                    <div class="form-group">
+                        <label>ID Order</label>
+                        <input type="text" class="form-control" id="checkOrderId" placeholder="Contoh: RYZ-20260818-0001" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nomor WhatsApp</label>
+                        <input type="tel" class="form-control" id="checkWa" placeholder="08xxxxxxxxxx" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-search"></i> CEK STATUS ORDER
+                    </button>
+                </form>
+
+                <div id="orderStatus" style="margin-top: 2rem; display: none;">
+                    <div class="order-summary">
+                        <h3 style="margin-bottom: 1rem;">STATUS ORDER</h3>
+                        <div class="summary-item">
+                            <span>ID Order:</span>
+                            <span id="statusOrderId">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Status:</span>
+                            <span id="statusOrderStatus">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Layanan:</span>
+                            <span id="statusOrderService">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Total:</span>
+                            <span id="statusOrderTotal">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Login Section -->
+        <section id="admin-login" class="section">
+            <h2 style="margin-bottom: 2rem; text-align: center;">
+                <i class="fas fa-user-shield"></i> ADMIN LOGIN
+            </h2>
+
+            <div class="form-section active" style="max-width: 500px; margin: 0 auto;">
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <label>Email/Username</label>
+                        <input type="text" class="form-control" id="adminEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" id="adminPassword" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-sign-in-alt"></i> LOGIN
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Admin Dashboard Section -->
+        <section id="admin-dashboard" class="section admin-dashboard">
+            <h2 style="margin-bottom: 2rem; text-align: center;">
+                <i class="fas fa-tachometer-alt"></i> ADMIN DASHBOARD
+            </h2>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalOrders">0</div>
+                    <div class="stat-label">Total Order</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="pendingOrders">0</div>
+                    <div class="stat-label">Order Pending</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="processingOrders">0</div>
+                    <div class="stat-label">Order Diproses</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="completedOrders">0</div>
+                    <div class="stat-label">Order Selesai</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalRevenue">Rp 0</div>
+                    <div class="stat-label">Total Transaksi</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalCustomers">0</div>
+                    <div class="stat-label">Total Customer</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-bottom: 1rem;">Kelola Order</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID Order</th>
+                                <th>Customer</th>
+                                <th>Layanan</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTable">
+                            <!-- Orders will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 2rem;">
+                <h3 style="margin-bottom: 1rem;">Customer Service</h3>
+                <div id="adminChatList">
+                    <!-- Chat list will be populated here -->
+                </div>
+            </div>
+
+            <button class="btn btn-secondary" onclick="logoutAdmin()" style="margin-top: 2rem;">
+                <i class="fas fa-sign-out-alt"></i> Logout Admin
+            </button>
+        </section>
     </div>
 
-    <div class="card">
-      <h2>📸 Instagram — Like</h2>
-      <div class="service"><span>100 Like</span><span class="price">Rp700</span></div>
-      <div class="service"><span>200 Like</span><span class="price">Rp1.400</span></div>
-      <div class="service"><span>300 Like</span><span class="price">Rp2.100</span></div>
-      <div class="service"><span>400 Like</span><span class="price">Rp2.800</span></div>
-      <div class="service"><span>500 Like</span><span class="price">Rp3.500</span></div>
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <div class="online-indicator"></div>
+                    <div>
+                        <div style="font-weight: bold;">💜 RYUZY STORE ADMIN</div>
+                        <div style="font-size: 0.8rem;">🟢 Online | Customer Service 24/7</div>
+                    </div>
+                </div>
+                <button onclick="closeChat()" style="background: none; border: none; color: white; cursor: pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message message-admin">
+                    «Halo kak! 👋 Selamat datang di RYUZY STORE. Ada yang bisa kami bantu? Silakan tanyakan mengenai order, harga, pembayaran, suntik sosmed, top up game, atau layanan lainnya.»
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Ketik pesan..." onkeypress="handleChatKeypress(event)">
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+            <div style="padding: 0.5rem; text-align: center;">
+                <a href="https://wa.me/085776210087?text=Halo%20Admin%20RYUZY%20STORE,%20saya%20ingin%20bertanya%20mengenai%20layanan/order." 
+                   target="_blank" 
+                   style="color: var(--primary-purple); text-decoration: none; font-size: 0.9rem;">
+                    📲 CHAT VIA WHATSAPP
+                </a>
+            </div>
+        </div>
+        <button class="chat-button" onclick="toggleChat()">
+            <i class="fas fa-comments"></i>
+        </button>
     </div>
 
-    <div class="card">
-      <h2>📸 Instagram — Followers</h2>
-      <div class="service"><span>100 Followers</span><span class="price">Rp6.000</span></div>
-      <div class="service"><span>200 Followers</span><span class="price">Rp13.000</span></div>
-      <div class="service"><span>300 Followers</span><span class="price">Rp20.000</span></div>
-      <div class="service"><span>400 Followers</span><span class="price">Rp26.000</span></div>
-      <div class="service"><span>500 Followers</span><span class="price">Rp33.000</span></div>
-      <div class="service"><span>1.000 Followers</span><span class="price">Rp47.000</span></div>
-    </div>
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 RYUZY STORE — All Rights Reserved</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            💙 DANA: 085776210087 | 💚 GoPay: 089647146786 | 💜 QRIS Available
+        </p>
+    </footer>
 
-    <div class="card">
-      <h2>📸 Instagram — Views</h2>
-      <div class="service"><span>1.000 Views</span><span class="price">Rp70</span></div>
-      <div class="service"><span>2.000 Views</span><span class="price">Rp140</span></div>
-      <div class="service"><span>3.000 Views</span><span class="price">Rp210</span></div>
-      <div class="service"><span>4.000 Views</span><span class="price">Rp290</span></div>
-      <div class="service"><span>5.000 Views</span><span class="price">Rp360</span></div>
-    </div>
+    <script>
+        // Data Storage
+        let orders = JSON.parse(localStorage.getItem('ryuzy_orders')) || [];
+        let customers = JSON.parse(localStorage.getItem('ryuzy_customers')) || [];
+        let chats = JSON.parse(localStorage.getItem('ryuzy_chats')) || [];
+        let isAdminLoggedIn = false;
 
-    <div class="card">
-      <h2>💬 Pengikut Saluran WhatsApp</h2>
-      <div class="service"><span>100 Pengikut</span><span class="price">Rp8.000</span></div>
-      <div class="service"><span>200 Pengikut</span><span class="price">Rp16.000</span></div>
-      <div class="service"><span>300 Pengikut</span><span class="price">Rp24.000</span></div>
-      <div class="service"><span>400 Pengikut</span><span class="price">Rp26.000</span></div>
-      <div class="service"><span>500 Pengikut</span><span class="price">Rp40.000</span></div>
-      <div class="service"><span>1.000 Pengikut</span><span class="price">Rp60.000</span></div>
-    </div>
-  </div>
+        // Price configurations
+        const socialMediaPrices = {
+            tiktok: { followers: 50, like: 30, views: 10, favorite: 40, share: 35, comment: 100 },
+            instagram: { followers: 60, like: 35, views: 15, favorite: 45, share: 40, comment: 120 },
+            facebook: { followers: 70, like: 40, views: 20, favorite: 50, share: 45, comment: 130 },
+            twitter: { followers: 80, like: 45, views: 25, favorite: 55, share: 50, comment: 140 },
+            telegram: { followers: 90, like: 50, views: 30, favorite: 60, share: 55, comment: 150 },
+            youtube: { followers: 100, like: 60, views: 35, favorite: 70, share: 65, comment: 160 }
+        };
 
-  <section class="order">
-    <h2>🛒 Order Sekarang</h2>
+        const gamePrices = {
+            ml: { '86 Diamonds': 15000, '172 Diamonds': 28000, '257 Diamonds': 40000, '344 Diamonds': 52000, '514 Diamonds': 75000, '706 Diamonds': 100000 },
+            ff: { '70 Diamonds': 10000, '140 Diamonds': 19000, '355 Diamonds': 45000, '720 Diamonds': 90000 },
+            roblox: { '80 Robux': 15000, '400 Robux': 70000, '800 Robux': 135000, '1700 Robux': 270000 },
+            valorant: { '475 VP': 55000, '1000 VP': 110000, '2050 VP': 220000, '3650 VP': 380000 },
+            genshin: { '60 Genesis': 15000, '300+30 Genesis': 75000, '980+110 Genesis': 240000, '1980+260 Genesis': 480000 },
+            hsr: { '60 Oneiric': 15000, '300+30 Oneiric': 75000, '980+110 Oneiric': 240000, '1980+260 Oneiric': 480000 },
+            hok: { '50 Tokens': 10000, '100 Tokens': 19000, '250 Tokens': 45000, '500 Tokens': 85000 },
+            codm: { '80 CP': 15000, '420 CP': 75000, '880 CP': 150000, '2000 CP': 330000 },
+            pubg: { '60 UC': 15000, '325 UC': 75000, '660 UC': 150000, '1800 UC': 380000 }
+        };
 
-    <label for="category">Kategori</label>
-    <select id="category" onchange="updateServices()">
-      <option value="tiktok">🎵 TikTok</option>
-      <option value="instagram">📸 Instagram</option>
-      <option value="whatsapp">💬 WhatsApp Channel</option>
-    </select>
+        // Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            window.scrollTo(0, 0);
+        }
 
-    <label for="service">Layanan</label>
-    <select id="service" onchange="updatePrice()"></select>
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
 
-    <label for="qty">Jumlah</label>
-    <input id="qty" type="number" min="1" value="1" oninput="updatePrice()">
+        // Social Media Functions
+        function updateServices() {
+            const platform = document.getElementById('platform').value;
+            const serviceSelect = document.getElementById('serviceType');
+            
+            serviceSelect.innerHTML = '<option value="">Pilih Jenis Layanan</option>';
+            
+            if (platform && socialMediaPrices[platform]) {
+                const services = Object.keys(socialMediaPrices[platform]);
+                services.forEach(service => {
+                    const option = document.createElement('option');
+                    option.value = service;
+                    option.textContent = service.charAt(0).toUpperCase() + service.slice(1);
+                    serviceSelect.appendChild(option);
+                });
+            }
+            
+            calculatePrice();
+        }
 
-    <label for="link">Link postingan / akun / channel</label>
-    <input id="link" type="url" placeholder="https://...">
+        function calculatePrice() {
+            const platform = document.getElementById('platform').value;
+            const service = document.getElementById('serviceType').value;
+            const quantity = parseInt(document.getElementById('quantity').value) || 0;
+            const packageType = document.getElementById('package').value;
+            
+            let pricePerUnit = 0;
+            if (platform && service && socialMediaPrices[platform] && socialMediaPrices[platform][service]) {
+                pricePerUnit = socialMediaPrices[platform][service];
+            }
+            
+            let multiplier = 1;
+            if (packageType === 'premium') multiplier = 1.2;
+            if (packageType === 'vip') multiplier = 1.5;
+            
+            const subtotal = pricePerUnit * quantity;
+            const total = Math.round(subtotal * multiplier);
+            
+            document.getElementById('pricePerUnit').textContent = `Rp ${pricePerUnit.toLocaleString()}`;
+            document.getElementById('summaryQuantity').textContent = quantity;
+            document.getElementById('subtotal').textContent = `Rp ${subtotal.toLocaleString()}`;
+            document.getElementById('totalPrice').textContent = `Rp ${total.toLocaleString()}`;
+        }
 
-    <div style="margin-top:16px;padding:15px;border-radius:14px;background:rgba(139,61,255,.14);border:1px solid rgba(157,108,255,.45)">
-      <div style="color:#bbb;font-size:13px">Estimasi total</div>
-      <div id="total" style="font-size:26px;font-weight:900;color:#8fd8ff;margin-top:4px">Rp0</div>
-    </div>
+        // Game Functions
+        function updateGameForm() {
+            const game = document.getElementById('gameSelect').value;
+            const nominalSelect = document.getElementById('nominal');
+            const serverField = document.getElementById('serverIdField');
+            
+            nominalSelect.innerHTML = '<option value="">Pilih Nominal</option>';
+            
+            if (game && gamePrices[game]) {
+                const nominals = Object.keys(gamePrices[game]);
+                nominals.forEach(nominal => {
+                    const option = document.createElement('option');
+                    option.value = nominal;
+                    option.textContent = `${nominal} - Rp ${gamePrices[game][nominal].toLocaleString()}`;
+                    nominalSelect.appendChild(option);
+                });
+            }
+            
+            // Show server ID field for Mobile Legends
+            if (game === 'ml') {
+                serverField.style.display = 'block';
+            } else {
+                serverField.style.display = 'none';
+            }
+            
+            calculateGamePrice();
+        }
 
-    <button onclick="order()">💜 ORDER VIA WHATSAPP</button>
-    <div class="note">Harga dihitung otomatis berdasarkan paket yang dipilih.</div>
-  </section>
+        function calculateGamePrice() {
+            const game = document.getElementById('gameSelect').value;
+            const nominal = document.getElementById('nominal').value;
+            
+            let price = 0;
+            if (game && nominal && gamePrices[game] && gamePrices[game][nominal]) {
+                price = gamePrices[game][nominal];
+            }
+            
+            const gameNames = {
+                ml: 'Mobile Legends', ff: 'Free Fire', roblox: 'Roblox',
+                valorant: 'Valorant', genshin: 'Genshin Impact', hsr: 'Honkai: Star Rail',
+                hok: 'Honor of Kings', codm: 'Call of Duty Mobile', pubg: 'PUBG Mobile'
+            };
+            
+            document.getElementById('gameName').textContent = gameNames[game] || '-';
+            document.getElementById('gameNominal').textContent = nominal || '-';
+            document.getElementById('gameTotal').textContent = `Rp ${price.toLocaleString()}`;
+        }
 
-  <footer>© 2026 RYUZY STORE • Suntik Sosmed</footer>
-</div>
+        // Order Generation
+        function generateOrderId() {
+            const date = new Date();
+            const dateStr = date.getFullYear().toString() + 
+                           (date.getMonth() + 1).toString().padStart(2, '0') + 
+                           date.getDate().toString().padStart(2, '0');
+            const orderCount = orders.length + 1;
+            return `RYZ-${dateStr}-${orderCount.toString().padStart(4, '0')}`;
+        }
 
-<script>
-const admin = "6285776210087";
+        // Form Submissions
+        document.getElementById('sosmedForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            createOrder('sosmed');
+        });
 
-const data = {
-  tiktok: [
-    {name:"Like", unit:"Like", base:100, price:130},
-    {name:"Followers", unit:"Followers", base:100, price:7000},
-    {name:"Views", unit:"Views", base:1000, price:500}
-  ],
-  instagram: [
-    {name:"Like", unit:"Like", base:100, price:700},
-    {name:"Followers", unit:"Followers", base:100, price:6000},
-    {name:"Views", unit:"Views", base:1000, price:70}
-  ],
-  whatsapp: [
-    {name:"Pengikut Saluran", unit:"Pengikut", base:100, price:8000}
-  ]
-};
+        document.getElementById('gameForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            createOrder('game');
+        });
 
-function formatRp(n){
-  return "Rp" + Math.round(n).toLocaleString("id-ID");
-}
+        document.getElementById('layananForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            createOrder('layanan');
+        });
 
-function updateServices(){
-  const category = document.getElementById("category").value;
-  const service = document.getElementById("service");
-  service.innerHTML = "";
+        function createOrder(type) {
+            const orderId = generateOrderId();
+            const customerName = prompt('Masukkan nama Anda:') || 'Customer';
+            const customerWa = prompt('Masukkan nomor WhatsApp Anda:') || '';
+            
+            let orderData = {
+                id: orderId,
+                customer: customerName,
+                whatsapp: customerWa,
+                type: type,
+                status: 'Menunggu Pembayaran',
+                timestamp: new Date().toISOString(),
+                paymentMethod: ''
+            };
+            
+            if (type === 'sosmed') {
+                orderData.platform = document.getElementById('platform').value;
+                orderData.service = document.getElementById('serviceType').value;
+                orderData.link = document.getElementById('socialLink').value;
+                orderData.quantity = document.getElementById('quantity').value;
+                orderData.package = document.getElementById('package').value;
+                orderData.notes = document.getElementById('notes').value;
+                orderData.total = document.getElementById('totalPrice').textContent;
+            } else if (type === 'game') {
+                orderData.game = document.getElementById('gameSelect').value;
+                orderData.userId = document.getElementById('userId').value;
+                orderData.serverId = document.getElementById('serverId').value;
+                orderData.nickname = document.getElementById('nickname').value;
+                orderData.nominal = document.getElementById('nominal').value;
+                orderData.notes = document.getElementById('gameNotes').value;
+                orderData.total = document.getElementById('gameTotal').textContent;
+            } else if (type === 'layanan') {
+                orderData.layanan = document.getElementById('layananType').value;
+                orderData.description = document.getElementById('layananDesc').value;
+                orderData.notes = document.getElementById('layananNotes').value;
+                orderData.total = 'Hubungi Admin';
+            }
+            
+            // Save order
+            orders.push(orderData);
+            localStorage.setItem('ryuzy_orders', JSON.stringify(orders));
+            
+            // Save customer
+            if (!customers.find(c => c.whatsapp === customerWa)) {
+                customers.push({
+                    name: customerName,
+                    whatsapp: customerWa,
+                    id: 'CUST-' + Date.now()
+                });
+                localStorage.setItem('ryuzy_customers', JSON.stringify(customers));
+            }
+            
+            // Show payment methods
+            showPaymentMethods(orderData);
+        }
 
-  data[category].forEach((item, i) => {
-    const opt = document.createElement("option");
-    opt.value = i;
-    opt.textContent = `${item.name} — mulai ${item.base.toLocaleString("id-ID")} ${item.unit} — ${formatRp(item.price)}`;
-    service.appendChild(opt);
-  });
+        function showPaymentMethods(orderData) {
+            const paymentHtml = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1003; display: flex; justify-content: center; align-items: center;">
+                    <div style="background: var(--card-bg); padding: 2rem; border-radius: 15px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto;">
+                        <h3 style="margin-bottom: 1rem; text-align: center;">💳 PILIH METODE PEMBAYARAN</h3>
+                        
+                        <div class="payment-methods">
+                            <div class="payment-method" onclick="selectPayment('${orderData.id}', 'DANA')">
+                                <i class="fas fa-wallet payment-dana"></i>
+                                <div>DANA</div>
+                                <small>085776210087</small>
+                                <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('085776210087')">Copy</button>
+                            </div>
+                            <div class="payment-method" onclick="selectPayment('${orderData.id}', 'GoPay')">
+                                <i class="fas fa-wallet payment-gopay"></i>
+                                <div>GoPay</div>
+                                <small>089647146786</small>
+                                <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('089647146786')">Copy</button>
+                            </div>
+                            <div class="payment-method" onclick="selectPayment('${orderData.id}', 'QRIS')">
+                                <i class="fas fa-qrcode payment-qris"></i>
+                                <div>QRIS</div>
+                                <small>Scan QR Code</small>
+                            </div>
+                        </div>
+                        
+                        <div class="order-summary">
+                            <h4>Ringkasan Order</h4>
+                            <div class="summary-item">
+                                <span>ID Order:</span>
+                                <span>${orderData.id}</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Total:</span>
+                                <span>${orderData.total}</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary" style="width: 100%;" onclick="sendToWhatsApp('${orderData.id}')">
+                            <i class="fab fa-whatsapp"></i> ORDER SEKARANG VIA WHATSAPP
+                        </button>
+                        
+                        <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;" onclick="this.closest('div[style]').remove()">
+                            Tutup
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', paymentHtml);
+        }
 
-  document.getElementById("qty").value = data[category][0].base;
-  updatePrice();
-}
+        function selectPayment(orderId, method) {
+            const order = orders.find(o => o.id === orderId);
+            if (order) {
+                order.paymentMethod = method;
+                localStorage.setItem('ryuzy_orders', JSON.stringify(orders));
+                showToast(`Metode pembayaran ${method} dipilih`);
+            }
+        }
 
-function updatePrice(){
-  const category = document.getElementById("category").value;
-  const index = Number(document.getElementById("service").value || 0);
-  const item = data[category][index];
-  if(!item) return;
+        function sendToWhatsApp(orderId) {
+            const order = orders.find(o => o.id === orderId);
+            if (!order) return;
+            
+            let message = `*RYUZY STORE — ORDER BARU*\n\n`;
+            message += `Nama: ${order.customer}\n`;
+            message += `ID Order: ${order.id}\n`;
+            message += `Layanan: ${order.type === 'sosmed' ? 'Suntik Sosmed' : order.type === 'game' ? 'Top Up Game' : 'Layanan Digital'}\n`;
+            
+            if (order.type === 'sosmed') {
+                message += `Platform: ${order.platform}\n`;
+                message += `Jenis: ${order.service}\n`;
+                message += `Link: ${order.link}\n`;
+                message += `Jumlah: ${order.quantity}\n`;
+            } else if (order.type === 'game') {
+                message += `Game: ${order.game}\n`;
+                message += `User ID: ${order.userId}\n`;
+                message += `Nominal: ${order.nominal}\n`;
+            }
+            
+            message += `Metode Pembayaran: ${order.paymentMethod || 'Belum dipilih'}\n`;
+            message += `Total: ${order.total}\n`;
+            if (order.notes) message += `Catatan: ${order.notes}\n`;
+            message += `\nMohon diproses kak 🙏`;
+            
+            const waUrl = `https://wa.me/085776210087?text=${encodeURIComponent(message)}`;
+            window.open(waUrl, '_blank');
+            
+            // Close payment modal
+            document.querySelector('div[style*="z-index: 1003"]').remove();
+            showToast('Order berhasil dikirim ke WhatsApp!');
+        }
 
-  let qty = Number(document.getElementById("qty").value) || item.base;
-  qty = Math.max(1, qty);
-  document.getElementById("qty").value = qty;
+        // Check Order
+        document.getElementById('cekOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const orderId = document.getElementById('checkOrderId').value;
+            const wa = document.getElementById('checkWa').value;
+            
+            const order = orders.find(o => o.id === orderId && o.whatsapp === wa);
+            
+            if (order) {
+                document.getElementById('orderStatus').style.display = 'block';
+                document.getElementById('statusOrderId').textContent = order.id;
+                
+                const statusColors = {
+                    'Menunggu Pembayaran': 'status-pending',
+                    'Pembayaran Dikonfirmasi': 'status-processing',
+                    'Diproses': 'status-processing',
+                    'Selesai': 'status-completed',
+                    'Dibatalkan': 'status-cancelled'
+                };
+                
+                const statusClass = statusColors[order.status] || 'status-pending';
+                document.getElementById('statusOrderStatus').innerHTML = 
+                    `<span class="status-badge ${statusClass}">${order.status}</span>`;
+                
+                document.getElementById('statusOrderService').textContent = 
+                    order.type === 'sosmed' ? 'Suntik Sosmed' : 
+                    order.type === 'game' ? 'Top Up Game' : 'Layanan Digital';
+                document.getElementById('statusOrderTotal').textContent = order.total;
+            } else {
+                showToast('Order tidak ditemukan!');
+            }
+        });
 
-  const total = (qty / item.base) * item.price;
-  document.getElementById("total").textContent = formatRp(total);
-}
+        // Admin Login
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            // Simple authentication (in production, use proper backend auth)
+            if (email === 'admin@ryuzy.store' && password === 'admin123') {
+                isAdminLoggedIn = true;
+                showSection('admin-dashboard');
+                loadAdminDashboard();
+                showToast('Login berhasil!');
+            } else {
+                showToast('Email atau password salah!');
+            }
+        });
 
-function order(){
-  const category = document.getElementById("category").value;
-  const index = Number(document.getElementById("service").value || 0);
-  const item = data[category][index];
-  const qty = Number(document.getElementById("qty").value);
-  const link = document.getElementById("link").value.trim();
+        function loadAdminDashboard() {
+            // Update stats
+            document.getElementById('totalOrders').textContent = orders.length;
+            document.getElementById('pendingOrders').textContent = 
+                orders.filter(o => o.status === 'Menunggu Pembayaran').length;
+            document.getElementById('processingOrders').textContent = 
+                orders.filter(o => o.status === 'Diproses').length;
+            document.getElementById('completedOrders').textContent = 
+                orders.filter(o => o.status === 'Selesai').length;
+            document.getElementById('totalCustomers').textContent = customers.length;
+            
+            // Calculate total revenue
+            let totalRevenue = 0;
+            orders.forEach(order => {
+                const amount = parseInt(order.total.replace(/[^0-9]/g, '')) || 0;
+                totalRevenue += amount;
+            });
+            document.getElementById('totalRevenue').textContent = `Rp ${totalRevenue.toLocaleString()}`;
+            
+            // Load orders table
+            const tbody = document.getElementById('ordersTable');
+            tbody.innerHTML = '';
+            
+            orders.slice().reverse().forEach(order => {
+                const row = document.createElement('tr');
+                const statusColors = {
+                    'Menunggu Pembayaran': 'status-pending',
+                    'Pembayaran Dikonfirmasi': 'status-processing',
+                    'Diproses': 'status-processing',
+                    'Selesai': 'status-completed',
+                    'Dibatalkan': 'status-cancelled'
+                };
+                
+                row.innerHTML = `
+                    <td>${order.id}</td>
+                    <td>${order.customer}<br><small>${order.whatsapp}</small></td>
+                    <td>${order.type === 'sosmed' ? 'Suntik Sosmed' : order.type === 'game' ? 'Top Up Game' : 'Layanan Digital'}</td>
+                    <td>${order.total}</td>
+                    <td><span class="status-badge ${statusColors[order.status] || 'status-pending'}">${order.status}</span></td>
+                    <td>
+                        <select onchange="updateOrderStatus('${order.id}', this.value)" style="padding: 0.3rem; border-radius: 5px;">
+                            <option value="">Ubah Status</option>
+                            <option value="Menunggu Pembayaran">Menunggu Pembayaran</option>
+                            <option value="Pembayaran Dikonfirmasi">Pembayaran Dikonfirmasi</option>
+                            <option value="Diproses">Diproses</option>
+                            <option value="Selesai">Selesai</option>
+                            <option value="Dibatalkan">Dibatalkan</option>
+                        </select>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
 
-  if(!link){
-    alert("Masukkan link terlebih dahulu.");
-    return;
-  }
-  if(!qty || qty < 1){
-    alert("Masukkan jumlah yang valid.");
-    return;
-  }
+        function updateOrderStatus(orderId, newStatus) {
+            if (!newStatus) return;
+            
+            const order = orders.find(o => o.id === orderId);
+            if (order) {
+                order.status = newStatus;
+                localStorage.setItem('ryuzy_orders', JSON.stringify(orders));
+                loadAdminDashboard();
+                showToast(`Status order ${orderId} diubah menjadi ${newStatus}`);
+            }
+        }
 
-  const total = (qty / item.base) * item.price;
-  const message =
-`Halo RYUZY STORE, saya ingin order.%0A%0A` +
-`Layanan: ${encodeURIComponent(item.name)}%0A` +
-`Jumlah: ${encodeURIComponent(qty.toLocaleString("id-ID") + " " + item.unit)}%0A` +
-`Total: ${encodeURIComponent(formatRp(total))}%0A` +
-`Link: ${encodeURIComponent(link)}`;
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            showSection('home');
+            showToast('Logout berhasil!');
+        }
 
-  window.open(`https://wa.me/${admin}?text=${message}`, "_blank");
-}
+        // Chat Functions
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            chatWindow.classList.toggle('active');
+        }
 
-updateServices();
-</script>
+        function openChat() {
+            document.getElementById('chatWindow').classList.add('active');
+        }
+
+        function closeChat() {
+            document.getElementById('chatWindow').classList.remove('active');
+        }
+
+        function handleChatKeypress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // Auto-reply
+            setTimeout(() => {
+                const reply = getAutoReply(message);
+                addMessage(reply, 'admin');
+            }, 1000);
+        }
+
+        function addMessage(text, sender) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message message-${sender}`;
+            messageDiv.textContent = text;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            
+            // Save chat
+            chats.push({
+                message: text,
+                sender: sender,
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('ryuzy_chats', JSON.stringify(chats));
+        }
+
+        function getAutoReply(message) {
+            const lowerMsg = message.toLowerCase();
+            
+            if (lowerMsg.includes('cara order') || lowerMsg.includes('bagaimana order')) {
+                return 'Cara order:\n1. Pilih layanan (Suntik Sosmed/Top Up Game/Layanan Digital)\n2. Isi form order\n3. Pilih metode pembayaran\n4. Klik ORDER SEKARANG\n5. Kirim order via WhatsApp\n\nAda yang bisa dibantu lagi?';
+            }
+            
+            if (lowerMsg.includes('pembayaran') || lowerMsg.includes('bayar')) {
+                return 'Metode pembayaran yang tersedia:\n💙 DANA: 085776210087\n💚 GoPay: 089647146786\n💜 QRIS: Scan QR Code\n\nSilakan pilih metode yang sesuai saat checkout.';
+            }
+            
+            if (lowerMsg.includes('berapa lama') || lowerMsg.includes('proses')) {
+                return 'Estimasi waktu proses:\n• Suntik Sosmed: 1-24 jam\n• Top Up Game: 5-30 menit\n• Layanan Digital: Sesuai kesepakatan\n\nWaktu dapat bervariasi tergantung antrian.';
+            }
+            
+            if (lowerMsg.includes('cek order') || lowerMsg.includes('status')) {
+                return 'Untuk cek status order, silakan klik menu "Cek Order" di navigasi atas, lalu masukkan ID Order dan nomor WhatsApp Anda.';
+            }
+            
+            if (lowerMsg.includes('top up') || lowerMsg.includes('game')) {
+                return 'Untuk top up game:\n1. Pilih game yang diinginkan\n2. Masukkan User ID dan Server ID (jika diperlukan)\n3. Pilih nominal top up\n4. Lanjutkan ke pembayaran\n\nGame yang tersedia: ML, FF, Roblox, Valorant, Genshin, dll.';
+            }
+            
+            return 'Pertanyaan kamu akan diteruskan kepada Admin RYUZY STORE. Silakan tunggu balasan admin. 💜\n\nAtau kamu bisa chat langsung via WhatsApp untuk respon lebih cepat.';
+        }
+
+        // Utility Functions
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Berhasil disalin!');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('Berhasil disalin!');
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load any saved data
+            console.log('RYUZY STORE initialized');
+        });
+    </script>
 </body>
 </html>
