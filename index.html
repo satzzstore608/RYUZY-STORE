@@ -2,764 +2,449 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#3B82F6">
-    <title>RYUDIA - Solusi Digital</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R-Gaming | Top Up Games Terpercaya</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CORE STYLES (Dari Referensi 1) --- */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #F3F4F6;
-            background-image: radial-gradient(#CBD5E1 1px, transparent 1px);
-            background-size: 20px 20px;
-            -webkit-tap-highlight-color: transparent;
-            overflow-x: hidden;
-        }
-
-        /* Hide Scrollbar */
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* The Bold Black Outline Style */
-        .app-card {
-            background: white;
-            border: 2px solid #000000;
-            border-radius: 24px;
-            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15);
-            transition: transform 0.1s;
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #0b0f19; 
+            color: #e2e8f0; 
         }
         
-        .app-card:active { transform: scale(0.98); }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 10px; }
 
-        .btn-primary {
-            background-color: #3B82F6;
-            color: white;
-            border: 2px solid #000000;
-            border-radius: 16px;
-            box-shadow: 3px 3px 0px #000000;
-            font-weight: 700;
-            transition: all 0.1s;
+        /* Logo Glow Effect */
+        .logo-glow {
+            filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.5));
+            transition: filter 0.3s ease;
         }
-
-        .btn-primary:active {
-            transform: translate(2px, 2px);
-            box-shadow: 1px 1px 0px #000000;
+        .logo-glow:hover {
+            filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.8));
         }
 
-        .menu-item {
-            background-color: #EFF6FF;
-            border: 2px solid #000000;
-            border-radius: 18px;
-            box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
-            transition: 0.2s;
-        }
-        
-        .menu-item:active { transform: translateY(2px); }
-
-        /* Bottom Nav Floating Button */
-        .nav-float-btn {
-            width: 60px;
-            height: 60px;
-            background: #3B82F6;
-            border: 3px solid #000000;
-            border-radius: 50%;
-            box-shadow: 0px -4px 10px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            margin-top: -30px;
-            z-index: 50;
-            position: relative;
+        /* Modal Animation */
+        .modal-enter { animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        /* Nominal Selection Style (Modified for Bold UI) */
-        .nominal-select {
-            background: white;
-            border: 2px solid #000;
-            border-radius: 12px;
-            padding: 10px;
-            cursor: pointer;
-            transition: 0.2s;
-            text-align: center;
+        /* Card Hover Effects */
+        .service-card { 
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border: 1px solid #334155;
+            transition: all 0.3s ease; 
         }
-        .nominal-select.selected {
-            background: #3B82F6;
-            color: white;
-            border-color: #000;
-            box-shadow: 2px 2px 0px #000;
+        .service-card:hover { 
+            transform: translateY(-4px); 
+            border-color: #818cf8; 
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.2); 
         }
 
-        /* Desktop Container Simulation */
-        @media (min-width: 768px) {
-            body { display: flex; justify-content: center; background-color: #e5e7eb; }
-            .mobile-container {
-                width: 420px;
-                min-height: 100vh;
-                background-color: #F8FAFC;
-                box-shadow: 0 0 20px rgba(0,0,0,0.1);
-                position: relative;
-                overflow-x: hidden;
-                border-left: 1px solid #ddd;
-                border-right: 1px solid #ddd;
-            }
+        .product-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            transition: all 0.2s ease;
         }
-        @media (max-width: 767px) {
-            .mobile-container { width: 100%; min-height: 100vh; padding-bottom: 80px; }
+        .product-card.active { 
+            border-color: #6366f1; 
+            background: rgba(99, 102, 241, 0.1); 
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
         }
-
-        /* Toast Notification */
-        .toast {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
-            background: #000; color: white; padding: 10px 20px; border-radius: 30px;
-            z-index: 9999; font-size: 0.9rem; font-weight: 600; transition: 0.3s;
-            border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        .toast.show { transform: translateX(-50%) translateY(0); }
-
-        /* Modal Overlay */
-        .modal-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000;
-            display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px);
-        }
-        .modal-overlay.open { display: flex; }
-        .modal-content {
-            background: white; width: 90%; max-width: 380px; border-radius: 24px;
-            border: 3px solid #000; padding: 20px; box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
-            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .product-card:hover { border-color: #6366f1; }
     </style>
 </head>
-<body>
+<body class="pb-24 min-h-screen">
 
-<div class="mobile-container pb-24 relative">
-    
-    <!-- 🔔 TOAST NOTIFICATION -->
-    <div id="toast" class="toast">Notifikasi</div>
-
-    <!-- 🔵 HEADER HOME -->
-    <header class="bg-blue-500 text-white pt-6 pb-12 px-5 rounded-b-[30px] relative overflow-hidden border-b-2 border-black">
-        <div class="absolute top-0 right-0 opacity-20">
-            <svg width="150" height="150"><pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="white"/></pattern><rect width="100%" height="100%" fill="url(#dots)"/></svg>
-        </div>
-        <div class="flex justify-between items-center relative z-10">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-white rounded-full border-2 border-black flex items-center justify-center overflow-hidden">
-                    <span class="font-bold text-blue-600 text-xs">RYU</span>
-                </div>
-                <div>
-                    <p class="text-xs font-medium opacity-90">Selamat datang,</p>
-                    <h1 class="text-xl font-bold tracking-wide">RYUDIA</h1>
-                </div>
-            </div>
-            <button class="w-10 h-10 bg-white text-blue-600 rounded-xl border-2 border-black flex items-center justify-center shadow-md active:scale-95 transition">
-                <i class="fa-solid fa-bell"></i>
-            </button>
-        </div>
-    </header>
-
-    <!-- MAIN CONTENT WRAPPER -->
-    <main class="px-4 -mt-8 relative z-20 space-y-5" id="mainContent">
-        
-        <!-- 💰 CARD SALDO -->
-        <div class="app-card p-5 flex justify-between items-center">
-            <div class="border-r-2 border-gray-200 pr-4 w-1/2">
-                <p class="text-gray-500 text-xs font-semibold mb-1">Saldo Utama</p>
-                <div class="flex items-center gap-2">
-                    <div class="bg-blue-100 p-1.5 rounded-lg border border-black">
-                        <i class="fa-solid fa-wallet text-blue-600 text-sm"></i>
-                    </div>
-                    <h2 class="text-xl font-bold text-gray-800 truncate" id="displayBalance">Rp0</h2>
-                </div>
-            </div>
-            <div class="pl-4 w-1/2">
-                <p class="text-gray-500 text-xs font-semibold mb-1">Total Transaksi</p>
-                <div class="flex items-center gap-2">
-                    <div class="bg-green-100 p-1.5 rounded-lg border border-black">
-                        <i class="fa-solid fa-chart-line text-green-600 text-sm"></i>
-                    </div>
-                    <h2 class="text-xl font-bold text-gray-800" id="totalTrxCount">0</h2>
-                </div>
-            </div>
-        </div>
-
-        <!-- ⚡ QUICK MENU -->
-        <div class="grid grid-cols-4 gap-3">
-            <a onclick="topUpSaldo()" class="menu-item flex flex-col items-center justify-center py-3 gap-2 cursor-pointer">
-                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white border-2 border-black shadow-sm">
-                    <i class="fa-solid fa-money-bill-wave"></i>
-                </div>
-                <span class="text-[10px] font-bold text-gray-800">Top Up</span>
-            </a>
-            <a onclick="showQRIS()" class="menu-item flex flex-col items-center justify-center py-3 gap-2 cursor-pointer">
-                <div class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-white border-2 border-black shadow-sm">
-                    <i class="fa-solid fa-qrcode"></i>
-                </div>
-                <span class="text-[10px] font-bold text-gray-800">QRIS</span>
-            </a>
-            <a onclick="openService('rekber')" class="menu-item flex flex-col items-center justify-center py-3 gap-2 cursor-pointer">
-                <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white border-2 border-black shadow-sm">
-                    <i class="fa-solid fa-arrow-right-arrow-left"></i>
-                </div>
-                <span class="text-[10px] font-bold text-gray-800">Rekber</span>
-            </a>
-            <a href="https://wa.me/085776210087" target="_blank" class="menu-item flex flex-col items-center justify-center py-3 gap-2 cursor-pointer">
-                <div class="w-10 h-10 bg-teal-500 rounded-full flex items-center justify-center text-white border-2 border-black shadow-sm">
-                    <i class="fa-solid fa-headset"></i>
-                </div>
-                <span class="text-[10px] font-bold text-gray-800">Hubungi Kami</span>
-            </a>
-        </div>
-
-        <!-- 📊 STATISTIK -->
-        <div class="app-card p-4 flex justify-around items-center text-center">
-            <div>
-                <p class="text-xl font-bold text-blue-600">2.524</p>
-                <p class="text-[10px] text-gray-500 font-semibold">Pengguna</p>
-            </div>
-            <div class="h-8 w-[1px] bg-gray-300"></div>
-            <div>
-                <p class="text-xl font-bold text-green-600" id="statSuccess">4.238</p>
-                <p class="text-[10px] text-gray-500 font-semibold">Sukses</p>
-            </div>
-            <div class="h-8 w-[1px] bg-gray-300"></div>
-            <div>
-                <p class="text-xl font-bold text-purple-600"><i class="fa-solid fa-gift text-sm"></i></p>
-                <p class="text-[10px] text-gray-500 font-semibold">Lucky Wheel</p>
-            </div>
-        </div>
-
-        <!-- 📢 ANNOUNCEMENT -->
-        <div class="bg-yellow-50 border-2 border-black rounded-2xl p-3 flex items-start gap-3 shadow-sm">
-            <div class="bg-yellow-400 p-2 rounded-lg border border-black shrink-0">
-                <i class="fa-solid fa-bullhorn text-black"></i>
-            </div>
-            <div>
-                <h3 class="text-xs font-bold text-gray-800 mb-1">Informasi</h3>
-                <p class="text-[11px] text-gray-600 leading-relaxed">
-                    «Transaksi pada pukul 01.00–03.00 WIB dapat mengalami keterlambatan karena maintenance sistem.»
-                </p>
-            </div>
-        </div>
-
-        <!-- KATEGORI LAYANAN UTAMA (Grid) -->
-        <div class="grid grid-cols-2 gap-3 mt-2">
-            <div onclick="openService('game')" class="app-card p-4 flex flex-col items-center text-center gap-2 cursor-pointer hover:bg-gray-50">
-                <i class="fa-solid fa-gamepad text-2xl text-red-500"></i>
-                <h3 class="font-bold text-sm">Top Up Game</h3>
-                <p class="text-[9px] text-gray-500">ML, FF, PUBG, Valo</p>
-            </div>
-            <div onclick="openService('pulsa')" class="app-card p-4 flex flex-col items-center text-center gap-2 cursor-pointer hover:bg-gray-50">
-                <i class="fa-solid fa-sim-card text-2xl text-orange-500"></i>
-                <h3 class="font-bold text-sm">Pulsa & Data</h3>
-                <p class="text-[9px] text-gray-500">All Operator</p>
-            </div>
-            <div onclick="openService('sosmed')" class="app-card p-4 flex flex-col items-center text-center gap-2 cursor-pointer hover:bg-gray-50">
-                <i class="fa-solid fa-hashtag text-2xl text-purple-600"></i>
-                <h3 class="font-bold text-sm">Suntik Sosmed</h3>
-                <p class="text-[9px] text-gray-500">TikTok, IG, YT</p>
-            </div>
-            <div onclick="openService('pln')" class="app-card p-4 flex flex-col items-center text-center gap-2 cursor-pointer hover:bg-gray-50">
-                <i class="fa-solid fa-bolt text-2xl text-yellow-500"></i>
-                <h3 class="font-bold text-sm">Token PLN</h3>
-                <p class="text-[9px] text-gray-500">Listrik Prabayar</p>
-            </div>
-        </div>
-
-        <!-- 🧾 TRANSAKSI TERBARU (Live Feed) -->
-        <div id="liveFeed" class="app-card p-3 bg-white flex items-center gap-3">
-            <div class="bg-blue-100 p-2 rounded-full border border-black text-blue-600">
-                <i class="fa-solid fa-bolt"></i>
-            </div>
-            <div class="flex-1">
-                <p class="text-xs font-bold text-gray-800">Menunggu transaksi...</p>
-            </div>
-        </div>
-
-        <!-- FOOTER INFO -->
-        <footer class="text-center pb-24 pt-4 border-t border-gray-200">
-            <p class="text-[10px] text-gray-400 mb-2">© 2026 RYUDIA. All Rights Reserved.</p>
-            <div class="flex justify-center gap-4 text-[10px] text-gray-500 font-semibold">
-                <a href="#" onclick="toggleAdminLogin()" class="hover:text-blue-600">Admin Dashboard</a>
-                <a href="#" class="hover:text-blue-600">Syarat & Ketentuan</a>
-            </div>
-        </footer>
-    </main>
-
-    <!-- PAGE: PRODUCT FORM (Hidden by default) -->
-    <div id="page-products" class="hidden px-4 pt-6 pb-24 absolute inset-0 bg-[#F3F4F6] z-30 overflow-y-auto">
-        <div class="flex items-center gap-3 mb-6">
-            <button onclick="closeProductPage()" class="w-10 h-10 bg-white border-2 border-black rounded-xl flex items-center justify-center shadow-sm">
-                <i class="fa-solid fa-arrow-left"></i>
-            </button>
-            <h2 class="text-xl font-bold" id="productTitle">Produk</h2>
+    <!-- HEADER / NAVBAR -->
+    <nav class="bg-[#0b0f19]/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40 px-4 py-3 flex items-center justify-between">
+        <!-- LOGO DI KIRI ATAS -->
+        <div class="flex items-center gap-3">
+            <!-- Ganti src dengan path file logo R Anda -->
+            <img src="https://i.imgur.com/placeholder-R-logo.png" alt="R Gaming Logo" class="w-10 h-10 object-contain logo-glow">
+            <span class="font-bold text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400" style="font-family: 'Orbitron', sans-serif;">
+                R-GAMING
+            </span>
         </div>
         
-        <div class="space-y-4">
-            <!-- Input Target -->
-            <div class="app-card p-4">
-                <label class="text-xs font-bold text-gray-500 block mb-2">ID / NOMOR TUJUAN</label>
-                <input type="text" id="inpTarget" class="w-full bg-gray-50 border-2 border-black rounded-xl p-3 font-bold focus:outline-none focus:bg-blue-50" placeholder="Contoh: 0812...">
-                <p class="text-[10px] text-gray-400 mt-1" id="targetHint">Pastikan nomor aktif</p>
+        <div class="flex items-center gap-4">
+            <button class="text-slate-400 hover:text-white transition-colors"><i class="fa-solid fa-magnifying-glass text-lg"></i></button>
+            <button class="text-yellow-500 hover:text-yellow-400 relative">
+                <i class="fa-solid fa-crown text-lg"></i>
+            </button>
+            <button class="w-9 h-9 bg-slate-800 rounded-full flex items-center justify-center text-indigo-400 border border-slate-700 hover:border-indigo-500 transition-colors">
+                <i class="fa-regular fa-user"></i>
+            </button>
+            <button class="text-slate-400 lg:hidden"><i class="fa-solid fa-bars text-lg"></i></button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-5xl mx-auto p-4 space-y-8">
+
+        <!-- BANNER PROMO -->
+        <div class="w-full h-40 md:h-56 rounded-2xl flex items-center justify-center text-white shadow-2xl overflow-hidden relative border border-slate-700">
+            <div class="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900"></div>
+            <div class="absolute inset-0 opacity-30 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+            <div class="text-center z-10 px-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400" style="font-family: 'Orbitron', sans-serif;">LEVEL UP YOUR GAME</h2>
+                <p class="text-sm md:text-base text-slate-300">Top up instant, aman, dan terpercaya 24/7</p>
+            </div>
+        </div>
+
+        <!-- KATEGORI LAYANAN UTAMA -->
+        <section>
+            <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2 border-l-4 border-indigo-500 pl-3">
+                POPULAR GAMES
+            </h3>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <!-- Mobile Legends -->
+                <button onclick="openServiceModal('mlbb')" class="service-card p-5 rounded-xl flex flex-col items-center text-center gap-3 cursor-pointer group">
+                    <div class="w-14 h-14 rounded-full bg-blue-500/10 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
+                        <i class="fa-solid fa-shield-cat text-2xl text-blue-500"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-200">Mobile Legends</h3>
+                        <p class="text-[10px] text-slate-500">Diamonds</p>
+                    </div>
+                </button>
+                
+                <!-- Free Fire -->
+                <button onclick="openServiceModal('freefire')" class="service-card p-5 rounded-xl flex flex-col items-center text-center gap-3 cursor-pointer group">
+                    <div class="w-14 h-14 rounded-full bg-orange-500/10 flex items-center justify-center group-hover:bg-orange-500/20 transition-colors">
+                        <i class="fa-solid fa-fire text-2xl text-orange-500"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-200">Free Fire</h3>
+                        <p class="text-[10px] text-slate-500">Diamonds</p>
+                    </div>
+                </button>
+
+                <!-- PUBG -->
+                <button onclick="openServiceModal('pubg')" class="service-card p-5 rounded-xl flex flex-col items-center text-center gap-3 cursor-pointer group">
+                    <div class="w-14 h-14 rounded-full bg-yellow-500/10 flex items-center justify-center group-hover:bg-yellow-500/20 transition-colors">
+                        <i class="fa-solid fa-crosshairs text-2xl text-yellow-500"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-200">PUBG Mobile</h3>
+                        <p class="text-[10px] text-slate-500">UC</p>
+                    </div>
+                </button>
+
+                <!-- Genshin Impact -->
+                <button onclick="openServiceModal('genshin')" class="service-card p-5 rounded-xl flex flex-col items-center text-center gap-3 cursor-pointer group">
+                    <div class="w-14 h-14 rounded-full bg-purple-500/10 flex items-center justify-center group-hover:bg-purple-500/20 transition-colors">
+                        <i class="fa-solid fa-star text-2xl text-purple-500"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-200">Genshin Impact</h3>
+                        <p class="text-[10px] text-slate-500">Genesis Crystals</p>
+                    </div>
+                </button>
+
+                <!-- Valorant -->
+                <button onclick="openServiceModal('valorant')" class="service-card p-5 rounded-xl flex flex-col items-center text-center gap-3 cursor-pointer group">
+                    <div class="w-14 h-14 rounded-full bg-red-500/10 flex items-center justify-center group-hover:bg-red-500/20 transition-colors">
+                        <i class="fa-solid fa-v text-2xl text-red-500"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-200">Valorant</h3>
+                        <p class="text-[10px] text-slate-500">VP Points</p>
+                    </div>
+                </button>
+
+                <!-- Roblox -->
+                <button onclick="openServiceModal('roblox')" class="service-card p-5 rounded-xl flex flex-col items-center text-center gap-3 cursor-pointer group">
+                    <div class="w-14 h-14 rounded-full bg-gray-500/10 flex items-center justify-center group-hover:bg-gray-500/20 transition-colors">
+                        <i class="fa-solid fa-cube text-2xl text-gray-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-200">Roblox</h3>
+                        <p class="text-[10px] text-slate-500">Robux</p>
+                    </div>
+                </button>
+
+                <!-- Honor of Kings -->
+                <button onclick="openServiceModal('hok')" class="service-card p-5 rounded-xl flex flex-col items-center text-center gap-3 cursor-pointer group">
+                    <div class="w-14 h-14 rounded-full bg-indigo-500/10 flex items-center justify-center group-hover:bg-indigo-500/20 transition-colors">
+                        <i class="fa-solid fa-chess-knight text-2xl text-indigo-500"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-200">Honor of Kings</h3>
+                        <p class="text-[10px] text-slate-500">Tokens</p>
+                    </div>
+                </button>
+
+                <!-- TikTok SMM -->
+                <button onclick="openServiceModal('tiktok')" class="service-card p-5 rounded-xl flex flex-col items-center text-center gap-3 cursor-pointer group">
+                    <div class="w-14 h-14 rounded-full bg-pink-500/10 flex items-center justify-center group-hover:bg-pink-500/20 transition-colors">
+                        <i class="fa-brands fa-tiktok text-2xl text-pink-500"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-200">TikTok</h3>
+                        <p class="text-[10px] text-slate-500">Services</p>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <!-- AREA FORM TOP UP -->
+        <section id="topup-section" class="hidden space-y-6 animate-fade-in">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                <h3 id="selected-game-title" class="text-xl font-bold text-indigo-400 uppercase" style="font-family: 'Orbitron', sans-serif;">TOP UP</h3>
+                <button onclick="resetSelection()" class="text-xs text-slate-500 hover:text-red-400 transition-colors flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-left"></i> Kembali
+                </button>
             </div>
 
-            <!-- Pilih Operator -->
-            <div class="app-card p-4">
-                <label class="text-xs font-bold text-gray-500 block mb-2">PILIH OPERATOR / GAME</label>
-                <select id="inpOperator" class="w-full bg-gray-50 border-2 border-black rounded-xl p-3 font-bold focus:outline-none" onchange="renderNominals()">
-                    <!-- Options injected via JS -->
-                </select>
+            <!-- Input Data Akun -->
+            <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-700">
+                <h4 class="font-semibold text-slate-200 mb-4 flex items-center gap-3">
+                    <span class="w-7 h-7 bg-indigo-600 text-white rounded-lg flex items-center justify-center text-xs font-bold shadow-lg shadow-indigo-500/30">1</span>
+                    Masukkan Data Akun
+                </h4>
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="number" placeholder="User ID" class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-indigo-500 text-sm text-white placeholder-slate-600 transition-colors">
+                    <input type="number" placeholder="Zone ID (Optional)" class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-indigo-500 text-sm text-white placeholder-slate-600 transition-colors">
+                </div>
             </div>
 
             <!-- Pilih Nominal -->
-            <div class="app-card p-4">
-                <label class="text-xs font-bold text-gray-500 block mb-2">PILIH NOMINAL</label>
-                <div id="nominalGrid" class="grid grid-cols-2 gap-3">
-                    <!-- Nominals injected via JS -->
+            <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-700">
+                <h4 class="font-semibold text-slate-200 mb-4 flex items-center gap-3">
+                    <span class="w-7 h-7 bg-indigo-600 text-white rounded-lg flex items-center justify-center text-xs font-bold shadow-lg shadow-indigo-500/30">2</span>
+                    Pilih Nominal Top Up
+                </h4>
+                
+                <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    <!-- Produk di-render JS -->
                 </div>
             </div>
 
+            <!-- Metode Pembayaran -->
+            <div class="bg-slate-800/50 p-5 rounded-xl border border-slate-700">
+                <h4 class="font-semibold text-slate-200 mb-4 flex items-center gap-3">
+                    <span class="w-7 h-7 bg-indigo-600 text-white rounded-lg flex items-center justify-center text-xs font-bold shadow-lg shadow-indigo-500/30">3</span>
+                    Pilih Pembayaran
+                </h4>
+                <div class="p-4 bg-slate-900/50 border border-dashed border-slate-700 rounded-lg text-center text-sm text-slate-500">
+                    Silakan pilih nominal terlebih dahulu
+                </div>
+            </div>
+            
             <!-- Tombol Beli -->
-            <button id="btnBuy" onclick="initiateCheckout()" disabled class="btn-primary w-full py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed">
-                Beli Sekarang
+            <button class="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.01] transition-all active:scale-95">
+                LANJUTKAN PEMBELIAN
             </button>
-        </div>
+        </section>
+
+    </main>
+
+    <!-- FLOATING ACTION BUTTONS -->
+    <div class="fixed bottom-6 right-4 flex flex-col gap-3 z-30">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="w-12 h-12 bg-indigo-600 text-white rounded-full shadow-lg shadow-indigo-900/50 flex items-center justify-center hover:bg-indigo-500 transition-colors border border-indigo-400/30" title="Kembali ke Atas">
+            <i class="fa-solid fa-chevron-up"></i>
+        </button>
+        <button class="w-12 h-12 bg-slate-800 text-indigo-400 border border-slate-700 rounded-full shadow-lg flex items-center justify-center hover:bg-slate-700 transition-colors" title="Hubungi CS">
+            <i class="fa-solid fa-headset text-xl"></i>
+        </button>
     </div>
 
-    <!-- PAGE: HISTORY (Hidden by default) -->
-    <div id="page-history" class="hidden px-4 pt-6 pb-24 absolute inset-0 bg-[#F3F4F6] z-30 overflow-y-auto">
-        <div class="flex items-center gap-3 mb-6">
-            <button onclick="showPage('home')" class="w-10 h-10 bg-white border-2 border-black rounded-xl flex items-center justify-center shadow-sm">
-                <i class="fa-solid fa-arrow-left"></i>
-            </button>
-            <h2 class="text-xl font-bold">Riwayat Transaksi</h2>
-        </div>
-        <div id="historyList" class="space-y-3"></div>
-        <div id="emptyHistory" class="text-center py-10 hidden">
-            <i class="fa-solid fa-receipt text-4xl text-gray-300 mb-3"></i>
-            <p class="text-gray-500 text-sm">Belum ada transaksi</p>
-        </div>
-    </div>
-
-    <!-- PAGE: PROFILE (Hidden by default) -->
-    <div id="page-profile" class="hidden px-4 pt-6 pb-24 absolute inset-0 bg-[#F3F4F6] z-30 overflow-y-auto">
-        <div class="flex items-center gap-3 mb-6">
-            <h2 class="text-xl font-bold ml-auto mr-auto">Profil Saya</h2>
-        </div>
-        <div class="app-card p-6 text-center mb-4">
-            <div class="w-20 h-20 bg-blue-100 rounded-full border-2 border-black mx-auto flex items-center justify-center text-3xl text-blue-600 mb-3">
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <h3 class="font-bold text-lg" id="accName">Guest User</h3>
-            <p class="text-sm text-gray-500" id="accWa">WhatsApp: -</p>
-        </div>
-        <div class="space-y-3">
-            <button onclick="showPage('history')" class="app-card w-full p-4 flex justify-between items-center hover:bg-gray-50">
-                <span class="font-bold text-sm">Riwayat Transaksi</span>
-                <i class="fa-solid fa-chevron-right text-gray-400"></i>
-            </button>
-            <button onclick="checkOrderManual()" class="app-card w-full p-4 flex justify-between items-center hover:bg-gray-50">
-                <span class="font-bold text-sm">Cek Order Manual</span>
-                <i class="fa-solid fa-search text-gray-400"></i>
-            </button>
-            <button onclick="logout()" class="app-card w-full p-4 flex justify-between items-center hover:bg-red-50 border-red-200">
-                <span class="font-bold text-sm text-red-500">Logout</span>
-                <i class="fa-solid fa-sign-out-alt text-red-500"></i>
-            </button>
-        </div>
-    </div>
-
-    <!-- 🧭 BOTTOM NAVIGATION -->
-    <nav class="fixed bottom-0 left-0 w-full bg-white border-t-2 border-black px-6 py-2 z-50 flex justify-between items-end pb-4 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
-        <a onclick="showPage('home')" class="nav-link flex flex-col items-center gap-1 text-blue-600 cursor-pointer" data-target="home">
-            <i class="fa-solid fa-house text-xl"></i>
-            <span class="text-[10px] font-bold">Home</span>
-        </a>
-        <a onclick="showPage('profile')" class="nav-link flex flex-col items-center gap-1 text-gray-400 cursor-pointer hover:text-blue-500" data-target="profile">
-            <i class="fa-solid fa-circle-info text-xl"></i>
-            <span class="text-[10px] font-medium">Info</span>
-        </a>
+    <!-- MODAL PEMILIHAN SERVER/LAYANAN -->
+    <div id="service-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
         
-        <!-- Center Button (QRIS) -->
-        <div class="relative">
-            <a onclick="showQRIS()" class="nav-float-btn cursor-pointer hover:scale-105 transition-transform">
-                <i class="fa-solid fa-qrcode"></i>
-            </a>
-        </div>
-
-        <a onclick="showPage('history')" class="nav-link flex flex-col items-center gap-1 text-gray-400 cursor-pointer hover:text-blue-500" data-target="history">
-            <i class="fa-solid fa-receipt text-xl"></i>
-            <span class="text-[10px] font-medium">Transaksi</span>
-        </a>
-        <a onclick="showPage('profile')" class="nav-link flex flex-col items-center gap-1 text-gray-400 cursor-pointer hover:text-blue-500" data-target="profile">
-            <i class="fa-solid fa-user text-xl"></i>
-            <span class="text-[10px] font-medium">Profil</span>
-        </a>
-    </nav>
-
-    <!-- MODAL PEMBAYARAN -->
-    <div class="modal-overlay" id="paymentModal">
-        <div class="modal-content">
-            <h3 class="font-bold text-lg mb-4 text-center border-b-2 border-black pb-2">Konfirmasi Pembayaran</h3>
-            <div class="bg-gray-50 p-3 rounded-xl border border-black mb-4 text-sm space-y-2">
-                <div class="flex justify-between"><span class="text-gray-500">Produk</span><span class="font-bold" id="payProduct">-</span></div>
-                <div class="flex justify-between"><span class="text-gray-500">Harga</span><span class="font-bold" id="payPrice">-</span></div>
-                <div class="flex justify-between text-base pt-2 border-t border-dashed border-gray-300"><span class="font-bold">Total</span><span class="font-bold text-blue-600" id="payTotal">-</span></div>
-            </div>
-            
-            <p class="text-xs font-bold text-gray-500 mb-2">METODE PEMBAYARAN</p>
-            <div class="grid grid-cols-3 gap-2 mb-4">
-                <div onclick="selectPayMethod(this, 'Saldo')" class="nominal-select selected pay-method">Saldo</div>
-                <div onclick="selectPayMethod(this, 'QRIS')" class="nominal-select pay-method">QRIS</div>
-                <div onclick="selectPayMethod(this, 'DANA')" class="nominal-select pay-method">DANA</div>
+        <div class="absolute bottom-0 left-0 right-0 md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[500px] md:bottom-auto bg-slate-800 md:rounded-2xl rounded-t-2xl p-6 modal-enter max-h-[80vh] overflow-y-auto border border-slate-700 shadow-2xl">
+            <div class="flex justify-between items-start mb-6">
+                <div class="text-center w-full pr-8">
+                    <h2 id="modal-title" class="text-2xl font-bold text-indigo-400 mb-1 uppercase" style="font-family: 'Orbitron', sans-serif;">GAME TITLE</h2>
+                    <p id="modal-subtitle" class="text-sm text-slate-400">Pilih layanan yang kamu butuhkan</p>
+                </div>
+                <button onclick="closeModal()" class="w-8 h-8 bg-slate-700 text-slate-300 rounded-full flex items-center justify-center hover:bg-red-500/20 hover:text-red-400 transition-colors shrink-0 absolute top-4 right-4">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
 
-            <button onclick="processPayment()" class="btn-primary w-full py-3">Bayar Sekarang</button>
-            <button onclick="closeModal()" class="w-full py-3 mt-2 text-sm font-bold text-gray-500 hover:text-black">Batal</button>
+            <div id="modal-options" class="space-y-3">
+                <!-- Opsi di-render JS -->
+            </div>
         </div>
     </div>
 
-    <!-- MODAL QRIS -->
-    <div class="modal-overlay" id="qrisModal" onclick="this.classList.remove('open')">
-        <div class="modal-content text-center" onclick="event.stopPropagation()">
-            <h3 class="font-bold text-lg mb-2">Scan QRIS RYUDIA</h3>
-            <img src="https://placehold.co/300x300/1e1e2f/7c3aed?text=QRIS+CODE" alt="QRIS" class="w-full rounded-xl border-2 border-black mb-3">
-            <p class="text-xs text-gray-500 mb-4">Support: DANA, OVO, GoPay, ShopeePay, M-Banking</p>
-            <button onclick="document.getElementById('qrisModal').classList.remove('open')" class="btn-primary w-full py-2">Tutup</button>
-        </div>
-    </div>
-
-</div>
-
-<script>
-    // --- DATA & STATE MANAGEMENT ---
-    let balance = parseInt(localStorage.getItem('ryudia_balance')) || 0;
-    let transactions = JSON.parse(localStorage.getItem('ryudia_transactions')) || [];
-    let smmStock = JSON.parse(localStorage.getItem('ryudia_smm_stock')) || {};
-    let currentOrder = null;
-    let selectedPayMethod = 'Saldo';
-    let activeService = '';
-    let selectedNominal = null;
-
-    // Initialize Default SMM Stock if empty
-    if(Object.keys(smmStock).length === 0) {
-        ['tiktok_followers','tiktok_likes','ig_followers','ig_likes','yt_views'].forEach(k => smmStock[k] = 10000000);
-        localStorage.setItem('ryudia_smm_stock', JSON.stringify(smmStock));
-    }
-
-    // Product Configuration
-    const products = {
-        game: { title: 'Top Up Game', operators: ['Mobile Legends', 'Free Fire', 'PUBG Mobile', 'Roblox', 'Genshin Impact', 'Valorant'], nominals: [{n:'86 DM', p:15000}, {n:'172 DM', p:28000}, {n:'344 DM', p:52000}, {n:'706 DM', p:100000}] },
-        pulsa: { title: 'Pulsa & Paket Data', operators: ['Telkomsel', 'Indosat', 'XL', 'AXIS', 'Tri', 'Smartfren'], nominals: [5000, 10000, 20000, 50000, 100000] },
-        pln: { title: 'Token Listrik', operators: ['PLN Prepaid'], nominals: [20000, 50000, 100000, 200000, 500000] },
-        sosmed: { title: 'SMM / Suntik Sosmed', operators: ['TikTok', 'Instagram', 'YouTube', 'Facebook'], nominals: [{n:'100 Followers', p:15000, key:'followers'}, {n:'500 Likes', p:10000, key:'likes'}, {n:'1000 Views', p:5000, key:'views'}] },
-        rekber: { title: 'Jasa MC / Rekber', operators: ['Rekber Transaksi'], nominals: [{n:'Hubungi Admin', p:0}] }
-    };
-
-    // --- INITIALIZATION ---
-    document.addEventListener('DOMContentLoaded', () => {
-        updateBalanceUI();
-        renderHistory();
-        startLiveFeed();
-        
-        // Check User
-        if(!localStorage.getItem('ryudia_user')) {
-            const name = prompt("Selamat datang di RYUDIA! Masukkan nama Anda:") || "User";
-            const wa = prompt("Masukkan nomor WhatsApp:") || "";
-            localStorage.setItem('ryudia_user', JSON.stringify({name, wa}));
-        }
-        loadUserProfile();
-    });
-
-    function loadUserProfile() {
-        const user = JSON.parse(localStorage.getItem('ryudia_user'));
-        if(user) { 
-            document.getElementById('accName').textContent = user.name; 
-            document.getElementById('accWa').textContent = `WhatsApp: ${user.wa || '-'}`; 
-        }
-    }
-
-    function updateBalanceUI() {
-        const fmt = new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR', minimumFractionDigits:0}).format(balance);
-        document.getElementById('displayBalance').textContent = fmt;
-        
-        const successTrx = transactions.filter(t => t.status === 'Sukses');
-        document.getElementById('totalTrxCount').textContent = successTrx.length;
-        document.getElementById('statSuccess').textContent = successTrx.length;
-    }
-
-    // --- NAVIGATION LOGIC ---
-    function showPage(pageId) {
-        // Hide all pages
-        document.getElementById('mainContent').classList.add('hidden');
-        document.getElementById('page-products').classList.add('hidden');
-        document.getElementById('page-history').classList.add('hidden');
-        document.getElementById('page-profile').classList.add('hidden');
-
-        // Show selected
-        if(pageId === 'home') document.getElementById('mainContent').classList.remove('hidden');
-        else document.getElementById(`page-${pageId}`).classList.remove('hidden');
-
-        // Update Nav Active State
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('text-blue-600');
-            link.classList.add('text-gray-400');
-            if(link.dataset.target === pageId) {
-                link.classList.add('text-blue-600');
-                link.classList.remove('text-gray-400');
-            }
-        });
-        window.scrollTo(0,0);
-    }
-
-    // --- SERVICE & FORM LOGIC ---
-    function openService(type) {
-        activeService = type;
-        const data = products[type];
-        if(!data) return showToast('Layanan belum tersedia');
-
-        document.getElementById('productTitle').textContent = data.title;
-        
-        // Populate Operators
-        const opSelect = document.getElementById('inpOperator');
-        opSelect.innerHTML = data.operators.map(o => `<option value="${o}">${o}</option>`).join('');
-        
-        // Reset Inputs
-        document.getElementById('inpTarget').value = '';
-        document.getElementById('btnBuy').disabled = true;
-        selectedNominal = null;
-        
-        showPage('products');
-        renderNominals();
-    }
-
-    function closeProductPage() {
-        showPage('home');
-    }
-
-    function renderNominals() {
-        const data = products[activeService];
-        const grid = document.getElementById('nominalGrid');
-        grid.innerHTML = '';
-        
-        data.nominals.forEach((item) => {
-            const val = typeof item === 'object' ? item.n : `${new Intl.NumberFormat('id-ID').format(item)}`;
-            const price = typeof item === 'object' ? item.p : item + Math.round(item * 0.05); // Admin fee simulation
-            
-            const div = document.createElement('div');
-            div.className = 'nominal-select';
-            div.dataset.price = Math.round(price);
-            div.dataset.label = val;
-            div.onclick = function() { selectNominal(this); };
-            div.innerHTML = `<div class="font-bold text-sm">${val}</div><div class="text-[10px] text-gray-500">Rp ${new Intl.NumberFormat('id-ID').format(Math.round(price))}</div>`;
-            grid.appendChild(div);
-        });
-    }
-
-    function selectNominal(el) {
-        document.querySelectorAll('.nominal-select').forEach(b => b.classList.remove('selected'));
-        el.classList.add('selected');
-        selectedNominal = el;
-        validateForm();
-    }
-
-    function validateForm() {
-        const target = document.getElementById('inpTarget').value;
-        document.getElementById('btnBuy').disabled = !(target.length > 3 && selectedNominal);
-    }
-
-    // --- CHECKOUT SYSTEM ---
-    function initiateCheckout() {
-        const target = document.getElementById('inpTarget').value;
-        const operator = document.getElementById('inpOperator').value;
-        const price = parseInt(selectedNominal.dataset.price);
-        const label = selectedNominal.dataset.label;
-
-        // Check SMM Stock
-        if(activeService === 'sosmed') {
-            const op = operator.toLowerCase();
-            const key = label.includes('Followers') ? 'followers' : label.includes('Likes') ? 'likes' : 'views';
-            const stockKey = `${op}_${key}`;
-            const qty = parseInt(label.match(/\d+/)[0]);
-            if((smmStock[stockKey] || 0) < qty) { showToast('❌ Stok tidak mencukupi!'); return; }
-        }
-
-        currentOrder = { 
-            id: 'RYD-' + Date.now().toString().slice(-8), 
-            product: `${operator} ${label}`, 
-            target, 
-            price, 
-            status: 'Pending', 
-            time: new Date().toLocaleString('id-ID') 
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Data Dummy Produk
+        const productsData = {
+            mlbb: [
+                { name: "5 Diamonds", price: "Rp 1.500", bonus: null },
+                { name: "12 Diamonds", price: "Rp 3.500", bonus: "(11 + 1 Bonus)" },
+                { name: "50 Diamonds", price: "Rp 14.000", bonus: null },
+                { name: "70 Diamonds", price: "Rp 19.500", bonus: null },
+                { name: "140 Diamonds", price: "Rp 38.000", bonus: "(130 + 10 Bonus)" },
+                { name: "355 Diamonds", price: "Rp 95.000", bonus: "(330 + 25 Bonus)" },
+            ],
+            freefire: [
+                { name: "5 Diamonds", price: "Rp 864", bonus: null },
+                { name: "12 Diamonds", price: "Rp 1.831", bonus: null },
+                { name: "70 Diamonds", price: "Rp 9.153", bonus: null },
+                { name: "140 Diamonds", price: "Rp 18.306", bonus: null },
+            ],
+            hok: [
+                { name: "16 Tokens", price: "Rp 3.241", bonus: null },
+                { name: "80 Tokens", price: "Rp 16.206", bonus: null },
+                { name: "830 Tokens", price: "Rp 163.389", bonus: "(800+30)" },
+            ]
         };
-        
-        document.getElementById('payProduct').textContent = currentOrder.product;
-        document.getElementById('payPrice').textContent = formatRupiah(price);
-        document.getElementById('payTotal').textContent = formatRupiah(price);
-        document.getElementById('paymentModal').classList.add('open');
-    }
 
-    function selectPayMethod(el, method) {
-        document.querySelectorAll('.pay-method').forEach(b => b.classList.remove('selected'));
-        el.classList.add('selected');
-        selectedPayMethod = method;
-    }
+        let currentGame = '';
 
-    function processPayment() {
-        const price = currentOrder.price;
+        function openServiceModal(game) {
+            currentGame = game;
+            const modal = document.getElementById('service-modal');
+            const title = document.getElementById('modal-title');
+            const subtitle = document.getElementById('modal-subtitle');
+            const optionsContainer = document.getElementById('modal-options');
+            
+            modal.classList.remove('hidden');
+            optionsContainer.innerHTML = ''; 
 
-        if(selectedPayMethod === 'Saldo') {
-            if(balance < price) { showToast('Saldo tidak mencukupi! Silakan Top Up.'); return; }
-            balance -= price;
-        } else if (selectedPayMethod === 'QRIS') {
-            document.getElementById('paymentModal').classList.remove('open');
-            document.getElementById('qrisModal').classList.add('open');
-            // Simulate waiting for payment
+            switch(game) {
+                case 'mlbb':
+                    title.innerText = 'MOBILE LEGENDS';
+                    subtitle.innerText = 'Pilih server Mobile Legends';
+                    optionsContainer.innerHTML = `
+                        <button onclick="selectService('ml-id')" class="w-full flex items-center gap-4 p-4 bg-slate-900 border border-slate-700 rounded-xl hover:border-indigo-500 hover:bg-slate-800 transition-all text-left group">
+                            <div class="w-14 h-14 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400 text-xl"><i class="fa-solid fa-shield-cat"></i></div>
+                            <div>
+                                <h4 class="font-bold text-slate-200 group-hover:text-indigo-400">MOBILE LEGENDS ID</h4>
+                                <p class="text-xs text-slate-500 mt-1">Server Indonesia</p>
+                            </div>
+                        </button>
+                        <button onclick="selectService('ml-global')" class="w-full flex items-center gap-4 p-4 bg-slate-900 border border-slate-700 rounded-xl hover:border-indigo-500 hover:bg-slate-800 transition-all text-left group">
+                            <div class="w-14 h-14 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400 text-xl"><i class="fa-solid fa-globe"></i></div>
+                            <div>
+                                <h4 class="font-bold text-slate-200 group-hover:text-indigo-400">Mobile Legends Global</h4>
+                                <p class="text-xs text-slate-500 mt-1">Server Luar Negeri</p>
+                            </div>
+                        </button>
+                    `;
+                    break;
+                    
+                case 'freefire':
+                    title.innerText = 'FREE FIRE';
+                    subtitle.innerText = 'Pilih versi Free Fire';
+                    optionsContainer.innerHTML = `
+                        <button onclick="selectService('ff-reg')" class="w-full flex items-center gap-4 p-4 bg-slate-900 border border-slate-700 rounded-xl hover:border-indigo-500 hover:bg-slate-800 transition-all text-left group">
+                            <div class="w-14 h-14 rounded-lg bg-orange-500/20 flex items-center justify-center text-orange-400 text-xl"><i class="fa-solid fa-fire"></i></div>
+                            <div>
+                                <h4 class="font-bold text-slate-200 group-hover:text-indigo-400">FREE FIRE</h4>
+                                <p class="text-xs text-slate-500 mt-1">Versi Reguler</p>
+                            </div>
+                        </button>
+                        <button onclick="selectService('ff-max')" class="w-full flex items-center gap-4 p-4 bg-slate-900 border border-slate-700 rounded-xl hover:border-indigo-500 hover:bg-slate-800 transition-all text-left group">
+                            <div class="w-14 h-14 rounded-lg bg-red-500/20 flex items-center justify-center text-red-400 text-xl"><i class="fa-solid fa-bolt"></i></div>
+                            <div>
+                                <h4 class="font-bold text-slate-200 group-hover:text-indigo-400">FREE FIRE MAX</h4>
+                                <p class="text-xs text-slate-500 mt-1">Versi HD / Max</p>
+                            </div>
+                        </button>
+                    `;
+                    break;
+
+                case 'roblox':
+                    title.innerText = 'ROBLOX';
+                    subtitle.innerText = 'Pilih metode top up Roblox';
+                    optionsContainer.innerHTML = `
+                        <button onclick="selectService('roblox-gc')" class="w-full flex items-center gap-4 p-4 bg-slate-900 border border-slate-700 rounded-xl hover:border-indigo-500 hover:bg-slate-800 transition-all text-left group">
+                            <div class="w-14 h-14 rounded-lg bg-gray-500/20 flex items-center justify-center text-gray-300 text-xl"><i class="fa-solid fa-ticket"></i></div>
+                            <div>
+                                <h4 class="font-bold text-slate-200 group-hover:text-indigo-400">ROBLOX GIFTCARD</h4>
+                                <p class="text-xs text-slate-500 mt-1">Kode Voucher Resmi</p>
+                            </div>
+                        </button>
+                        <button onclick="selectService('roblox-login')" class="w-full flex items-center gap-4 p-4 bg-slate-900 border border-slate-700 rounded-xl hover:border-indigo-500 hover:bg-slate-800 transition-all text-left group">
+                            <div class="w-14 h-14 rounded-lg bg-gray-500/20 flex items-center justify-center text-gray-300 text-xl"><i class="fa-solid fa-key"></i></div>
+                            <div>
+                                <h4 class="font-bold text-slate-200 group-hover:text-indigo-400">ROBLOX VIA LOGIN</h4>
+                                <p class="text-xs text-slate-500 mt-1">Top up langsung ke akun</p>
+                            </div>
+                        </button>
+                    `;
+                    break;
+
+                default:
+                    selectService(game);
+                    return;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('service-modal').classList.add('hidden');
+        }
+
+        function selectService(serviceType) {
+            closeModal();
+            const section = document.getElementById('topup-section');
+            const title = document.getElementById('selected-game-title');
+            const grid = document.getElementById('product-grid');
+            
+            section.classList.remove('hidden');
+            
+            const gameNames = {
+                'mlbb': 'Mobile Legends', 'ml-id': 'Mobile Legends ID', 'ml-global': 'ML Global',
+                'freefire': 'Free Fire', 'ff-reg': 'Free Fire', 'ff-max': 'Free Fire Max',
+                'roblox': 'Roblox', 'roblox-gc': 'Roblox Giftcard', 'roblox-login': 'Roblox Login',
+                'pubg': 'PUBG Mobile', 'genshin': 'Genshin Impact', 'valorant': 'Valorant',
+                'hok': 'Honor of Kings', 'tiktok': 'TikTok Services'
+            };
+            title.innerText = `TOP UP ${gameNames[serviceType] || serviceType.toUpperCase()}`;
+            
+            const products = productsData[currentGame] || productsData['mlbb'];
+            
+            grid.innerHTML = products.map((prod) => `
+                <div onclick="selectProduct(this)" class="product-card cursor-pointer p-4 rounded-xl relative group">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="font-bold text-slate-200 text-sm leading-tight">${prod.name}</h4>
+                        <i class="fa-regular fa-circle-check text-slate-600 group-hover:text-indigo-400 check-icon transition-colors"></i>
+                    </div>
+                    ${prod.bonus ? `<p class="text-[10px] text-slate-500 mb-2">${prod.bonus}</p>` : '<div class="mb-2"></div>'}
+                    <p class="text-indigo-400 font-bold text-sm">${prod.price}</p>
+                </div>
+            `).join('');
+
             setTimeout(() => {
-                document.getElementById('qrisModal').classList.remove('open');
-                finalizeTransaction();
-            }, 3000);
-            return;
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
         }
 
-        finalizeTransaction();
-    }
-
-    function finalizeTransaction() {
-        closeModal();
-        
-        // Update Stock if SMM
-        if(activeService === 'sosmed') {
-            const label = currentOrder.product.split(' ').pop(); // Simple parsing
-            const op = currentOrder.product.split(' ')[0].toLowerCase();
-            const key = label.includes('Followers') ? 'followers' : label.includes('Likes') ? 'likes' : 'views';
-            const qty = parseInt(label.match(/\d+/)[0]);
-            smmStock[`${op}_${key}`] -= qty;
-            localStorage.setItem('ryudia_smm_stock', JSON.stringify(smmStock));
+        function selectProduct(element) {
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.classList.remove('active');
+                card.querySelector('.check-icon').classList.remove('fa-solid', 'text-indigo-400');
+                card.querySelector('.check-icon').classList.add('fa-regular', 'text-slate-600');
+            });
+            
+            element.classList.add('active');
+            element.querySelector('.check-icon').classList.remove('fa-regular', 'text-slate-600');
+            element.querySelector('.check-icon').classList.add('fa-solid', 'text-indigo-400');
         }
 
-        if(selectedPayMethod === 'Saldo') {
-            localStorage.setItem('ryudia_balance', balance);
-            updateBalanceUI();
+        function resetSelection() {
+            document.getElementById('topup-section').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        currentOrder.status = 'Sukses';
-        currentOrder.method = selectedPayMethod;
-        transactions.unshift(currentOrder);
-        localStorage.setItem('ryudia_transactions', JSON.stringify(transactions));
-        
-        renderHistory();
-        showToast('Pembayaran Berhasil! ✅');
-        
-        // Send WA Invoice Logic could go here
-    }
-
-    function closeModal() { document.getElementById('paymentModal').classList.remove('open'); }
-    function showQRIS() { document.getElementById('qrisModal').classList.add('open'); }
-
-    // --- UTILITIES ---
-    function topUpSaldo() {
-        const amount = prompt("Masukkan nominal Top Up (DEMO):", "50000");
-        if(amount && !isNaN(amount)) {
-            balance += parseInt(amount);
-            localStorage.setItem('ryudia_balance', balance);
-            updateBalanceUI();
-            showToast(`Top Up Rp ${parseInt(amount).toLocaleString('id-ID')} Berhasil!`);
-        }
-    }
-
-    function renderHistory() {
-        const container = document.getElementById('historyList');
-        const empty = document.getElementById('emptyHistory');
-        
-        if(transactions.length === 0) { 
-            container.innerHTML = ''; 
-            empty.classList.remove('hidden'); 
-            return; 
-        }
-        
-        empty.classList.add('hidden');
-        container.innerHTML = transactions.map(t => `
-            <div class="app-card p-4 flex justify-between items-center">
-                <div>
-                    <h4 class="font-bold text-sm text-gray-800">${t.product}</h4>
-                    <p class="text-[10px] text-gray-500">${t.time} • ${t.id}</p>
-                </div>
-                <div class="text-right">
-                    <div class="font-bold text-sm text-gray-800">${formatRupiah(t.price)}</div>
-                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${t.status === 'Sukses' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'}">${t.status}</span>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function formatRupiah(num) {
-        return new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR', minimumFractionDigits:0}).format(num);
-    }
-
-    function showToast(msg) {
-        const t = document.getElementById('toast');
-        t.textContent = msg;
-        t.classList.add('show');
-        setTimeout(() => t.classList.remove('show'), 3000);
-    }
-
-    function checkOrderManual() {
-        const id = prompt("Masukkan ID Order (RYD-XXXXXXXX):");
-        if(id) {
-            const found = transactions.find(t => t.id === id);
-            if(found) alert(`Status: ${found.status}\nProduk: ${found.product}`);
-            else alert("Order tidak ditemukan.");
-        }
-    }
-
-    function toggleAdminLogin() {
-        const pass = prompt("Password Admin:");
-        if(pass === 'ryudia2026') {
-            alert(`Admin Login Berhasil!\nTotal Transaksi: ${transactions.length}\nStok TikTok Followers: ${smmStock['tiktok_followers']}`);
-        } else if(pass) showToast('Password Salah!');
-    }
-
-    function logout() {
-        if(confirm('Reset semua data lokal?')) {
-            localStorage.clear();
-            location.reload();
-        }
-    }
-
-    // Live Feed Simulation
-    function startLiveFeed() {
-        const names = ["Ahmad", "Budi", "Siti", "Rina", "Doni"];
-        const prods = ["100 Diamonds ML", "25k Pulsa Telkomsel", "1k TikTok Followers"];
-        
-        setInterval(() => {
-            const name = names[Math.floor(Math.random() * names.length)];
-            const prod = prods[Math.floor(Math.random() * prods.length)];
-            const feed = document.getElementById('liveFeed');
-            feed.innerHTML = `
-                <div class="bg-blue-100 p-2 rounded-full border border-black text-blue-600 animate-pulse">
-                    <i class="fa-solid fa-bolt"></i>
-                </div>
-                <div class="flex-1">
-                    <p class="text-xs font-bold text-gray-800">${name.charAt(0)}*** baru saja membeli</p>
-                    <p class="text-[10px] text-gray-500">${prod}</p>
-                </div>
-            `;
-        }, 8000);
-    }
-</script>
-
+    </script>
 </body>
 </html>
