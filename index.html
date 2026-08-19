@@ -8,10 +8,8 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <!-- Google Fonts: Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -165,10 +163,10 @@
         </div>
         <div class="flex justify-between items-center relative z-10">
             <div class="flex items-center gap-3">
-                <!-- LOGO R FUTURISTIK DI KIRI ATAS -->
+                <!-- 📸 FOTO 1: LOGO DI KIRI ATAS -->
+                <!-- Ganti 'logo-ryudia.png' dengan nama file logo Anda -->
                 <div class="w-10 h-10 bg-white rounded-full border-2 border-black flex items-center justify-center overflow-hidden p-1">
-                    <!-- Ganti src dengan path file logo R asli Anda -->
-                    <img src="https://i.imgur.com/placeholder-R-logo.png" alt="R Logo" class="w-full h-full object-contain logo-r-glow">
+                    <img src="logo-ryudia.png" alt="Ryudia Logo" class="w-full h-full object-contain logo-r-glow">
                 </div>
                 <div>
                     <p class="text-xs font-medium opacity-90">Selamat datang,</p>
@@ -234,7 +232,7 @@
             </a>
         </div>
 
-        <!-- 📊 STATISTIK -->
+        <!--  STATISTIK -->
         <div class="app-card p-4 flex justify-around items-center text-center">
             <div>
                 <p class="text-xl font-bold text-blue-600">2.524</p>
@@ -252,7 +250,7 @@
             </div>
         </div>
 
-        <!-- 📢 ANNOUNCEMENT -->
+        <!--  ANNOUNCEMENT -->
         <div class="bg-yellow-50 border-2 border-black rounded-2xl p-3 flex items-start gap-3 shadow-sm">
             <div class="bg-yellow-400 p-2 rounded-lg border border-black shrink-0">
                 <i class="fa-solid fa-bullhorn text-black"></i>
@@ -324,6 +322,13 @@
                     <i class="fa-brands fa-instagram text-2xl text-pink-600"></i>
                     <h3 class="font-bold text-sm">Instagram</h3>
                     <p class="text-[9px] text-gray-500">Like, Follow, View</p>
+                </div>
+
+                <!-- WA Channel -->
+                <div onclick="openServiceModal('wa_channel')" class="app-card p-4 flex flex-col items-center text-center gap-2 cursor-pointer hover:bg-gray-50">
+                    <i class="fa-brands fa-whatsapp text-2xl text-green-600"></i>
+                    <h3 class="font-bold text-sm">WA Channel</h3>
+                    <p class="text-[9px] text-gray-500">Pengikut Saluran</p>
                 </div>
 
                 <!-- Pulsa & Data (Existing) -->
@@ -445,7 +450,7 @@
         </div>
     </div>
 
-    <!-- 🧭 BOTTOM NAVIGATION -->
+    <!--  BOTTOM NAVIGATION -->
     <nav class="fixed bottom-0 left-0 w-full bg-white border-t-2 border-black px-6 py-2 z-50 flex justify-between items-end pb-4 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
         <a onclick="showPage('home')" class="nav-link flex flex-col items-center gap-1 text-blue-600 cursor-pointer" data-target="home">
             <i class="fa-solid fa-house text-xl"></i>
@@ -511,11 +516,12 @@
         </div>
     </div>
 
-    <!-- MODAL QRIS -->
+    <!-- 📸 FOTO 2: MODAL QRIS -->
     <div class="modal-overlay" id="qrisModal" onclick="this.classList.remove('open')">
         <div class="modal-content text-center" onclick="event.stopPropagation()">
             <h3 class="font-bold text-lg mb-2">Scan QRIS RYUDIA</h3>
-            <img src="https://placehold.co/300x300/1e1e2f/7c3aed?text=QRIS+CODE" alt="QRIS" class="w-full rounded-xl border-2 border-black mb-3">
+            <!-- Ganti 'qris-code.jpg' dengan nama file gambar QRIS Anda -->
+            <img src="qris-code.jpg" alt="QRIS Code" class="w-full rounded-xl border-2 border-black mb-3 object-cover">
             <p class="text-xs text-gray-500 mb-4">Support: DANA, OVO, GoPay, ShopeePay, M-Banking</p>
             <button onclick="document.getElementById('qrisModal').classList.remove('open')" class="btn-primary w-full py-2">Tutup</button>
         </div>
@@ -535,20 +541,107 @@
 
     // Initialize Default SMM Stock if empty
     if(Object.keys(smmStock).length === 0) {
-        ['tiktok_followers','tiktok_likes','ig_followers','ig_likes','yt_views'].forEach(k => smmStock[k] = 10000000);
+        ['tiktok_followers','tiktok_likes','tiktok_views','ig_followers','ig_likes','ig_views','wa_followers'].forEach(k => smmStock[k] = 10000000);
         localStorage.setItem('ryudia_smm_stock', JSON.stringify(smmStock));
     }
 
-    // Product Configuration (Updated with full game list)
+    // Product Configuration (UPDATED WITH ALL REQUESTED PRICES)
     const products = {
-        mlbb: { title: 'Mobile Legends', operators: ['Mobile Legends ID', 'Mobile Legends Global'], nominals: [{n:'5 DM', p:1500}, {n:'12 DM', p:3500}, {n:'50 DM', p:14000}, {n:'70 DM', p:19500}, {n:'140 DM', p:38000}] },
-        freefire: { title: 'Free Fire', operators: ['Free Fire Regular', 'Free Fire Max'], nominals: [{n:'5 DM', p:864}, {n:'12 DM', p:1831}, {n:'70 DM', p:9153}, {n:'140 DM', p:18306}] },
-        pubg: { title: 'PUBG Mobile', operators: ['PUBG Mobile'], nominals: [{n:'60 UC', p:14000}, {n:'325 UC', p:70000}, {n:'660 UC', p:140000}] },
-        genshin: { title: 'Genshin Impact', operators: ['Genshin Impact'], nominals: [{n:'60 GC', p:16000}, {n:'300 GC', p:79000}, {n:'980 GC', p:249000}] },
-        valorant: { title: 'Valorant', operators: ['Valorant Points'], nominals: [{n:'125 VP', p:15000}, {n:'420 VP', p:50000}, {n:'700 VP', p:80000}] },
-        roblox: { title: 'Roblox', operators: ['Roblox Giftcard', 'Roblox Via Login'], nominals: [{n:'80 Robux', p:15000}, {n:'400 Robux', p:75000}, {n:'800 Robux', p:145000}] },
-        tiktok: { title: 'TikTok Services', operators: ['TikTok Followers', 'TikTok Likes', 'TikTok Views'], nominals: [{n:'100 Followers', p:15000, key:'followers'}, {n:'500 Likes', p:10000, key:'likes'}, {n:'1000 Views', p:5000, key:'views'}] },
-        instagram: { title: 'Instagram Services', operators: ['IG Followers', 'IG Likes', 'IG Views'], nominals: [{n:'100 Followers', p:12000, key:'followers'}, {n:'500 Likes', p:8000, key:'likes'}, {n:'1000 Views', p:4000, key:'views'}] },
+        mlbb: { 
+            title: '⚔️ MOBILE LEGENDS', 
+            operators: ['Mobile Legends ID', 'Mobile Legends Global'], 
+            nominals: [
+                {n:'5 💎', p:2000}, {n:'12 💎', p:3000}, {n:'28 ', p:7000}, 
+                {n:'59 💎', p:14000}, {n:'85 💎', p:20000}, {n:'170 💎', p:38000}, 
+                {n:'296 💎', p:65000}, {n:'568 💎', p:125000}
+            ] 
+        },
+        freefire: { 
+            title: '🔥 FREE FIRE', 
+            operators: ['Free Fire Regular', 'Free Fire Max'], 
+            nominals: [
+                {n:'5 💎', p:2000}, {n:'12 💎', p:3000}, {n:'50 💎', p:9000}, 
+                {n:'70 💎', p:12000}, {n:'140 💎', p:22000}, {n:'355 ', p:52000}, 
+                {n:'720 💎', p:100000}
+            ] 
+        },
+        pubg: { 
+            title: ' PUBG MOBILE', 
+            operators: ['PUBG Mobile'], 
+            nominals: [
+                {n:'60 UC', p:15000}, {n:'325 UC', p:70000}, {n:'660 UC', p:140000}, 
+                {n:'1.800 UC', p:370000}, {n:'3.850 UC', p:750000}
+            ] 
+        },
+        genshin: { 
+            title: '✨ GENSHIN IMPACT', 
+            operators: ['Genshin Impact'], 
+            nominals: [
+                {n:'60 Genesis', p:15000}, {n:'300 Genesis', p:65000}, {n:'980 Genesis', p:190000}, 
+                {n:'1.980 Genesis', p:390000}, {n:'3.280 Genesis', p:620000}, {n:'6.480 Genesis', p:1200000}
+            ] 
+        },
+        valorant: { 
+            title: '🎯 VALORANT', 
+            operators: ['Valorant Points'], 
+            nominals: [
+                {n:'475 VP', p:50000}, {n:'1.000 VP', p:100000}, {n:'2.050 VP', p:200000}, 
+                {n:'3.650 VP', p:350000}, {n:'5.350 VP', p:500000}, {n:'11.000 VP', p:1000000}
+            ] 
+        },
+        roblox: { 
+            title: '🟦 ROBLOX', 
+            operators: ['Roblox Giftcard', 'Roblox Via Login'], 
+            nominals: [
+                {n:'80 Robux', p:15000}, {n:'160 Robux', p:28000}, {n:'240 Robux', p:40000}, 
+                {n:'400 Robux', p:65000}, {n:'800 Robux', p:125000}, {n:'1.700 Robux', p:260000}
+            ] 
+        },
+        tiktok: { 
+            title: '🎵 TIKTOK SERVICES', 
+            operators: ['❤️ Like TikTok', '👥 Followers TikTok', '👁️ View TikTok'], 
+            nominals: [
+                // Likes
+                {n:'100 Like', p:300, key:'likes'}, {n:'200 Like', p:500, key:'likes'}, 
+                {n:'300 Like', p:700, key:'likes'}, {n:'400 Like', p:900, key:'likes'}, 
+                {n:'500 Like', p:1200, key:'likes'},
+                // Followers
+                {n:'100 Followers', p:7000, key:'followers'}, {n:'200 Followers', p:15000, key:'followers'}, 
+                {n:'300 Followers', p:23000, key:'followers'}, {n:'400 Followers', p:31000, key:'followers'}, 
+                {n:'500 Followers', p:39000, key:'followers'}, {n:'1.000 Followers', p:58000, key:'followers'},
+                // Views
+                {n:'1.000 View', p:500, key:'views'}, {n:'2.000 View', p:1000, key:'views'}, 
+                {n:'3.000 View', p:1500, key:'views'}, {n:'4.000 View', p:2000, key:'views'}, 
+                {n:'5.000 View', p:2500, key:'views'}
+            ] 
+        },
+        instagram: { 
+            title: '📸 INSTAGRAM SERVICES', 
+            operators: ['❤️ Like Instagram', '👥 Followers Instagram', '👁️ View Instagram'], 
+            nominals: [
+                // Likes
+                {n:'100 Like', p:700, key:'likes'}, {n:'200 Like', p:1400, key:'likes'}, 
+                {n:'300 Like', p:2100, key:'likes'}, {n:'400 Like', p:2800, key:'likes'}, 
+                {n:'500 Like', p:3500, key:'likes'},
+                // Followers
+                {n:'100 Followers', p:6000, key:'followers'}, {n:'200 Followers', p:13000, key:'followers'}, 
+                {n:'300 Followers', p:20000, key:'followers'}, {n:'400 Followers', p:26000, key:'followers'}, 
+                {n:'500 Followers', p:33000, key:'followers'}, {n:'1.000 Followers', p:47000, key:'followers'},
+                // Views
+                {n:'1.000 View', p:70, key:'views'}, {n:'2.000 View', p:140, key:'views'}, 
+                {n:'3.000 View', p:210, key:'views'}, {n:'4.000 View', p:290, key:'views'}, 
+                {n:'5.000 View', p:360, key:'views'}
+            ] 
+        },
+        wa_channel: {
+            title: '💬 PENGUKUT SALURAN WA',
+            operators: ['WhatsApp Channel'],
+            nominals: [
+                {n:'100 Pengikut', p:8000, key:'followers'}, {n:'200 Pengikut', p:16000, key:'followers'}, 
+                {n:'300 Pengikut', p:24000, key:'followers'}, {n:'400 Pengikut', p:26000, key:'followers'}, 
+                {n:'500 Pengikut', p:40000, key:'followers'}, {n:'1.000 Pengikut', p:60000, key:'followers'}
+            ]
+        },
         pulsa: { title: 'Pulsa & Paket Data', operators: ['Telkomsel', 'Indosat', 'XL', 'AXIS', 'Tri', 'Smartfren'], nominals: [5000, 10000, 20000, 50000, 100000] },
         pln: { title: 'Token Listrik', operators: ['PLN Prepaid'], nominals: [20000, 50000, 100000, 200000, 500000] },
         rekber: { title: 'Jasa MC / Rekber', operators: ['Rekber Transaksi'], nominals: [{n:'Hubungi Admin', p:0}] }
@@ -686,7 +779,7 @@
                 break;
 
             default:
-                // Untuk game tanpa pilihan server (PUBG, Genshin, Valorant, TikTok, IG, Pulsa, PLN)
+                // Untuk game tanpa pilihan server (PUBG, Genshin, Valorant, TikTok, IG, WA, Pulsa, PLN)
                 selectServiceFromModal(game);
                 return;
         }
@@ -770,9 +863,9 @@
         const label = selectedNominal.dataset.label;
 
         // Check SMM Stock
-        if(['tiktok', 'instagram'].includes(activeService)) {
-            const op = operator.toLowerCase().split(' ')[0]; // Get first word (tiktok/ig)
-            const key = label.includes('Followers') ? 'followers' : label.includes('Likes') ? 'likes' : 'views';
+        if(['tiktok', 'instagram', 'wa_channel'].includes(activeService)) {
+            const op = operator.toLowerCase().split(' ')[0]; // Get first word
+            const key = selectedNominal.dataset.key || 'followers';
             const stockKey = `${op}_${key}`;
             const qty = parseInt(label.match(/\d+/)[0]);
             if((smmStock[stockKey] || 0) < qty) { showToast('❌ Stok tidak mencukupi!'); return; }
@@ -823,10 +916,10 @@
         closeModal();
         
         // Update Stock if SMM
-        if(['tiktok', 'instagram'].includes(activeService)) {
-            const label = currentOrder.product.split(' ').pop(); // Simple parsing
+        if(['tiktok', 'instagram', 'wa_channel'].includes(activeService)) {
+            const label = currentOrder.product.split(' ').pop(); 
             const op = currentOrder.product.split(' ')[0].toLowerCase();
-            const key = label.includes('Followers') ? 'followers' : label.includes('Likes') ? 'likes' : 'views';
+            const key = selectedNominal.dataset.key || 'followers';
             const qty = parseInt(label.match(/\d+/)[0]);
             smmStock[`${op}_${key}`] -= qty;
             localStorage.setItem('ryudia_smm_stock', JSON.stringify(smmStock));
@@ -921,7 +1014,7 @@
 
     // Live Feed Simulation
     function startLiveFeed() {
-        const names = ["Satria", "Ryuzy", "Cynthia", "Melati", "Albert"];
+        const names = ["Ahmad", "Budi", "Siti", "Rina", "Doni"];
         const prods = ["100 Diamonds ML", "25k Pulsa Telkomsel", "1k TikTok Followers"];
         
         setInterval(() => {
