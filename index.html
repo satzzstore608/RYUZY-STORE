@@ -3,564 +3,763 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#7c3aed">
-    <title>RYUDIA - Satu Platform, Banyak Solusi Digital</title>
+    <meta name="theme-color" content="#3B82F6">
+    <title>RYUDIA - Solusi Digital</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #7c3aed;
-            --secondary: #3b82f6;
-            --bg-dark: #0f0f1a;
-            --card-bg: #1e1e2f;
-            --text-main: #ffffff;
-            --text-muted: #9ca3af;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --radius: 16px;
-            --nav-height: 70px;
-            --header-height: 60px;
-        }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Poppins', 'Inter', system-ui, sans-serif; }
-        
+    <style>
+        /* --- CORE STYLES (Dari Referensi 1) --- */
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            min-height: 100vh;
-            padding-bottom: calc(var(--nav-height) + 20px);
+            font-family: 'Poppins', sans-serif;
+            background-color: #F3F4F6;
+            background-image: radial-gradient(#CBD5E1 1px, transparent 1px);
+            background-size: 20px 20px;
+            -webkit-tap-highlight-color: transparent;
             overflow-x: hidden;
         }
 
-        /* --- HEADER & SEARCH --- */
-        .app-header {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(15, 15, 26, 0.95); backdrop-filter: blur(10px);
-            padding: 0.8rem 1.2rem; display: flex; align-items: center; gap: 1rem;
-            border-bottom: 1px solid rgba(124, 58, 237, 0.2); height: var(--header-height);
+        /* Hide Scrollbar */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* The Bold Black Outline Style */
+        .app-card {
+            background: white;
+            border: 2px solid #000000;
+            border-radius: 24px;
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15);
+            transition: transform 0.1s;
         }
-        .logo-text { font-size: 1.2rem; font-weight: 800; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; white-space: nowrap; }
-        .search-bar { flex: 1; background: var(--card-bg); border-radius: 20px; padding: 0.5rem 1rem; display: flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(255,255,255,0.1); }
-        .search-bar input { background: none; border: none; color: white; width: 100%; outline: none; font-size: 0.9rem; }
-        .header-icons i { font-size: 1.2rem; cursor: pointer; margin-left: 0.5rem; }
+        
+        .app-card:active { transform: scale(0.98); }
 
-        /* --- BALANCE CARD --- */
-        .balance-card {
-            margin: 1.2rem; background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: var(--radius); padding: 1.5rem; position: relative; overflow: hidden;
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+        .btn-primary {
+            background-color: #3B82F6;
+            color: white;
+            border: 2px solid #000000;
+            border-radius: 16px;
+            box-shadow: 3px 3px 0px #000000;
+            font-weight: 700;
+            transition: all 0.1s;
         }
-        .balance-label { font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.5rem; }
-        .balance-amount { font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem; }
-        .btn-topup { background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; cursor: pointer; backdrop-filter: blur(5px); }
 
-        /* --- PROMO SLIDER --- */
-        .promo-scroll { display: flex; gap: 1rem; overflow-x: auto; padding: 0 1.2rem 1rem; scrollbar-width: none; }
-        .promo-scroll::-webkit-scrollbar { display: none; }
-        .promo-card { min-width: 280px; height: 120px; background: var(--card-bg); border-radius: var(--radius); padding: 1.2rem; border: 1px solid rgba(124, 58, 237, 0.3); display: flex; flex-direction: column; justify-content: center; position: relative; }
-        .promo-tag { position: absolute; top: 10px; right: 10px; background: var(--danger); font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: bold; }
+        .btn-primary:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px #000000;
+        }
 
-        /* --- SERVICE GRID --- */
-        .section-title { padding: 0 1.2rem; margin-bottom: 1rem; font-size: 1.1rem; font-weight: 600; margin-top: 1rem; }
-        .service-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 0 1.2rem; margin-bottom: 2rem; }
-        .service-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; cursor: pointer; }
-        .service-icon { width: 50px; height: 50px; background: var(--card-bg); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--primary); border: 1px solid rgba(124, 58, 237, 0.2); transition: 0.3s; }
-        .service-item:active .service-icon { transform: scale(0.9); background: rgba(124, 58, 237, 0.2); }
-        .service-name { font-size: 0.75rem; color: var(--text-muted); text-align: center; }
+        .menu-item {
+            background-color: #EFF6FF;
+            border: 2px solid #000000;
+            border-radius: 18px;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+        
+        .menu-item:active { transform: translateY(2px); }
 
-        /* --- BOTTOM NAVIGATION --- */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; height: var(--nav-height); background: rgba(30, 30, 47, 0.98); backdrop-filter: blur(10px); display: flex; justify-content: space-around; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); z-index: 1000; padding-bottom: env(safe-area-inset-bottom); }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); font-size: 0.7rem; cursor: pointer; transition: 0.3s; width: 20%; }
-        .nav-item i { font-size: 1.3rem; margin-bottom: 2px; }
-        .nav-item.active { color: var(--primary); }
-        .nav-item.active i { filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.6)); }
+        /* Bottom Nav Floating Button */
+        .nav-float-btn {
+            width: 60px;
+            height: 60px;
+            background: #3B82F6;
+            border: 3px solid #000000;
+            border-radius: 50%;
+            box-shadow: 0px -4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-top: -30px;
+            z-index: 50;
+            position: relative;
+        }
 
-        /* --- PAGES / VIEWS --- */
-        .page { display: none; animation: fadeIn 0.3s ease; }
-        .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Nominal Selection Style (Modified for Bold UI) */
+        .nominal-select {
+            background: white;
+            border: 2px solid #000;
+            border-radius: 12px;
+            padding: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+        }
+        .nominal-select.selected {
+            background: #3B82F6;
+            color: white;
+            border-color: #000;
+            box-shadow: 2px 2px 0px #000;
+        }
 
-        /* --- FORMS & CARDS --- */
-        .form-container { padding: 1.2rem; }
-        .input-group { margin-bottom: 1.2rem; }
-        .input-group label { display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--text-muted); }
-        .app-input { width: 100%; background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); padding: 1rem; border-radius: 12px; color: white; font-size: 1rem; outline: none; }
-        .app-input:focus { border-color: var(--primary); }
-        .nominal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-bottom: 1.5rem; }
-        .nominal-btn { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); padding: 1rem; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.2s; }
-        .nominal-btn.selected { border-color: var(--primary); background: rgba(124, 58, 237, 0.15); }
-        .nominal-val { font-weight: bold; display: block; margin-bottom: 4px; }
-        .nominal-price { font-size: 0.8rem; color: var(--text-muted); }
-        .btn-full { width: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: white; border: none; padding: 1rem; border-radius: 12px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 1rem; }
-        .btn-full:disabled { opacity: 0.5; cursor: not-allowed; }
+        /* Desktop Container Simulation */
+        @media (min-width: 768px) {
+            body { display: flex; justify-content: center; background-color: #e5e7eb; }
+            .mobile-container {
+                width: 420px;
+                min-height: 100vh;
+                background-color: #F8FAFC;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+                position: relative;
+                overflow-x: hidden;
+                border-left: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+            }
+        }
+        @media (max-width: 767px) {
+            .mobile-container { width: 100%; min-height: 100vh; padding-bottom: 80px; }
+        }
 
-        /* --- HISTORY LIST --- */
-        .history-item { background: var(--card-bg); margin: 0 1.2rem 1rem; padding: 1rem; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--primary); }
-        .hist-info h4 { font-size: 0.95rem; margin-bottom: 4px; }
-        .hist-info p { font-size: 0.75rem; color: var(--text-muted); }
-        .hist-status { font-size: 0.75rem; font-weight: bold; padding: 4px 8px; border-radius: 6px; }
-        .st-success { background: rgba(16, 185, 129, 0.2); color: var(--success); }
-        .st-pending { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
-        .st-failed { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
-        .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
-        .empty-state i { font-size: 3rem; margin-bottom: 1rem; opacity: 0.3; }
-
-        /* --- MODAL & TOAST --- */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 2000; display: none; align-items: flex-end; justify-content: center; }
-        .modal-overlay.open { display: flex; }
-        .modal-sheet { background: var(--card-bg); width: 100%; max-width: 500px; border-radius: 20px 20px 0 0; padding: 1.5rem; animation: slideUp 0.3s ease; max-height: 90vh; overflow-y: auto; }
-        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px); background: var(--card-bg); border: 1px solid var(--primary); padding: 0.8rem 1.5rem; border-radius: 30px; z-index: 3000; transition: 0.3s; font-size: 0.9rem; white-space: nowrap; }
+        /* Toast Notification */
+        .toast {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
+            background: #000; color: white; padding: 10px 20px; border-radius: 30px;
+            z-index: 9999; font-size: 0.9rem; font-weight: 600; transition: 0.3s;
+            border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
         .toast.show { transform: translateX(-50%) translateY(0); }
 
-        /* --- CHAT WIDGET --- */
-        .chat-fab { position: fixed; bottom: calc(var(--nav-height) + 20px); right: 20px; width: 55px; height: 55px; border-radius: 50%; background: var(--success); color: white; border: none; font-size: 1.5rem; box-shadow: 0 5px 20px rgba(16, 185, 129, 0.4); z-index: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-
-        /* --- ABOUT SECTION --- */
-        .about-section { margin: 2rem 1.2rem; padding: 1.5rem; background: var(--card-bg); border-radius: var(--radius); border: 1px solid rgba(124, 58, 237, 0.2); }
-        .about-section h3 { color: var(--primary); margin-bottom: 1rem; }
-        .about-section p { font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1rem; }
-        .highlight-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1rem; }
-        .highlight-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; }
-        .highlight-item i { color: var(--primary); }
-
-        /* --- FOOTER --- */
-        footer { text-align: center; padding: 2rem 1.2rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem; }
-        footer a { color: var(--primary); text-decoration: none; }
-
-        /* Responsive Desktop Adjustment */
-        @media (min-width: 768px) {
-            body { max-width: 480px; margin: 0 auto; border-left: 1px solid #333; border-right: 1px solid #333; }
-            .bottom-nav { max-width: 480px; left: 50%; transform: translateX(-50%); }
-            .modal-sheet { max-width: 480px; }
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000;
+            display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px);
         }
+        .modal-overlay.open { display: flex; }
+        .modal-content {
+            background: white; width: 90%; max-width: 380px; border-radius: 24px;
+            border: 3px solid #000; padding: 20px; box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     </style>
 </head>
 <body>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">Notifikasi</div>
+<div class="mobile-container pb-24 relative">
+    
+    <!-- 🔔 TOAST NOTIFICATION -->
+    <div id="toast" class="toast">Notifikasi</div>
 
-    <!-- Header -->
-    <header class="app-header">
-        <div class="logo-text">RYUDIA</div>
-        <div class="search-bar">
-            <i class="fas fa-search" style="color:var(--text-muted)"></i>
-            <input type="text" placeholder="Cari game, pulsa, SMM..." id="globalSearch">
+    <!-- 🔵 HEADER HOME -->
+    <header class="bg-blue-500 text-white pt-6 pb-12 px-5 rounded-b-[30px] relative overflow-hidden border-b-2 border-black">
+        <div class="absolute top-0 right-0 opacity-20">
+            <svg width="150" height="150"><pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="white"/></pattern><rect width="100%" height="100%" fill="url(#dots)"/></svg>
         </div>
-        <div class="header-icons">
-            <i class="fas fa-bell"></i>
+        <div class="flex justify-between items-center relative z-10">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-full border-2 border-black flex items-center justify-center overflow-hidden">
+                    <span class="font-bold text-blue-600 text-xs">RYU</span>
+                </div>
+                <div>
+                    <p class="text-xs font-medium opacity-90">Selamat datang,</p>
+                    <h1 class="text-xl font-bold tracking-wide">RYUDIA</h1>
+                </div>
+            </div>
+            <button class="w-10 h-10 bg-white text-blue-600 rounded-xl border-2 border-black flex items-center justify-center shadow-md active:scale-95 transition">
+                <i class="fa-solid fa-bell"></i>
+            </button>
         </div>
     </header>
 
-    <!-- PAGE: HOME -->
-    <div id="page-home" class="page active">
-        <div class="balance-card">
-            <div class="balance-label">Saldo Agen RYUDIA</div>
-            <div class="balance-amount" id="displayBalance">Rp 0</div>
-            <button class="btn-topup" onclick="topUpSaldo()"><i class="fas fa-plus-circle"></i> Top Up Saldo</button>
-        </div>
-
-        <div class="promo-scroll">
-            <div class="promo-card">
-                <span class="promo-tag">HOT</span>
-                <h3>Diskon Pulsa 5%</h3>
-                <p style="font-size:0.8rem; color:var(--text-muted); margin-top:5px;">Khusus pengguna baru hari ini!</p>
+    <!-- MAIN CONTENT WRAPPER -->
+    <main class="px-4 -mt-8 relative z-20 space-y-5" id="mainContent">
+        
+        <!-- 💰 CARD SALDO -->
+        <div class="app-card p-5 flex justify-between items-center">
+            <div class="border-r-2 border-gray-200 pr-4 w-1/2">
+                <p class="text-gray-500 text-xs font-semibold mb-1">Saldo Utama</p>
+                <div class="flex items-center gap-2">
+                    <div class="bg-blue-100 p-1.5 rounded-lg border border-black">
+                        <i class="fa-solid fa-wallet text-blue-600 text-sm"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-gray-800 truncate" id="displayBalance">Rp0</h2>
+                </div>
             </div>
-            <div class="promo-card">
-                <span class="promo-tag" style="background:var(--primary)">CASHBACK</span>
-                <h3>Cashback Token PLN</h3>
-                <p style="font-size:0.8rem; color:var(--text-muted); margin-top:5px;">Dapat poin reward setiap transaksi.</p>
-            </div>
-        </div>
-
-        <div class="section-title">Shortcut Utama</div>
-        <div class="service-grid">
-            <div class="service-item" onclick="openService('game')"><div class="service-icon"><i class="fas fa-gamepad"></i></div><span class="service-name">Top Up Game</span></div>
-            <div class="service-item" onclick="openService('pulsa')"><div class="service-icon"><i class="fas fa-mobile-alt"></i></div><span class="service-name">Pulsa & Data</span></div>
-            <div class="service-item" onclick="openService('pln')"><div class="service-icon"><i class="fas fa-bolt"></i></div><span class="service-name">Token PLN</span></div>
-            <div class="service-item" onclick="openService('ewallet')"><div class="service-icon"><i class="fas fa-wallet"></i></div><span class="service-name">E-Wallet</span></div>
-            <div class="service-item" onclick="openService('qris')"><div class="service-icon"><i class="fas fa-qrcode"></i></div><span class="service-name">QRIS Merchant</span></div>
-            <div class="service-item" onclick="openService('sosmed')"><div class="service-icon"><i class="fab fa-instagram"></i></div><span class="service-name">SMM / Suntik</span></div>
-            <div class="service-item" onclick="openService('rekber')"><div class="service-icon"><i class="fas fa-handshake"></i></div><span class="service-name">MC / Rekber</span></div>
-            <div class="service-item" onclick="openService('jasa')"><div class="service-icon"><i class="fas fa-tools"></i></div><span class="service-name">Jasa Digital</span></div>
-        </div>
-
-        <!-- Tentang RYUDIA Section -->
-        <div class="about-section">
-            <h3>Tentang RYUDIA</h3>
-            <p>RYUDIA adalah platform layanan digital yang menyediakan berbagai kebutuhan dalam satu tempat. Mulai dari top up game, pulsa, paket data, token PLN, top up e-wallet, pembayaran QRIS, SMM, jasa MC/rekber, pembuatan website & link, desain logo, hingga berbagai layanan digital lainnya.</p>
-            <div class="highlight-grid">
-                <div class="highlight-item"><i class="fas fa-bolt"></i> Cepat & Praktis</div>
-                <div class="highlight-item"><i class="fas fa-shield-alt"></i> Aman & Terpercaya</div>
-                <div class="highlight-item"><i class="fas fa-credit-card"></i> Pembayaran Mudah</div>
-                <div class="highlight-item"><i class="fas fa-mobile-alt"></i> Mobile Friendly</div>
+            <div class="pl-4 w-1/2">
+                <p class="text-gray-500 text-xs font-semibold mb-1">Total Transaksi</p>
+                <div class="flex items-center gap-2">
+                    <div class="bg-green-100 p-1.5 rounded-lg border border-black">
+                        <i class="fa-solid fa-chart-line text-green-600 text-sm"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-gray-800" id="totalTrxCount">0</h2>
+                </div>
             </div>
         </div>
 
-        <footer>
-            <div class="logo-text" style="margin-bottom:0.5rem; font-size:1rem">RYUDIA</div>
-            <p>Satu Platform, Banyak Solusi Digital.</p>
-            <div style="margin:1rem 0; display:flex; justify-content:center; gap:1rem; flex-wrap:wrap">
-                <a href="#" onclick="showPage('home')">Beranda</a>
-                <a href="#" onclick="openService('game')">Game</a>
-                <a href="#" onclick="openService('pulsa')">Pulsa</a>
-                <a href="#" onclick="openService('sosmed')">SMM</a>
-                <a href="#" onclick="window.open('https://wa.me/085776210087','_blank')">Bantuan</a>
+        <!-- ⚡ QUICK MENU -->
+        <div class="grid grid-cols-4 gap-3">
+            <a onclick="topUpSaldo()" class="menu-item flex flex-col items-center justify-center py-3 gap-2 cursor-pointer">
+                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white border-2 border-black shadow-sm">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                </div>
+                <span class="text-[10px] font-bold text-gray-800">Top Up</span>
+            </a>
+            <a onclick="showQRIS()" class="menu-item flex flex-col items-center justify-center py-3 gap-2 cursor-pointer">
+                <div class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-white border-2 border-black shadow-sm">
+                    <i class="fa-solid fa-qrcode"></i>
+                </div>
+                <span class="text-[10px] font-bold text-gray-800">QRIS</span>
+            </a>
+            <a onclick="openService('rekber')" class="menu-item flex flex-col items-center justify-center py-3 gap-2 cursor-pointer">
+                <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white border-2 border-black shadow-sm">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                </div>
+                <span class="text-[10px] font-bold text-gray-800">Rekber</span>
+            </a>
+            <a href="https://wa.me/085776210087" target="_blank" class="menu-item flex flex-col items-center justify-center py-3 gap-2 cursor-pointer">
+                <div class="w-10 h-10 bg-teal-500 rounded-full flex items-center justify-center text-white border-2 border-black shadow-sm">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <span class="text-[10px] font-bold text-gray-800">Hubungi Kami</span>
+            </a>
+        </div>
+
+        <!-- 📊 STATISTIK -->
+        <div class="app-card p-4 flex justify-around items-center text-center">
+            <div>
+                <p class="text-xl font-bold text-blue-600">2.524</p>
+                <p class="text-[10px] text-gray-500 font-semibold">Pengguna</p>
             </div>
-            <p style="margin-top:1rem; font-size:0.7rem; opacity:0.6">© 2026 RYUDIA. All Rights Reserved.<br>Gunakan layanan secara bertanggung jawab dan sesuai dengan ketentuan platform terkait.</p>
+            <div class="h-8 w-[1px] bg-gray-300"></div>
+            <div>
+                <p class="text-xl font-bold text-green-600" id="statSuccess">4.238</p>
+                <p class="text-[10px] text-gray-500 font-semibold">Sukses</p>
+            </div>
+            <div class="h-8 w-[1px] bg-gray-300"></div>
+            <div>
+                <p class="text-xl font-bold text-purple-600"><i class="fa-solid fa-gift text-sm"></i></p>
+                <p class="text-[10px] text-gray-500 font-semibold">Lucky Wheel</p>
+            </div>
+        </div>
+
+        <!-- 📢 ANNOUNCEMENT -->
+        <div class="bg-yellow-50 border-2 border-black rounded-2xl p-3 flex items-start gap-3 shadow-sm">
+            <div class="bg-yellow-400 p-2 rounded-lg border border-black shrink-0">
+                <i class="fa-solid fa-bullhorn text-black"></i>
+            </div>
+            <div>
+                <h3 class="text-xs font-bold text-gray-800 mb-1">Informasi</h3>
+                <p class="text-[11px] text-gray-600 leading-relaxed">
+                    «Transaksi pada pukul 01.00–03.00 WIB dapat mengalami keterlambatan karena maintenance sistem.»
+                </p>
+            </div>
+        </div>
+
+        <!-- KATEGORI LAYANAN UTAMA (Grid) -->
+        <div class="grid grid-cols-2 gap-3 mt-2">
+            <div onclick="openService('game')" class="app-card p-4 flex flex-col items-center text-center gap-2 cursor-pointer hover:bg-gray-50">
+                <i class="fa-solid fa-gamepad text-2xl text-red-500"></i>
+                <h3 class="font-bold text-sm">Top Up Game</h3>
+                <p class="text-[9px] text-gray-500">ML, FF, PUBG, Valo</p>
+            </div>
+            <div onclick="openService('pulsa')" class="app-card p-4 flex flex-col items-center text-center gap-2 cursor-pointer hover:bg-gray-50">
+                <i class="fa-solid fa-sim-card text-2xl text-orange-500"></i>
+                <h3 class="font-bold text-sm">Pulsa & Data</h3>
+                <p class="text-[9px] text-gray-500">All Operator</p>
+            </div>
+            <div onclick="openService('sosmed')" class="app-card p-4 flex flex-col items-center text-center gap-2 cursor-pointer hover:bg-gray-50">
+                <i class="fa-solid fa-hashtag text-2xl text-purple-600"></i>
+                <h3 class="font-bold text-sm">Suntik Sosmed</h3>
+                <p class="text-[9px] text-gray-500">TikTok, IG, YT</p>
+            </div>
+            <div onclick="openService('pln')" class="app-card p-4 flex flex-col items-center text-center gap-2 cursor-pointer hover:bg-gray-50">
+                <i class="fa-solid fa-bolt text-2xl text-yellow-500"></i>
+                <h3 class="font-bold text-sm">Token PLN</h3>
+                <p class="text-[9px] text-gray-500">Listrik Prabayar</p>
+            </div>
+        </div>
+
+        <!-- 🧾 TRANSAKSI TERBARU (Live Feed) -->
+        <div id="liveFeed" class="app-card p-3 bg-white flex items-center gap-3">
+            <div class="bg-blue-100 p-2 rounded-full border border-black text-blue-600">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div class="flex-1">
+                <p class="text-xs font-bold text-gray-800">Menunggu transaksi...</p>
+            </div>
+        </div>
+
+        <!-- FOOTER INFO -->
+        <footer class="text-center pb-24 pt-4 border-t border-gray-200">
+            <p class="text-[10px] text-gray-400 mb-2">© 2026 RYUDIA. All Rights Reserved.</p>
+            <div class="flex justify-center gap-4 text-[10px] text-gray-500 font-semibold">
+                <a href="#" onclick="toggleAdminLogin()" class="hover:text-blue-600">Admin Dashboard</a>
+                <a href="#" class="hover:text-blue-600">Syarat & Ketentuan</a>
+            </div>
         </footer>
-    </div>
+    </main>
 
-    <!-- PAGE: PRODUCTS (Dynamic Form) -->
-    <div id="page-products" class="page">
-        <div class="app-header" style="position:relative; border:none; padding-bottom:0;">
-            <i class="fas fa-arrow-left" onclick="showPage('home')" style="margin-right:1rem; cursor:pointer;"></i>
-            <span id="productTitle" style="font-weight:bold; font-size:1.1rem">Produk</span>
+    <!-- PAGE: PRODUCT FORM (Hidden by default) -->
+    <div id="page-products" class="hidden px-4 pt-6 pb-24 absolute inset-0 bg-[#F3F4F6] z-30 overflow-y-auto">
+        <div class="flex items-center gap-3 mb-6">
+            <button onclick="closeProductPage()" class="w-10 h-10 bg-white border-2 border-black rounded-xl flex items-center justify-center shadow-sm">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <h2 class="text-xl font-bold" id="productTitle">Produk</h2>
         </div>
-        <div class="form-container" id="dynamicFormContainer"></div>
-    </div>
-
-    <!-- PAGE: TRANSACTIONS -->
-    <div id="page-transactions" class="page">
-        <div class="section-title" style="margin-top:1rem">Pesanan Saya</div>
-        <div id="historyList"></div>
-        <div class="empty-state" id="emptyHistory"><i class="fas fa-receipt"></i><p>Belum ada transaksi</p></div>
-    </div>
-
-    <!-- PAGE: SALDO -->
-    <div id="page-saldo" class="page">
-        <div class="section-title" style="margin-top:1rem">Manajemen Saldo</div>
-        <div class="balance-card" style="margin:1.2rem">
-            <div class="balance-label">Saldo Saat Ini</div>
-            <div class="balance-amount" id="saldoDisplay">Rp 0</div>
-            <button class="btn-topup" onclick="topUpSaldo()">Deposit Saldo</button>
-        </div>
-        <div style="padding:0 1.2rem">
-            <div class="history-item" style="border-left:none; border:1px solid rgba(255,255,255,0.1); margin-bottom:0.8rem">
-                <div class="hist-info"><h4>Total Transaksi</h4><p>Berhasil diproses</p></div>
-                <div style="font-weight:bold" id="saldoTrxCount">0</div>
+        
+        <div class="space-y-4">
+            <!-- Input Target -->
+            <div class="app-card p-4">
+                <label class="text-xs font-bold text-gray-500 block mb-2">ID / NOMOR TUJUAN</label>
+                <input type="text" id="inpTarget" class="w-full bg-gray-50 border-2 border-black rounded-xl p-3 font-bold focus:outline-none focus:bg-blue-50" placeholder="Contoh: 0812...">
+                <p class="text-[10px] text-gray-400 mt-1" id="targetHint">Pastikan nomor aktif</p>
             </div>
-            <div class="history-item" style="border-left:none; border:1px solid rgba(255,255,255,0.1); margin-bottom:0.8rem">
-                <div class="hist-info"><h4>Total Deposit</h4><p>Saldo masuk</p></div>
-                <div style="font-weight:bold; color:var(--success)" id="saldoDeposit">Rp 0</div>
+
+            <!-- Pilih Operator -->
+            <div class="app-card p-4">
+                <label class="text-xs font-bold text-gray-500 block mb-2">PILIH OPERATOR / GAME</label>
+                <select id="inpOperator" class="w-full bg-gray-50 border-2 border-black rounded-xl p-3 font-bold focus:outline-none" onchange="renderNominals()">
+                    <!-- Options injected via JS -->
+                </select>
             </div>
-        </div>
-    </div>
 
-    <!-- PAGE: PROFILE -->
-    <div id="page-profile" class="page">
-        <div style="text-align:center; padding:2rem 1rem">
-            <div style="width:80px; height:80px; background:var(--card-bg); border-radius:50%; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; font-size:2rem; color:var(--primary); border:2px solid var(--primary)"><i class="fas fa-user"></i></div>
-            <h3 id="accName">Guest User</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem" id="accWa">WhatsApp: -</p>
-        </div>
-        <div style="padding:0 1.2rem">
-            <div class="history-item" style="border-left:none; border:1px solid rgba(255,255,255,0.1); margin-bottom:0.8rem; cursor:pointer" onclick="showPage('transactions')"><div class="hist-info"><h4>Riwayat Transaksi</h4><p>Lihat semua aktivitas</p></div><i class="fas fa-chevron-right" style="color:var(--text-muted)"></i></div>
-            <div class="history-item" style="border-left:none; border:1px solid rgba(255,255,255,0.1); margin-bottom:0.8rem; cursor:pointer" onclick="checkOrderManual()"><div class="hist-info"><h4>Cek Order Manual</h4><p>Masukkan ID Order</p></div><i class="fas fa-search" style="color:var(--text-muted)"></i></div>
-            <div class="history-item" style="border-left:none; border:1px solid rgba(255,255,255,0.1); margin-bottom:0.8rem; cursor:pointer" onclick="toggleAdminLogin()"><div class="hist-info"><h4>Admin Dashboard</h4><p>Kelola toko & harga</p></div><i class="fas fa-shield-alt" style="color:var(--text-muted)"></i></div>
-            <button class="btn-full" style="background:var(--card-bg); border:1px solid var(--danger); color:var(--danger); margin-top:2rem" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
-        </div>
-    </div>
-
-    <!-- ADMIN DASHBOARD -->
-    <div id="page-admin" class="page" style="padding-bottom:2rem">
-        <div class="app-header"><i class="fas fa-arrow-left" onclick="showPage('profile')" style="cursor:pointer"></i><span style="font-weight:bold">Admin Dashboard</span></div>
-        <div style="padding:1.2rem">
-            <div class="service-grid" style="grid-template-columns:repeat(2,1fr); margin-bottom:1.5rem">
-                <div class="promo-card" style="width:100%; min-width:auto; height:100px"><h3 id="admTotalTrx">0</h3><p style="font-size:0.8rem">Total Transaksi</p></div>
-                <div class="promo-card" style="width:100%; min-width:auto; height:100px"><h3 id="admRevenue">Rp 0</h3><p style="font-size:0.8rem">Pendapatan</p></div>
+            <!-- Pilih Nominal -->
+            <div class="app-card p-4">
+                <label class="text-xs font-bold text-gray-500 block mb-2">PILIH NOMINAL</label>
+                <div id="nominalGrid" class="grid grid-cols-2 gap-3">
+                    <!-- Nominals injected via JS -->
+                </div>
             </div>
-            <h4 style="margin-bottom:1rem">Kelola Stok SMM</h4>
-            <div id="adminStockList" style="margin-bottom:1.5rem"></div>
-            <h4 style="margin-bottom:1rem">Order Terakhir</h4>
-            <div id="adminOrderList"></div>
+
+            <!-- Tombol Beli -->
+            <button id="btnBuy" onclick="initiateCheckout()" disabled class="btn-primary w-full py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                Beli Sekarang
+            </button>
         </div>
     </div>
 
-    <!-- BOTTOM NAVIGATION -->
-    <nav class="bottom-nav">
-        <div class="nav-item active" onclick="showPage('home')"><i class="fas fa-home"></i><span>Home</span></div>
-        <div class="nav-item" onclick="showPage('products')"><i class="fas fa-th-large"></i><span>Layanan</span></div>
-        <div class="nav-item" onclick="showPage('transactions')"><i class="fas fa-receipt"></i><span>Pesanan</span></div>
-        <div class="nav-item" onclick="showPage('saldo')"><i class="fas fa-wallet"></i><span>Saldo</span></div>
-        <div class="nav-item" onclick="showPage('profile')"><i class="fas fa-user"></i><span>Profil</span></div>
+    <!-- PAGE: HISTORY (Hidden by default) -->
+    <div id="page-history" class="hidden px-4 pt-6 pb-24 absolute inset-0 bg-[#F3F4F6] z-30 overflow-y-auto">
+        <div class="flex items-center gap-3 mb-6">
+            <button onclick="showPage('home')" class="w-10 h-10 bg-white border-2 border-black rounded-xl flex items-center justify-center shadow-sm">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <h2 class="text-xl font-bold">Riwayat Transaksi</h2>
+        </div>
+        <div id="historyList" class="space-y-3"></div>
+        <div id="emptyHistory" class="text-center py-10 hidden">
+            <i class="fa-solid fa-receipt text-4xl text-gray-300 mb-3"></i>
+            <p class="text-gray-500 text-sm">Belum ada transaksi</p>
+        </div>
+    </div>
+
+    <!-- PAGE: PROFILE (Hidden by default) -->
+    <div id="page-profile" class="hidden px-4 pt-6 pb-24 absolute inset-0 bg-[#F3F4F6] z-30 overflow-y-auto">
+        <div class="flex items-center gap-3 mb-6">
+            <h2 class="text-xl font-bold ml-auto mr-auto">Profil Saya</h2>
+        </div>
+        <div class="app-card p-6 text-center mb-4">
+            <div class="w-20 h-20 bg-blue-100 rounded-full border-2 border-black mx-auto flex items-center justify-center text-3xl text-blue-600 mb-3">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <h3 class="font-bold text-lg" id="accName">Guest User</h3>
+            <p class="text-sm text-gray-500" id="accWa">WhatsApp: -</p>
+        </div>
+        <div class="space-y-3">
+            <button onclick="showPage('history')" class="app-card w-full p-4 flex justify-between items-center hover:bg-gray-50">
+                <span class="font-bold text-sm">Riwayat Transaksi</span>
+                <i class="fa-solid fa-chevron-right text-gray-400"></i>
+            </button>
+            <button onclick="checkOrderManual()" class="app-card w-full p-4 flex justify-between items-center hover:bg-gray-50">
+                <span class="font-bold text-sm">Cek Order Manual</span>
+                <i class="fa-solid fa-search text-gray-400"></i>
+            </button>
+            <button onclick="logout()" class="app-card w-full p-4 flex justify-between items-center hover:bg-red-50 border-red-200">
+                <span class="font-bold text-sm text-red-500">Logout</span>
+                <i class="fa-solid fa-sign-out-alt text-red-500"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 🧭 BOTTOM NAVIGATION -->
+    <nav class="fixed bottom-0 left-0 w-full bg-white border-t-2 border-black px-6 py-2 z-50 flex justify-between items-end pb-4 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+        <a onclick="showPage('home')" class="nav-link flex flex-col items-center gap-1 text-blue-600 cursor-pointer" data-target="home">
+            <i class="fa-solid fa-house text-xl"></i>
+            <span class="text-[10px] font-bold">Home</span>
+        </a>
+        <a onclick="showPage('profile')" class="nav-link flex flex-col items-center gap-1 text-gray-400 cursor-pointer hover:text-blue-500" data-target="profile">
+            <i class="fa-solid fa-circle-info text-xl"></i>
+            <span class="text-[10px] font-medium">Info</span>
+        </a>
+        
+        <!-- Center Button (QRIS) -->
+        <div class="relative">
+            <a onclick="showQRIS()" class="nav-float-btn cursor-pointer hover:scale-105 transition-transform">
+                <i class="fa-solid fa-qrcode"></i>
+            </a>
+        </div>
+
+        <a onclick="showPage('history')" class="nav-link flex flex-col items-center gap-1 text-gray-400 cursor-pointer hover:text-blue-500" data-target="history">
+            <i class="fa-solid fa-receipt text-xl"></i>
+            <span class="text-[10px] font-medium">Transaksi</span>
+        </a>
+        <a onclick="showPage('profile')" class="nav-link flex flex-col items-center gap-1 text-gray-400 cursor-pointer hover:text-blue-500" data-target="profile">
+            <i class="fa-solid fa-user text-xl"></i>
+            <span class="text-[10px] font-medium">Profil</span>
+        </a>
     </nav>
 
-    <!-- PAYMENT MODAL -->
+    <!-- MODAL PEMBAYARAN -->
     <div class="modal-overlay" id="paymentModal">
-        <div class="modal-sheet">
-            <h3 style="margin-bottom:1rem">Konfirmasi Pembayaran</h3>
-            <div style="background:rgba(0,0,0,0.3); padding:1rem; border-radius:12px; margin-bottom:1.5rem">
-                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem; font-size:0.9rem"><span style="color:var(--text-muted)">Produk</span><span id="payProduct">-</span></div>
-                <div style="display:flex; justify-content:space-between; font-size:0.9rem"><span style="color:var(--text-muted)">Harga</span><span id="payPrice">-</span></div>
-                <hr style="border:0; border-top:1px dashed rgba(255,255,255,0.2); margin:0.8rem 0">
-                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.1rem"><span>Total Bayar</span><span id="payTotal" style="color:var(--primary)">-</span></div>
+        <div class="modal-content">
+            <h3 class="font-bold text-lg mb-4 text-center border-b-2 border-black pb-2">Konfirmasi Pembayaran</h3>
+            <div class="bg-gray-50 p-3 rounded-xl border border-black mb-4 text-sm space-y-2">
+                <div class="flex justify-between"><span class="text-gray-500">Produk</span><span class="font-bold" id="payProduct">-</span></div>
+                <div class="flex justify-between"><span class="text-gray-500">Harga</span><span class="font-bold" id="payPrice">-</span></div>
+                <div class="flex justify-between text-base pt-2 border-t border-dashed border-gray-300"><span class="font-bold">Total</span><span class="font-bold text-blue-600" id="payTotal">-</span></div>
             </div>
-            <p style="font-size:0.85rem; margin-bottom:0.8rem; color:var(--text-muted)">Metode Pembayaran:</p>
-            <div style="display:flex; gap:0.8rem; margin-bottom:1.5rem">
-                <div class="nominal-btn selected" style="flex:1; padding:0.8rem" onclick="selectPayMethod(this, 'DANA')"><i class="fas fa-wallet" style="color:#008ceb; margin-bottom:5px; display:block"></i> DANA</div>
-                <div class="nominal-btn" style="flex:1; padding:0.8rem" onclick="selectPayMethod(this, 'GoPay')"><i class="fas fa-wallet" style="color:#00aa13; margin-bottom:5px; display:block"></i> GoPay</div>
-                <div class="nominal-btn" style="flex:1; padding:0.8rem" onclick="selectPayMethod(this, 'QRIS')"><i class="fas fa-qrcode" style="color:var(--primary); margin-bottom:5px; display:block"></i> QRIS</div>
+            
+            <p class="text-xs font-bold text-gray-500 mb-2">METODE PEMBAYARAN</p>
+            <div class="grid grid-cols-3 gap-2 mb-4">
+                <div onclick="selectPayMethod(this, 'Saldo')" class="nominal-select selected pay-method">Saldo</div>
+                <div onclick="selectPayMethod(this, 'QRIS')" class="nominal-select pay-method">QRIS</div>
+                <div onclick="selectPayMethod(this, 'DANA')" class="nominal-select pay-method">DANA</div>
             </div>
-            <button class="btn-full" onclick="processPayment()">Bayar Sekarang</button>
-            <button class="btn-full" style="background:transparent; border:1px solid rgba(255,255,255,0.2); margin-top:0.5rem" onclick="closeModal()">Batal</button>
+
+            <button onclick="processPayment()" class="btn-primary w-full py-3">Bayar Sekarang</button>
+            <button onclick="closeModal()" class="w-full py-3 mt-2 text-sm font-bold text-gray-500 hover:text-black">Batal</button>
         </div>
     </div>
 
-    <!-- QRIS IMAGE MODAL -->
+    <!-- MODAL QRIS -->
     <div class="modal-overlay" id="qrisModal" onclick="this.classList.remove('open')">
-        <div class="modal-sheet" style="text-align:center" onclick="event.stopPropagation()">
-            <h3 style="margin-bottom:1rem">Scan QRIS RYUDIA</h3>
-            <img src="qris-ryudia.jpg" alt="QRIS RYUDIA" style="width:100%; border-radius:12px; border:2px solid var(--primary); margin-bottom:1rem" onerror="this.src='https://placehold.co/400x400/1e1e2f/7c3aed?text=QRIS+NOT+FOUND\n(Please+upload+qris-ryudia.jpg)'">
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem">Support: DANA, OVO, GoPay, ShopeePay, M-Banking</p>
-            <button class="btn-full" onclick="document.getElementById('qrisModal').classList.remove('open')">Tutup</button>
+        <div class="modal-content text-center" onclick="event.stopPropagation()">
+            <h3 class="font-bold text-lg mb-2">Scan QRIS RYUDIA</h3>
+            <img src="https://placehold.co/300x300/1e1e2f/7c3aed?text=QRIS+CODE" alt="QRIS" class="w-full rounded-xl border-2 border-black mb-3">
+            <p class="text-xs text-gray-500 mb-4">Support: DANA, OVO, GoPay, ShopeePay, M-Banking</p>
+            <button onclick="document.getElementById('qrisModal').classList.remove('open')" class="btn-primary w-full py-2">Tutup</button>
         </div>
     </div>
 
-    <!-- FLOATING CS -->
-    <button class="chat-fab" onclick="window.open('https://wa.me/085776210087?text=Halo%20Admin%20RYUDIA','_blank')"><i class="fab fa-whatsapp"></i></button>
+</div>
 
-    <script>
-        // --- STATE MANAGEMENT ---
-        let balance = parseInt(localStorage.getItem('ryudia_balance')) || 0;
-        let transactions = JSON.parse(localStorage.getItem('ryudia_transactions')) || [];
-        let smmStock = JSON.parse(localStorage.getItem('ryudia_smm_stock')) || {};
-        let currentOrder = null;
-        let selectedPayMethod = 'DANA';
-        let activeService = '';
+<script>
+    // --- DATA & STATE MANAGEMENT ---
+    let balance = parseInt(localStorage.getItem('ryudia_balance')) || 0;
+    let transactions = JSON.parse(localStorage.getItem('ryudia_transactions')) || [];
+    let smmStock = JSON.parse(localStorage.getItem('ryudia_smm_stock')) || {};
+    let currentOrder = null;
+    let selectedPayMethod = 'Saldo';
+    let activeService = '';
+    let selectedNominal = null;
 
-        // Initialize default SMM stock if empty
-        if(Object.keys(smmStock).length === 0) {
-            ['tiktok_followers','tiktok_likes','ig_followers','ig_likes','yt_views','fb_likes'].forEach(k => smmStock[k] = 10000000);
+    // Initialize Default SMM Stock if empty
+    if(Object.keys(smmStock).length === 0) {
+        ['tiktok_followers','tiktok_likes','ig_followers','ig_likes','yt_views'].forEach(k => smmStock[k] = 10000000);
+        localStorage.setItem('ryudia_smm_stock', JSON.stringify(smmStock));
+    }
+
+    // Product Configuration
+    const products = {
+        game: { title: 'Top Up Game', operators: ['Mobile Legends', 'Free Fire', 'PUBG Mobile', 'Roblox', 'Genshin Impact', 'Valorant'], nominals: [{n:'86 DM', p:15000}, {n:'172 DM', p:28000}, {n:'344 DM', p:52000}, {n:'706 DM', p:100000}] },
+        pulsa: { title: 'Pulsa & Paket Data', operators: ['Telkomsel', 'Indosat', 'XL', 'AXIS', 'Tri', 'Smartfren'], nominals: [5000, 10000, 20000, 50000, 100000] },
+        pln: { title: 'Token Listrik', operators: ['PLN Prepaid'], nominals: [20000, 50000, 100000, 200000, 500000] },
+        sosmed: { title: 'SMM / Suntik Sosmed', operators: ['TikTok', 'Instagram', 'YouTube', 'Facebook'], nominals: [{n:'100 Followers', p:15000, key:'followers'}, {n:'500 Likes', p:10000, key:'likes'}, {n:'1000 Views', p:5000, key:'views'}] },
+        rekber: { title: 'Jasa MC / Rekber', operators: ['Rekber Transaksi'], nominals: [{n:'Hubungi Admin', p:0}] }
+    };
+
+    // --- INITIALIZATION ---
+    document.addEventListener('DOMContentLoaded', () => {
+        updateBalanceUI();
+        renderHistory();
+        startLiveFeed();
+        
+        // Check User
+        if(!localStorage.getItem('ryudia_user')) {
+            const name = prompt("Selamat datang di RYUDIA! Masukkan nama Anda:") || "User";
+            const wa = prompt("Masukkan nomor WhatsApp:") || "";
+            localStorage.setItem('ryudia_user', JSON.stringify({name, wa}));
+        }
+        loadUserProfile();
+    });
+
+    function loadUserProfile() {
+        const user = JSON.parse(localStorage.getItem('ryudia_user'));
+        if(user) { 
+            document.getElementById('accName').textContent = user.name; 
+            document.getElementById('accWa').textContent = `WhatsApp: ${user.wa || '-'}`; 
+        }
+    }
+
+    function updateBalanceUI() {
+        const fmt = new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR', minimumFractionDigits:0}).format(balance);
+        document.getElementById('displayBalance').textContent = fmt;
+        
+        const successTrx = transactions.filter(t => t.status === 'Sukses');
+        document.getElementById('totalTrxCount').textContent = successTrx.length;
+        document.getElementById('statSuccess').textContent = successTrx.length;
+    }
+
+    // --- NAVIGATION LOGIC ---
+    function showPage(pageId) {
+        // Hide all pages
+        document.getElementById('mainContent').classList.add('hidden');
+        document.getElementById('page-products').classList.add('hidden');
+        document.getElementById('page-history').classList.add('hidden');
+        document.getElementById('page-profile').classList.add('hidden');
+
+        // Show selected
+        if(pageId === 'home') document.getElementById('mainContent').classList.remove('hidden');
+        else document.getElementById(`page-${pageId}`).classList.remove('hidden');
+
+        // Update Nav Active State
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('text-blue-600');
+            link.classList.add('text-gray-400');
+            if(link.dataset.target === pageId) {
+                link.classList.add('text-blue-600');
+                link.classList.remove('text-gray-400');
+            }
+        });
+        window.scrollTo(0,0);
+    }
+
+    // --- SERVICE & FORM LOGIC ---
+    function openService(type) {
+        activeService = type;
+        const data = products[type];
+        if(!data) return showToast('Layanan belum tersedia');
+
+        document.getElementById('productTitle').textContent = data.title;
+        
+        // Populate Operators
+        const opSelect = document.getElementById('inpOperator');
+        opSelect.innerHTML = data.operators.map(o => `<option value="${o}">${o}</option>`).join('');
+        
+        // Reset Inputs
+        document.getElementById('inpTarget').value = '';
+        document.getElementById('btnBuy').disabled = true;
+        selectedNominal = null;
+        
+        showPage('products');
+        renderNominals();
+    }
+
+    function closeProductPage() {
+        showPage('home');
+    }
+
+    function renderNominals() {
+        const data = products[activeService];
+        const grid = document.getElementById('nominalGrid');
+        grid.innerHTML = '';
+        
+        data.nominals.forEach((item) => {
+            const val = typeof item === 'object' ? item.n : `${new Intl.NumberFormat('id-ID').format(item)}`;
+            const price = typeof item === 'object' ? item.p : item + Math.round(item * 0.05); // Admin fee simulation
+            
+            const div = document.createElement('div');
+            div.className = 'nominal-select';
+            div.dataset.price = Math.round(price);
+            div.dataset.label = val;
+            div.onclick = function() { selectNominal(this); };
+            div.innerHTML = `<div class="font-bold text-sm">${val}</div><div class="text-[10px] text-gray-500">Rp ${new Intl.NumberFormat('id-ID').format(Math.round(price))}</div>`;
+            grid.appendChild(div);
+        });
+    }
+
+    function selectNominal(el) {
+        document.querySelectorAll('.nominal-select').forEach(b => b.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedNominal = el;
+        validateForm();
+    }
+
+    function validateForm() {
+        const target = document.getElementById('inpTarget').value;
+        document.getElementById('btnBuy').disabled = !(target.length > 3 && selectedNominal);
+    }
+
+    // --- CHECKOUT SYSTEM ---
+    function initiateCheckout() {
+        const target = document.getElementById('inpTarget').value;
+        const operator = document.getElementById('inpOperator').value;
+        const price = parseInt(selectedNominal.dataset.price);
+        const label = selectedNominal.dataset.label;
+
+        // Check SMM Stock
+        if(activeService === 'sosmed') {
+            const op = operator.toLowerCase();
+            const key = label.includes('Followers') ? 'followers' : label.includes('Likes') ? 'likes' : 'views';
+            const stockKey = `${op}_${key}`;
+            const qty = parseInt(label.match(/\d+/)[0]);
+            if((smmStock[stockKey] || 0) < qty) { showToast('❌ Stok tidak mencukupi!'); return; }
+        }
+
+        currentOrder = { 
+            id: 'RYD-' + Date.now().toString().slice(-8), 
+            product: `${operator} ${label}`, 
+            target, 
+            price, 
+            status: 'Pending', 
+            time: new Date().toLocaleString('id-ID') 
+        };
+        
+        document.getElementById('payProduct').textContent = currentOrder.product;
+        document.getElementById('payPrice').textContent = formatRupiah(price);
+        document.getElementById('payTotal').textContent = formatRupiah(price);
+        document.getElementById('paymentModal').classList.add('open');
+    }
+
+    function selectPayMethod(el, method) {
+        document.querySelectorAll('.pay-method').forEach(b => b.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedPayMethod = method;
+    }
+
+    function processPayment() {
+        const price = currentOrder.price;
+
+        if(selectedPayMethod === 'Saldo') {
+            if(balance < price) { showToast('Saldo tidak mencukupi! Silakan Top Up.'); return; }
+            balance -= price;
+        } else if (selectedPayMethod === 'QRIS') {
+            document.getElementById('paymentModal').classList.remove('open');
+            document.getElementById('qrisModal').classList.add('open');
+            // Simulate waiting for payment
+            setTimeout(() => {
+                document.getElementById('qrisModal').classList.remove('open');
+                finalizeTransaction();
+            }, 3000);
+            return;
+        }
+
+        finalizeTransaction();
+    }
+
+    function finalizeTransaction() {
+        closeModal();
+        
+        // Update Stock if SMM
+        if(activeService === 'sosmed') {
+            const label = currentOrder.product.split(' ').pop(); // Simple parsing
+            const op = currentOrder.product.split(' ')[0].toLowerCase();
+            const key = label.includes('Followers') ? 'followers' : label.includes('Likes') ? 'likes' : 'views';
+            const qty = parseInt(label.match(/\d+/)[0]);
+            smmStock[`${op}_${key}`] -= qty;
             localStorage.setItem('ryudia_smm_stock', JSON.stringify(smmStock));
         }
 
-        // Product Data Configuration (Modular - Easy to connect API later)
-        const products = {
-            game: { title: 'Top Up Game', operators: ['Mobile Legends', 'Free Fire', 'PUBG Mobile', 'Roblox', 'Genshin Impact', 'Valorant', 'Honor of Kings', 'COD Mobile'], nominals: [{n:'86 DM', p:15000}, {n:'172 DM', p:28000}, {n:'344 DM', p:52000}, {n:'706 DM', p:100000}] },
-            pulsa: { title: 'Pulsa & Paket Data', operators: ['Telkomsel', 'Indosat', 'XL', 'AXIS', 'Tri', 'Smartfren'], nominals: [5000, 10000, 20000, 50000, 100000] },
-            pln: { title: 'Token Listrik', operators: ['PLN Prepaid'], nominals: [20000, 50000, 100000, 200000, 500000, 1000000] },
-            ewallet: { title: 'Top Up E-Wallet', operators: ['DANA', 'GoPay', 'OVO', 'ShopeePay', 'LinkAja'], nominals: [20000, 50000, 100000, 200000] },
-            qris: { title: 'QRIS Merchant', operators: ['Hubungkan QRIS'], nominals: [{n:'Tampilkan QRIS', p:0}] },
-            sosmed: { title: 'SMM / Suntik Sosmed', operators: ['TikTok', 'Instagram', 'YouTube', 'Facebook', 'Twitter/X', 'Telegram', 'Threads', 'Shopee'], nominals: [{n:'100 Followers', p:15000, key:'followers'}, {n:'500 Likes', p:10000, key:'likes'}, {n:'1000 Views', p:5000, key:'views'}] },
-            rekber: { title: 'Jasa MC / Rekber', operators: ['Rekber Transaksi'], nominals: [{n:'Hubungi Admin', p:0}] },
-            jasa: { title: 'Jasa Digital', operators: ['Website & Link', 'Desain Logo', 'Desain QRIS', 'Lainnya'], nominals: [{n:'Custom Request', p:0}] }
-        };
-
-        // --- INITIALIZATION ---
-        document.addEventListener('DOMContentLoaded', () => {
-            updateBalanceUI();
-            renderHistory();
-            if(!localStorage.getItem('ryudia_user')) {
-                const name = prompt("Selamat datang di RYUDIA! Masukkan nama Anda:") || "User";
-                const wa = prompt("Masukkan nomor WhatsApp:") || "";
-                localStorage.setItem('ryudia_user', JSON.stringify({name, wa}));
-            }
-            loadUserProfile();
-        });
-
-        function loadUserProfile() {
-            const user = JSON.parse(localStorage.getItem('ryudia_user'));
-            if(user) { document.getElementById('accName').textContent = user.name; document.getElementById('accWa').textContent = `WhatsApp: ${user.wa || '-'}`; }
-        }
-
-        function updateBalanceUI() {
-            const fmt = new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR', minimumFractionDigits:0}).format(balance);
-            document.getElementById('displayBalance').textContent = fmt;
-            document.getElementById('saldoDisplay').textContent = fmt;
-            
-            // Update saldo page stats
-            const successTrx = transactions.filter(t => t.status === 'Sukses');
-            document.getElementById('saldoTrxCount').textContent = successTrx.length;
-            const totalDep = parseInt(localStorage.getItem('ryudia_total_deposit')) || 0;
-            document.getElementById('saldoDeposit').textContent = new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR'}).format(totalDep);
-        }
-
-        // --- NAVIGATION ---
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(`page-${pageId}`).classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            const navMap = {'home':0, 'products':1, 'transactions':2, 'saldo':3, 'profile':4};
-            if(navMap[pageId] !== undefined) document.querySelectorAll('.nav-item')[navMap[pageId]].classList.add('active');
-            window.scrollTo(0,0);
-        }
-
-        // --- SERVICE LOGIC ---
-        function openService(type) {
-            activeService = type;
-            const data = products[type];
-            document.getElementById('productTitle').textContent = data.title;
-            
-            let html = `<div class="input-group"><label>${type === 'game' || type === 'ewallet' ? 'ID / Nomor Tujuan' : type === 'pln' ? 'ID Pelanggan / No Meter' : 'Nomor Handphone'}</label><input type="text" class="app-input" id="inpTarget" placeholder="Contoh: 0812..." oninput="validateForm()"></div>`;
-            
-            if(type === 'game') html += `<div class="input-group"><label>Server ID (Opsional)</label><input type="text" class="app-input" id="inpServer" placeholder="Khusus Mobile Legends"></div>`;
-            
-            html += `<div class="input-group"><label>Pilih Operator / Platform</label><select class="app-input" id="inpOperator" onchange="renderNominals()">${data.operators.map(o => `<option value="${o}">${o}</option>`).join('')}</select></div>`;
-            html += `<div class="input-group"><label>Pilih Nominal / Layanan</label><div class="nominal-grid" id="nominalGrid"></div></div>`;
-            html += `<div class="input-group"><label>Catatan (Opsional)</label><input type="text" class="app-input" id="inpNote" placeholder="Catatan tambahan..."></div>`;
-            html += `<button class="btn-full" id="btnBuy" disabled onclick="initiateCheckout()">Beli Sekarang</button>`;
-            
-            document.getElementById('dynamicFormContainer').innerHTML = html;
-            showPage('products');
-            renderNominals();
-        }
-
-        function renderNominals() {
-            const data = products[activeService];
-            const grid = document.getElementById('nominalGrid');
-            grid.innerHTML = '';
-            
-            data.nominals.forEach((item) => {
-                const val = typeof item === 'object' ? item.n : `${new Intl.NumberFormat('id-ID').format(item)}`;
-                const price = typeof item === 'object' ? item.p : item + Math.round(item * 0.05); // Simulasi admin fee 5%
-                
-                const div = document.createElement('div');
-                div.className = 'nominal-btn';
-                div.dataset.price = Math.round(price);
-                div.dataset.label = val;
-                div.onclick = function() { selectNominal(this); };
-                div.innerHTML = `<span class="nominal-val">${val}</span><span class="nominal-price">Rp ${new Intl.NumberFormat('id-ID').format(Math.round(price))}</span>`;
-                grid.appendChild(div);
-            });
-            validateForm();
-        }
-
-        function selectNominal(el) {
-            document.querySelectorAll('.nominal-btn').forEach(b => b.classList.remove('selected'));
-            el.classList.add('selected');
-            validateForm();
-        }
-
-        function validateForm() {
-            const target = document.getElementById('inpTarget').value;
-            const selected = document.querySelector('.nominal-btn.selected');
-            document.getElementById('btnBuy').disabled = !(target.length > 3 && selected);
-        }
-
-        // --- CHECKOUT & PAYMENT ---
-        function initiateCheckout() {
-            const target = document.getElementById('inpTarget').value;
-            const operator = document.getElementById('inpOperator').value;
-            const selected = document.querySelector('.nominal-btn.selected');
-            const note = document.getElementById('inpNote').value;
-            const price = parseInt(selected.dataset.price);
-            const label = selected.dataset.label;
-
-            if(activeService === 'qris') {
-                document.getElementById('qrisModal').classList.add('open');
-                return;
-            }
-
-            if(balance < price) { showToast('Saldo tidak mencukupi! Silakan Top Up.'); return; }
-
-            // Check SMM Stock
-            if(activeService === 'sosmed') {
-                const op = operator.toLowerCase();
-                const key = label.includes('Followers') ? 'followers' : label.includes('Likes') ? 'likes' : 'views';
-                const stockKey = `${op}_${key}`;
-                const qty = parseInt(label.match(/\d+/)[0]);
-                if((smmStock[stockKey] || 0) < qty) { showToast('❌ Stok tidak mencukupi!'); return; }
-                smmStock[stockKey] -= qty;
-                localStorage.setItem('ryudia_smm_stock', JSON.stringify(smmStock));
-            }
-
-            currentOrder = { id: 'RYD-' + Date.now().toString().slice(-8), product: `${operator} ${label}`, target, price, note, status: 'Pending', time: new Date().toLocaleString('id-ID'), method: '' };
-            
-            document.getElementById('payProduct').textContent = currentOrder.product;
-            document.getElementById('payPrice').textContent = new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR'}).format(price);
-            document.getElementById('payTotal').textContent = new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR'}).format(price);
-            document.getElementById('paymentModal').classList.add('open');
-        }
-
-        function selectPayMethod(el, method) {
-            document.querySelectorAll('#paymentModal .nominal-btn').forEach(b => b.classList.remove('selected'));
-            el.classList.add('selected');
-            selectedPayMethod = method;
-            if(method === 'QRIS') {
-                document.getElementById('paymentModal').classList.remove('open');
-                document.getElementById('qrisModal').classList.add('open');
-                setTimeout(() => document.getElementById('paymentModal').classList.add('open'), 4000);
-            }
-        }
-
-        function processPayment() {
-            closeModal();
-            balance -= currentOrder.price;
+        if(selectedPayMethod === 'Saldo') {
             localStorage.setItem('ryudia_balance', balance);
             updateBalanceUI();
-
-            currentOrder.status = 'Sukses';
-            currentOrder.method = selectedPayMethod;
-            transactions.unshift(currentOrder);
-            localStorage.setItem('ryudia_transactions', JSON.stringify(transactions));
-            
-            renderHistory();
-            showToast('Pembayaran Berhasil! ✅ Invoice: ' + currentOrder.id);
-
-            const user = JSON.parse(localStorage.getItem('ryudia_user'));
-            const msg = `*INVOICE RYUDIA*\nID: ${currentOrder.id}\nProduk: ${currentOrder.product}\nTujuan: ${currentOrder.target}\nTotal: Rp ${currentOrder.price.toLocaleString('id-ID')}\nMetode: ${selectedPayMethod}\nStatus: PAID\n\nTerima kasih telah bertransaksi di RYUDIA!`;
-            setTimeout(() => { if(confirm('Kirim invoice ke WhatsApp Admin?')) window.open(`https://wa.me/085776210087?text=${encodeURIComponent(msg)}`, '_blank'); }, 1000);
         }
 
-        function closeModal() { document.getElementById('paymentModal').classList.remove('open'); }
+        currentOrder.status = 'Sukses';
+        currentOrder.method = selectedPayMethod;
+        transactions.unshift(currentOrder);
+        localStorage.setItem('ryudia_transactions', JSON.stringify(transactions));
+        
+        renderHistory();
+        showToast('Pembayaran Berhasil! ✅');
+        
+        // Send WA Invoice Logic could go here
+    }
 
-        // --- HISTORY & UTILS ---
-        function renderHistory() {
-            const container = document.getElementById('historyList');
-            const empty = document.getElementById('emptyHistory');
-            if(transactions.length === 0) { container.innerHTML = ''; empty.style.display = 'block'; return; }
-            empty.style.display = 'none';
-            container.innerHTML = transactions.map(t => `<div class="history-item"><div class="hist-info"><h4>${t.product}</h4><p>${t.time} • ${t.id}</p></div><div style="text-align:right"><div style="font-weight:bold; margin-bottom:4px">Rp ${t.price.toLocaleString('id-ID')}</div><span class="hist-status st-${t.status.toLowerCase()}">${t.status}</span></div></div>`).join('');
+    function closeModal() { document.getElementById('paymentModal').classList.remove('open'); }
+    function showQRIS() { document.getElementById('qrisModal').classList.add('open'); }
+
+    // --- UTILITIES ---
+    function topUpSaldo() {
+        const amount = prompt("Masukkan nominal Top Up (DEMO):", "50000");
+        if(amount && !isNaN(amount)) {
+            balance += parseInt(amount);
+            localStorage.setItem('ryudia_balance', balance);
+            updateBalanceUI();
+            showToast(`Top Up Rp ${parseInt(amount).toLocaleString('id-ID')} Berhasil!`);
         }
+    }
 
-        function topUpSaldo() {
-            const amount = prompt("Masukkan nominal Top Up (DEMO MODE):", "50000");
-            if(amount && !isNaN(amount)) {
-                const val = parseInt(amount);
-                balance += val;
-                localStorage.setItem('ryudia_balance', balance);
-                let totalDep = parseInt(localStorage.getItem('ryudia_total_deposit')) || 0;
-                localStorage.setItem('ryudia_total_deposit', totalDep + val);
-                updateBalanceUI();
-                showToast(`Top Up Rp ${val.toLocaleString('id-ID')} Berhasil!`);
-            }
+    function renderHistory() {
+        const container = document.getElementById('historyList');
+        const empty = document.getElementById('emptyHistory');
+        
+        if(transactions.length === 0) { 
+            container.innerHTML = ''; 
+            empty.classList.remove('hidden'); 
+            return; 
         }
+        
+        empty.classList.add('hidden');
+        container.innerHTML = transactions.map(t => `
+            <div class="app-card p-4 flex justify-between items-center">
+                <div>
+                    <h4 class="font-bold text-sm text-gray-800">${t.product}</h4>
+                    <p class="text-[10px] text-gray-500">${t.time} • ${t.id}</p>
+                </div>
+                <div class="text-right">
+                    <div class="font-bold text-sm text-gray-800">${formatRupiah(t.price)}</div>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${t.status === 'Sukses' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'}">${t.status}</span>
+                </div>
+            </div>
+        `).join('');
+    }
 
-        function checkOrderManual() {
-            const id = prompt("Masukkan ID Order (RYD-XXXXXXXX):");
-            if(id) {
-                const found = transactions.find(t => t.id === id);
-                if(found) alert(`Status Order ${id}: ${found.status}\nProduk: ${found.product}\nWaktu: ${found.time}`);
-                else alert("Order tidak ditemukan.");
-            }
+    function formatRupiah(num) {
+        return new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR', minimumFractionDigits:0}).format(num);
+    }
+
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    function checkOrderManual() {
+        const id = prompt("Masukkan ID Order (RYD-XXXXXXXX):");
+        if(id) {
+            const found = transactions.find(t => t.id === id);
+            if(found) alert(`Status: ${found.status}\nProduk: ${found.product}`);
+            else alert("Order tidak ditemukan.");
         }
+    }
 
-        function toggleAdminLogin() {
-            const pass = prompt("Masukkan Password Admin:");
-            if(pass === 'ryudia2026') { loadAdminDashboard(); showPage('admin'); } 
-            else if(pass) showToast('Password Salah!');
+    function toggleAdminLogin() {
+        const pass = prompt("Password Admin:");
+        if(pass === 'ryudia2026') {
+            alert(`Admin Login Berhasil!\nTotal Transaksi: ${transactions.length}\nStok TikTok Followers: ${smmStock['tiktok_followers']}`);
+        } else if(pass) showToast('Password Salah!');
+    }
+
+    function logout() {
+        if(confirm('Reset semua data lokal?')) {
+            localStorage.clear();
+            location.reload();
         }
+    }
 
-        function loadAdminDashboard() {
-            document.getElementById('admTotalTrx').textContent = transactions.length;
-            const rev = transactions.reduce((sum, t) => sum + t.price, 0);
-            document.getElementById('admRevenue').textContent = new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR'}).format(rev);
-            
-            // Render Stock Management
-            const stockDiv = document.getElementById('adminStockList');
-            stockDiv.innerHTML = Object.entries(smmStock).map(([k,v]) => {
-                const [plat, svc] = k.split('_');
-                const status = v > 1000000 ? '🟢 Available' : v > 0 ? '🟡 Limited' : '🔴 Out of Stock';
-                return `<div class="history-item" style="margin-bottom:0.5rem; padding:0.8rem"><div class="hist-info"><h4 style="font-size:0.85rem">${plat.toUpperCase()} ${svc}</h4><p>Stok: ${new Intl.NumberFormat('id-ID').format(v)}</p></div><span style="font-size:0.75rem">${status}</span></div>`;
-            }).join('');
+    // Live Feed Simulation
+    function startLiveFeed() {
+        const names = ["Ahmad", "Budi", "Siti", "Rina", "Doni"];
+        const prods = ["100 Diamonds ML", "25k Pulsa Telkomsel", "1k TikTok Followers"];
+        
+        setInterval(() => {
+            const name = names[Math.floor(Math.random() * names.length)];
+            const prod = prods[Math.floor(Math.random() * prods.length)];
+            const feed = document.getElementById('liveFeed');
+            feed.innerHTML = `
+                <div class="bg-blue-100 p-2 rounded-full border border-black text-blue-600 animate-pulse">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="text-xs font-bold text-gray-800">${name.charAt(0)}*** baru saja membeli</p>
+                    <p class="text-[10px] text-gray-500">${prod}</p>
+                </div>
+            `;
+        }, 8000);
+    }
+</script>
 
-            document.getElementById('adminOrderList').innerHTML = transactions.slice(0,5).map(t => `<div class="history-item" style="margin-bottom:0.5rem; padding:0.8rem"><div class="hist-info"><h4 style="font-size:0.85rem">${t.id}</h4><p>${t.product}</p></div><span class="hist-status st-${t.status.toLowerCase()}">${t.status}</span></div>`).join('') || '<p style="color:var(--text-muted); text-align:center">Belum ada data</p>';
-        }
-
-        function logout() { if(confirm('Yakin ingin logout? Data lokal akan direset.')) { localStorage.clear(); location.reload(); } }
-        function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
-    </script>
 </body>
 </html>
